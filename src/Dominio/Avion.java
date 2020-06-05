@@ -18,4 +18,23 @@ public abstract class Avion {
         this.propulsion = propulsion;
     }
 
+    public float getCapacidadCombustible() {
+        return capacidadCombustible;
+    }
+
+    public float getCostoPorKm() {
+        return costoPorKm;
+    }
+
+    public int getCapacidadMaxPasajeros() {
+        return capacidadMaxPasajeros;
+    }
+
+    public float getVelocidadMaxima() {
+        return velocidadMaxima;
+    }
+
+    public Propulsion getPropulsion() {
+        return propulsion;
+    }
 }
