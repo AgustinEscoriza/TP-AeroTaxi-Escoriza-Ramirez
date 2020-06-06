@@ -2,17 +2,20 @@ package Modelo;
 
 import Enums.Propulsion;
 
-public class Silver extends Avion {
+public class Silver extends Avion implements Servicio{
 
-    private boolean catering;
-
-    public Silver(float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion, boolean catering) {
+    public Silver(float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
         super(capacidadCombustible, costoPorKm, capacidadMaxPasajeros, velocidadMaxima, propulsion);
-        this.catering = catering;
+        super.tarifaFija = 4000;
     }
 
-    public boolean isCatering() {
-        return catering;
+    @Override
+    public String toString() {
+        return "Silver{ " + super.toString() + "}";
     }
 
+    @Override
+    public String catering() {
+        return "Este avion tiene servicio de catering";
+    }
 }

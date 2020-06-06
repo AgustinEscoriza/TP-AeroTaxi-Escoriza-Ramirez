@@ -9,6 +9,10 @@ public abstract class Avion {
     private int capacidadMaxPasajeros;
     private float velocidadMaxima;
     private Propulsion propulsion;
+    private boolean disponible;
+    private int pasajerosActuales;
+    protected float tarifaFija;
+
 
     public Avion(float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
         this.capacidadCombustible = capacidadCombustible;
@@ -16,6 +20,20 @@ public abstract class Avion {
         this.capacidadMaxPasajeros = capacidadMaxPasajeros;
         this.velocidadMaxima = velocidadMaxima;
         this.propulsion = propulsion;
+        this.disponible = true;
+        this.pasajerosActuales = 0;
+    }
+
+    @Override
+    public String toString() {
+        return "capacidadCombustible=" + capacidadCombustible +
+                ", costoPorKm=" + costoPorKm +
+                ", capacidadMaxPasajeros=" + capacidadMaxPasajeros +
+                ", velocidadMaxima=" + velocidadMaxima +
+                ", propulsion=" + propulsion +
+                ", disponible=" + disponible +
+                ", pasajerosActuales=" + pasajerosActuales +
+                ", tarifaFija=" + tarifaFija ;
     }
 
     public float getCapacidadCombustible() {
