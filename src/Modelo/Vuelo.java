@@ -50,4 +50,17 @@ public class Vuelo {
     public boolean isConfirmacion() {
         return confirmacion;
     }
+
+    @Override
+    public String toString() {
+        return "Vuelo{" +
+                "avion=" + avion +
+                ", cantidadAcompañantes=" + cantidadAcompañantes +
+                ", origen=" + origen +
+                ", destino=" + destino +
+                ", fecha=" + fecha +
+                ", costo=" + costo +
+                ", confirmacion=" + confirmacion +
+                '}';
+    }
 }
