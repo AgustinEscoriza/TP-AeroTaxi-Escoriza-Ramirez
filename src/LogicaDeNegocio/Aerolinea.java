@@ -12,6 +12,7 @@ public class Aerolinea {
 
     public Aerolinea(){
         this.aviones = new ArrayList<Avion>();
+        this.usuarios = new ArrayList<Usuario>();
         this.vuelos = new ArrayList<Vuelo>();
     }
 
