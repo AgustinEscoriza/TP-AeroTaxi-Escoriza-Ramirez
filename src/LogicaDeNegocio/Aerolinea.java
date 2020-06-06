@@ -3,6 +3,8 @@ package LogicaDeNegocio;
 import Modelo.Avion;
 import Modelo.Vuelo;
 import Modelo.Usuario;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Aerolinea {
@@ -28,7 +30,38 @@ public class Aerolinea {
         usuarios.add(usuario);
     }
 
+    public String mostrarVuelosPorFecha(LocalDate fecha){
+        String retornoVuelos = " ";
+        for(Vuelo vuelo : vuelos){
+            if(fecha.equals(vuelo.getFecha())){
+                retornoVuelos.concat(vuelo.toString());
+            }
+        }
+        return retornoVuelos;
+    }
 
+    public String mostrarVuelos(){
+        String retornoVuelos = " ";
+        for(Vuelo vuelo : vuelos){
+            retornoVuelos.concat(vuelo.toString());
+        }
+        return retornoVuelos;
+    }
+
+    public String mostrarUsuarios(){
+        String retornoUsuario = " ";
+        for(Usuario usuario: usuarios){
+            retornoUsuario.concat(usuario.toString());
+        }
+        return retornoUsuario;
+    }
+    public String mostrarAviones(){
+        String retornoAviones = " ";
+        for(Avion avion:aviones){
+            retornoAviones.concat(avion.toString());
+        }
+        return retornoAviones;
+    }
 
 
 }
