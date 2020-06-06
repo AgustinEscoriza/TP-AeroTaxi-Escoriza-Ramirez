@@ -5,12 +5,14 @@ public class Usuario {
     private String apellido;
     private String dni;
     private int edad;
+    private float totalDineroGastado;
 
     public Usuario(String nombre, String apellido, String dni, int edad) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.edad = edad;
+        this.totalDineroGastado=0;
     }
 
     public String getNombre() {
@@ -29,6 +31,14 @@ public class Usuario {
         return edad;
     }
 
+    public float getTotalDineroGastado(){
+        return totalDineroGastado;
+    }
+
+    public void setTotalDineroGastado(float dineroGastado){
+        totalDineroGastado =+ dineroGastado;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -36,6 +46,7 @@ public class Usuario {
                 ", apellido='" + apellido + '\'' +
                 ", dni='" + dni + '\'' +
                 ", edad=" + edad +
+                ", totalDineroGastado=" + totalDineroGastado +
                 '}';
     }
 }
