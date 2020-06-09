@@ -2,15 +2,20 @@ package Modelo;
 
 import Enums.Propulsion;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public abstract class Avion {
 
+    private static final AtomicInteger generadorId = new AtomicInteger(1000);
+
+    private Integer idAvion;
     private float capacidadCombustible;
     private float costoPorKm;
     private int capacidadMaxPasajeros;
     private float velocidadMaxima;
     private Propulsion propulsion;
-    private boolean disponible;
     private int pasajerosActuales;
+    private boolean disponible;
     protected float tarifaFija;
 
 
@@ -22,6 +27,7 @@ public abstract class Avion {
         this.propulsion = propulsion;
         this.disponible = true;
         this.pasajerosActuales = 0;
+        this.idAvion = generadorId.getAndIncrement();
     }
 
     @Override
@@ -32,8 +38,12 @@ public abstract class Avion {
                 ", velocidadMaxima=" + velocidadMaxima +
                 ", propulsion=" + propulsion +
                 ", disponible=" + disponible +
-                ", pasajerosActuales=" + pasajerosActuales +
                 ", tarifaFija=" + tarifaFija ;
+    }
+
+
+    public Integer getIdAvion() {
+        return idAvion;
     }
 
     public float getCapacidadCombustible() {
@@ -54,5 +64,17 @@ public abstract class Avion {
 
     public Propulsion getPropulsion() {
         return propulsion;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public int getPasajerosActuales() {
+        return pasajerosActuales;
+    }
+
+    public float getTarifaFija() {
+        return tarifaFija;
     }
 }
