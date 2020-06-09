@@ -1,6 +1,12 @@
 package Modelo;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Usuario {
+
+    private static final AtomicInteger generadorId = new AtomicInteger(1000);
+
+    private Integer idUsuario;
     private String nombre;
     private String apellido;
     private String dni;
@@ -13,6 +19,7 @@ public class Usuario {
         this.dni = dni;
         this.edad = edad;
         this.totalDineroGastado=0;
+        this.idUsuario = generadorId.getAndIncrement();
     }
 
     public String getNombre() {
