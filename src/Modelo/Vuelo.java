@@ -10,23 +10,21 @@ public class Vuelo {
 
     private Integer idVuelo;
     private Avion avion;
-    private int cantidadAcompañantes;
+    private int cantidadAcompanantes;
     private Ciudad origen;
     private Ciudad destino;
     private LocalDate fecha;
     private float costoTotal;
     private int distanciaKms;
-    private boolean confirmacion;
 
-    public Vuelo(Avion avion, Ciudad origen, Ciudad destino,int cantidadAcompañantes, LocalDate fecha, boolean confirmacion) {
+    public Vuelo(Avion avion, Ciudad origen, Ciudad destino,int cantidadAcompanantes, LocalDate fecha) {
         this.avion = avion;
-        this.cantidadAcompañantes = cantidadAcompañantes;
+        this.cantidadAcompanantes = cantidadAcompanantes;
         this.origen = origen;
         this.destino = destino;
         this.fecha = fecha;
         this.distanciaKms = calcularKms();
         this.costoTotal = calcularCosto();
-        this.confirmacion = confirmacion;
         this.idVuelo = generadorId.getAndIncrement();
     }
 
@@ -84,7 +82,7 @@ public class Vuelo {
 
     private float calcularCosto(){
         float costoTotal = 0;
-        costoTotal = ( distanciaKms * avion.getCostoPorKm() ) + ( (cantidadAcompañantes+1) * 3500 ) + avion.getTarifaFija();
+        costoTotal = ( distanciaKms * avion.getCostoPorKm() ) + ( (cantidadAcompanantes+1) * 3500 ) + avion.getTarifaFija();
         return costoTotal;
     }
 
@@ -92,8 +90,8 @@ public class Vuelo {
         return avion;
     }
 
-    public int getCantidadAcompañantes() {
-        return cantidadAcompañantes;
+    public int getCantidadAcompanantes() {
+        return cantidadAcompanantes;
     }
 
     public Ciudad getOrigen() {
@@ -120,22 +118,18 @@ public class Vuelo {
         return distanciaKms;
     }
 
-    public boolean isConfirmacion() {
-        return confirmacion;
-    }
 
     @Override
     public String toString() {
         return "Vuelo{" +
                 "idVuelo=" + idVuelo +
                 ", avion=" + avion +
-                ", cantidadAcompañantes=" + cantidadAcompañantes +
+                ", cantidadAcompanantes=" + cantidadAcompanantes +
                 ", origen=" + origen +
                 ", destino=" + destino +
                 ", fecha=" + fecha +
                 ", costoTotal=" + costoTotal +
                 ", distanciaKms=" + distanciaKms +
-                ", confirmacion=" + confirmacion +
                 '}';
     }
 }
