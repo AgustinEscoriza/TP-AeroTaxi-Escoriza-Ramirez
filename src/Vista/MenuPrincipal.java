@@ -1,19 +1,19 @@
-package Vistas;
+package Vista;
 import java.util.Scanner;
 
 public class MenuPrincipal {
-    private Scanner sn;
-    private boolean salir;
-    private int opcion;
+    protected Scanner sn;
+    protected boolean salir;
+    protected int opcion;
 
-    public MenuPrincipal(){
-        this.sn = new Scanner(System.in);
-        this.salir = false;
-        this.opcion = 0;
+    public MenuPrincipal() {
+        sn = new Scanner(System.in);
+        salir = false;
+        opcion = 0;
     }
 
-    public void menu(){
-        while(!salir){
+    public void menuPrincipal() {
+        while (!salir) {
 
             System.out.println("1. Opcion 1");
             System.out.println("2. Opcion 2");
@@ -40,5 +40,18 @@ public class MenuPrincipal {
                     System.out.println("Solo números entre 1 y 4");
             }
         }
+    }
+
+    public boolean salirAMenuAnterior() {
+        System.out.println("Desea salir al menu anterior? S/N");
+        String eleccion = sn.next();
+        if (eleccion == "S") {
+            salir = true;
+        } else if (eleccion == "N") {
+            salir = false;
+        } else {
+            System.out.println("Debe ingresar S o N");
+        }
+        return salir;
     }
 }
