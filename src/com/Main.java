@@ -1,8 +1,11 @@
 package com;
 
+import Vista.MenuPrincipal;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        menuPrincipal.menu();
     }
 }
