@@ -7,6 +7,7 @@ import Modelo.Usuario;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+    /// CHEQUEAR SI NO HAY QUE AGREGAR ELIMINAR AVIONES,VUELOS,USUARIOS U OTROS METODOS;
 public class Aerolinea {
     public ArrayList<Avion> aviones;
     public ArrayList<Vuelo> vuelos;
