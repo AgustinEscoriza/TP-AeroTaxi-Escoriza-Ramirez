@@ -30,52 +30,75 @@ public class Vuelo {
 
     private int calcularKms(){
         int distancia = 0;
-        if(origen == Ciudad.BUENOS_AIRES){
-            if(destino == Ciudad.CORDOBA){
+      // if(origen == Ciudad.BUENOS_AIRES){
+      //     if(destino == Ciudad.CORDOBA){
+      //         distancia = 695;
+      //     }
+      //     if(destino == Ciudad.SANTIAGO_DE_CHILE){
+      //         distancia = 1400;
+      //     }
+      //     if(destino == Ciudad.MONTEVIDEO){
+      //         distancia = 950;
+      //     }
+      // }
+      // else if(origen == Ciudad.CORDOBA){
+      //     if(destino == Ciudad.BUENOS_AIRES){
+      //         distancia = 695;
+      //     }
+      //     if(destino == Ciudad.MONTEVIDEO){
+      //         distancia = 1190;
+      //     }
+      //     if(destino == Ciudad.SANTIAGO_DE_CHILE){
+      //         distancia = 1050;
+      //     }
+      // }
+      // else if(origen == Ciudad.MONTEVIDEO){
+      //     if(destino == Ciudad.BUENOS_AIRES){
+      //         distancia = 950;
+      //     }
+      //     if(destino == Ciudad.CORDOBA){
+      //         distancia = 1190;
+      //     }
+      //     if(destino == Ciudad.SANTIAGO_DE_CHILE){
+      //         distancia = 2100;
+      //     }
+      // }
+      // else if(origen == Ciudad.SANTIAGO_DE_CHILE){
+      //     if(destino == Ciudad.BUENOS_AIRES){
+      //         distancia = 1400;
+      //     }
+      //     if(destino == Ciudad.CORDOBA){
+      //         distancia = 1050;
+      //     }
+      //     if(destino == Ciudad.MONTEVIDEO){
+      //         distancia = 2100;
+      //     }
+      // }
+        if(origen == Ciudad.BUENOS_AIRES || destino == Ciudad.BUENOS_AIRES){
+
+            if(origen == Ciudad.CORDOBA || destino == Ciudad.CORDOBA){
                 distancia = 695;
             }
-            if(destino == Ciudad.SANTIAGO_DE_CHILE){
-                distancia = 1400;
-            }
-            if(destino == Ciudad.MONTEVIDEO){
+            if(origen == Ciudad.MONTEVIDEO || destino == Ciudad.MONTEVIDEO){
                 distancia = 950;
             }
-        }
-        else if(origen == Ciudad.CORDOBA){
-            if(destino == Ciudad.BUENOS_AIRES){
-                distancia = 695;
+            if(origen == Ciudad.SANTIAGO_DE_CHILE || destino == Ciudad.SANTIAGO_DE_CHILE){
+                distancia = 1400;
             }
-            if(destino == Ciudad.MONTEVIDEO){
+        }
+        else if(origen == Ciudad.CORDOBA || destino == Ciudad.CORDOBA){
+            if(origen == Ciudad.MONTEVIDEO || destino == Ciudad.MONTEVIDEO){
                 distancia = 1190;
             }
-            if(destino == Ciudad.SANTIAGO_DE_CHILE){
+            if(origen == Ciudad.SANTIAGO_DE_CHILE || destino == Ciudad.SANTIAGO_DE_CHILE){
                 distancia = 1050;
             }
         }
-        else if(origen == Ciudad.MONTEVIDEO){
-            if(destino == Ciudad.BUENOS_AIRES){
-                distancia = 950;
-            }
-            if(destino == Ciudad.CORDOBA){
-                distancia = 1190;
-            }
-            if(destino == Ciudad.SANTIAGO_DE_CHILE){
+        else if(origen == Ciudad.MONTEVIDEO || destino == Ciudad.MONTEVIDEO){
+
+            if(origen == Ciudad.SANTIAGO_DE_CHILE || destino == Ciudad.SANTIAGO_DE_CHILE){
                 distancia = 2100;
             }
-        }
-        else if(origen == Ciudad.SANTIAGO_DE_CHILE){
-            if(destino == Ciudad.BUENOS_AIRES){
-                distancia = 1400;
-            }
-            if(destino == Ciudad.CORDOBA){
-                distancia = 1050;
-            }
-            if(destino == Ciudad.MONTEVIDEO){
-                distancia = 2100;
-            }
-        }
-        else{
-            distancia = -1; // para pensar
         }
         return distancia;
     }
