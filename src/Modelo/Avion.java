@@ -14,7 +14,6 @@ public abstract class Avion {
     private int capacidadMaxPasajeros;
     private float velocidadMaxima;
     private Propulsion propulsion;
-    private int pasajerosActuales;
     private boolean disponible;
     protected float tarifaFija;
 
@@ -26,7 +25,6 @@ public abstract class Avion {
         this.velocidadMaxima = velocidadMaxima;
         this.propulsion = propulsion;
         this.disponible = true;
-        this.pasajerosActuales = 0;
         this.idAvion = generadorId.getAndIncrement();
     }
 
@@ -68,10 +66,6 @@ public abstract class Avion {
 
     public boolean isDisponible() {
         return disponible;
-    }
-
-    public int getPasajerosActuales() {
-        return pasajerosActuales;
     }
 
     public float getTarifaFija() {

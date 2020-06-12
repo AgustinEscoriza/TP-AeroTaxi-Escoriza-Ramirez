@@ -3,23 +3,23 @@ package Modelo;
 import java.time.LocalDate;
 import Enums.Ciudad;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
 
 public class Vuelo {
 
     private static final AtomicInteger generadorId = new AtomicInteger(1000);
-
     private Integer idVuelo;
     private Avion avion;
-    private int cantidadAcompanantes;
     private Ciudad origen;
     private Ciudad destino;
     private LocalDate fecha;
+    private int pasajerosActuales;
     private float costoTotal;
     private int distanciaKms;
+    public ArrayList<Reserva> reservas;
 
-    public Vuelo(Avion avion, Ciudad origen, Ciudad destino,int cantidadAcompanantes, LocalDate fecha) {
+    public Vuelo(Avion avion, Ciudad origen, Ciudad destino, LocalDate fecha) {
         this.avion = avion;
-        this.cantidadAcompanantes = cantidadAcompanantes;
         this.origen = origen;
         this.destino = destino;
         this.fecha = fecha;
@@ -28,7 +28,53 @@ public class Vuelo {
         this.idVuelo = generadorId.getAndIncrement();
     }
 
-    private int calcularKms(){
+    public Avion getAvion() {
+        return avion;
+    }
+
+    public Ciudad getOrigen() {
+        return origen;
+    }
+
+    public Ciudad getDestino() {
+        return destino;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public float getCostoTotal() {
+        return costoTotal;
+    }
+
+    public Integer getIdVuelo() {
+        return idVuelo;
+    }
+
+    public int getPasajerosActuales(){
+        return pasajerosActuales;
+    }
+
+    public int getDistanciaKms() {
+        return distanciaKms;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Vuelo{" +
+                "idVuelo=" + idVuelo +
+                ", avion=" + avion +
+                ", origen=" + origen +
+                ", destino=" + destino +
+                ", fecha=" + fecha +
+                ", costoTotal=" + costoTotal +
+                ", distanciaKms=" + distanciaKms +
+                '}';
+    }
+
+    public int calcularKms(){
         int distancia = 0;
         if(origen == Ciudad.BUENOS_AIRES || destino == Ciudad.BUENOS_AIRES){
 
@@ -59,57 +105,16 @@ public class Vuelo {
         return distancia;
     }
 
-    private float calcularCosto(){
+    public float calcularCosto(int cantidadAcompanantes){
         float costoTotal = 0;
         costoTotal = ( distanciaKms * avion.getCostoPorKm() ) + ( (cantidadAcompanantes+1) * 3500 ) + avion.getTarifaFija();
         return costoTotal;
     }
 
-    public Avion getAvion() {
-        return avion;
+    public void agregarReserva(Reserva reserva){
+        reservas.add(reserva);
+        pasajerosActuales=+reserva.getNroAcompanantes()+1;
     }
 
-    public int getCantidadAcompanantes() {
-        return cantidadAcompanantes;
-    }
-
-    public Ciudad getOrigen() {
-        return origen;
-    }
-
-    public Ciudad getDestino() {
-        return destino;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public float getCostoTotal() {
-        return costoTotal;
-    }
-
-    public Integer getIdVuelo() {
-        return idVuelo;
-    }
-
-    public int getDistanciaKms() {
-        return distanciaKms;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Vuelo{" +
-                "idVuelo=" + idVuelo +
-                ", avion=" + avion +
-                ", cantidadAcompanantes=" + cantidadAcompanantes +
-                ", origen=" + origen +
-                ", destino=" + destino +
-                ", fecha=" + fecha +
-                ", costoTotal=" + costoTotal +
-                ", distanciaKms=" + distanciaKms +
-                '}';
-    }
 }
 
