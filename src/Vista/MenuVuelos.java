@@ -9,9 +9,9 @@ import Enums.Ciudad;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class MenuContratarVuelo extends MenuPrincipal{
+public class MenuVuelos extends MenuLogin{
 
-    public MenuContratarVuelo(Aerolinea aerolinea) {
+    public MenuVuelos(Aerolinea aerolinea) {
         super(aerolinea);
     }
 
@@ -61,6 +61,15 @@ public class MenuContratarVuelo extends MenuPrincipal{
             salir=salirAMenuAnterior();
         }
         return vuelo;
+    }
+
+    public Vuelo menuCancelarVuelo(){
+
+    }
+
+    public Avion menuSeleccionAvion(LocalDate fecha, Ciudad origen, Ciudad destino, int nroAcompañantes){
+
+
     }
 
 

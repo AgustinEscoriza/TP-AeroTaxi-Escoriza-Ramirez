@@ -1,61 +1,49 @@
 package Vista;
-import java.util.Scanner;
+import Modelo.Usuario;
 import LogicaDeNegocio.Aerolinea;
 
-public class MenuPrincipal {
-    protected Scanner sn;
-    protected boolean salir;
-    protected int opcion;
-    protected Aerolinea aerolinea;
+public class MenuPrincipal extends MenuLogin {
 
-    public MenuPrincipal(Aerolinea aerolinea) {
-        this.aerolinea = aerolinea;
-        sn = new Scanner(System.in);
-        salir = false;
-        opcion = 0;
+    protected MenuVuelos menuVuelos;
+
+    public MenuPrincipal(){
+        menuVuelos = new MenuVuelos();
+        super();
     }
 
-    public void menuPrincipal() {
-        MenuLogin menuLogin = new MenuLogin(aerolinea);
+    public void menuPrincipal(Aerolinea aerolinea, Usuario usuario) {
         while (!salir) {
 
-            System.out.println("1. Opcion 1");
-            System.out.println("2. Opcion 2");
-            System.out.println("3. Opcion 3");
-            System.out.println("4. Salir del programa");
-
-            System.out.println("Escribe una de las opciones");
+            limpiarPantalla.limpiarPantalla();
+            System.out.println("1. Contratar un vuelo");
+            System.out.println("2. Cancelar un vuelo");
+            System.out.println("3. Ver vuelos programados por fecha");
+            System.out.println("4. Listar todos los clientes");
+            System.out.println("5. Salir");
             opcion = sn.nextInt();
 
             switch (opcion) {
                 case 1:
-                    menuLogin.menuRegistrarUsuario();
+                    limpiarPantalla.limpiarPantalla();
+                    menuVuelos.menuContratarVuelo();
                     break;
                 case 2:
-                    System.out.println("Has seleccionado la opcion 2");
+                    limpiarPantalla.limpiarPantalla();
+                    menuVuelos.menuCancelarVuelo();
                     break;
                 case 3:
-                    System.out.println("Has seleccionado la opcion 3");
+                    limpiarPantalla.limpiarPantalla();
+                    System.out.println(aerolinea.mostrarVuelosPorFecha());
                     break;
                 case 4:
-                    salir = true;
+                    limpiarPantalla.limpiarPantalla();
+                    System.out.println(aerolinea.mostrarUsuarios());
                     break;
+                case 5:
+                    salir=true;
                 default:
-                    System.out.println("Solo números entre 1 y 4");
+                    System.out.println("Solo números entre 1 y 5");
             }
         }
-    }
-
-    public boolean salirAMenuAnterior() {
-        System.out.println("Desea salir al menu anterior? S/N");
-        String eleccion = sn.next();
-        if (eleccion == "S") {
-            salir = true;
-        } else if (eleccion == "N") {
-            salir = false;
-        } else {
-            System.out.println("Debe ingresar S o N");
-        }
-        return salir;
     }
 }
