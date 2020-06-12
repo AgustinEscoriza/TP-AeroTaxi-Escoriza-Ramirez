@@ -20,15 +20,21 @@ public class Aerolinea {
     }
 
     public void agregarAvion(Avion avion){
-        aviones.add(avion);
+        if(avion!=null) {
+            aviones.add(avion);
+        }
     }
 
     public void agregarVuelo(Vuelo vuelo){
-        vuelos.add(vuelo);
+        if(vuelo!=null) {
+            vuelos.add(vuelo);
+        }
     }
 
     public void agregarUsuario(Usuario usuario){
-        usuarios.add(usuario);
+        if(usuario!=null){
+            usuarios.add(usuario);
+        }
     }
 
     public String mostrarVuelosPorFecha(LocalDate fecha){
@@ -64,5 +70,14 @@ public class Aerolinea {
         return retornoAviones;
     }
 
+    public Usuario buscarUsuarioPorDNI(String DNI){
+        Usuario usuarioBuscado=null;
+        for(Usuario usuario : usuarios){
+            if(usuario.getDni().equals(DNI)){
+                usuarioBuscado=usuario;
+            }
+        }
+        return usuarioBuscado;
+    }
 
 }
