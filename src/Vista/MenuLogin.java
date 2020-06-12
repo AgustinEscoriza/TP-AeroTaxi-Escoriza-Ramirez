@@ -25,7 +25,6 @@ public class MenuLogin {
             limpiarPantalla.limpiarPantalla();
             System.out.println("1. Ingresar usuario registrado");
             System.out.println("2. Registrar nuevo usuario");
-            System.out.println("Escribe una de las opciones");
             opcion = sn.nextInt();
 
             switch (opcion) {
@@ -35,7 +34,7 @@ public class MenuLogin {
                     break;
                 case 2:
                     limpiarPantalla.limpiarPantalla();
-                    usuario=menuRegistrarUsuario();
+                    usuario=menuRegistrarUsuario(aerolinea);
                     break;
                 default:
                     System.out.println("Solo números 1 o 2");
@@ -44,7 +43,7 @@ public class MenuLogin {
         return usuario;
     }
 
-    public Usuario menuRegistrarUsuario(){
+    public Usuario menuRegistrarUsuario(Aerolinea aerolinea){
         String nombre;
         String apellido;
         String dni;
@@ -73,6 +72,7 @@ public class MenuLogin {
                 confirmacion = sn.next();
                 if (confirmacion == "S") {
                     usuario = new Usuario(nombre,apellido,dni,edad);
+                    aerolinea.agregarUsuario(usuario);
                 } else if (confirmacion == "N") {
                     usuario = null;
                 } else {

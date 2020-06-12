@@ -2,6 +2,8 @@ package Vista;
 import Modelo.Usuario;
 import LogicaDeNegocio.Aerolinea;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class MenuPrincipal extends MenuLogin {
@@ -13,7 +15,7 @@ public class MenuPrincipal extends MenuLogin {
         menuVuelos = new MenuVuelos();
     }
 
-    public void menuPrincipal(Aerolinea aerolinea, Usuario usuario) {
+    public void menuPrincipal(Usuario usuario, Aerolinea aerolinea, ) {
         while (!salir) {
 
             limpiarPantalla.limpiarPantalla();
@@ -27,16 +29,15 @@ public class MenuPrincipal extends MenuLogin {
             switch (opcion) {
                 case 1:
                     limpiarPantalla.limpiarPantalla();
-                    menuVuelos.menuContratarVuelo();
+                    menuVuelos.menuContratarVuelo(usuario, aerolinea);
                     break;
                 case 2:
                     limpiarPantalla.limpiarPantalla();
-                    menuVuelos.menuCancelarVuelo();
+                    menuVuelos.menuCancelarVuelo(usuario, aerolinea);
                     break;
                 case 3:
                     limpiarPantalla.limpiarPantalla();
-                    menuVuelos.menuBuscarPorFecha(aerolinea);
-
+                    menuVuelos.menuBuscarVueloPorFecha(aerolinea);
                     break;
                 case 4:
                     limpiarPantalla.limpiarPantalla();
@@ -49,4 +50,6 @@ public class MenuPrincipal extends MenuLogin {
             }
         }
     }
+
+
 }

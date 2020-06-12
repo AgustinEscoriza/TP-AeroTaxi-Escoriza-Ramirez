@@ -3,10 +3,11 @@ package Vista;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
-
 import LogicaDeNegocio.Aerolinea;
 import Modelo.Vuelo;
 import Modelo.Avion;
+import Modelo.Usuario;
+import Modelo.Reserva;
 import Enums.Ciudad;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,15 +18,13 @@ public class MenuVuelos extends MenuLogin{
         super();
     }
 
-    public Vuelo menuContratarVuelo() {
+    public void menuContratarVuelo(Usuario usuario, Aerolinea aerolinea) {
 
-        Vuelo vuelo=null;
-        Avion avion=null;
+        Vuelo vuelo;
         String fechaString;
         Ciudad destino=null;
         Ciudad origen=null;
         float costoTotal;
-        int distanciaKms;
         String confirmacion = null;
         int cantidadAcompanantes;
 
@@ -40,49 +39,40 @@ public class MenuVuelos extends MenuLogin{
             System.out.println("Ingrese cantidad de acompanantes");
             cantidadAcompanantes = sn.nextInt();
 
-            //SELECCION DE AVION//
-            while (confirmacion != "S" || confirmacion != "N") {
+            //SELECCION DE VUELO//
 
+            while (confirmacion != "S" || confirmacion != "N") {
                 System.out.println("Confirmar? S/N");
                 confirmacion = sn.next();
-
                 if (confirmacion == "S") {
-
-                    vuelo = new Vuelo(avion, origen, destino, cantidadAcompanantes, fechaLocalDate);
-
+                    Reserva reserva = new Reserva(usuario,cantidadAcompanantes);
+                    vuelo.agregarReserva(reserva);
                 } else if (confirmacion == "N") {
-
-                    vuelo = null;
-
+                    salir=true;
                 } else {
-
                     System.out.println("Ingrese S o N");
-
                 }
             }
             salir=salirAMenuAnterior();
         }
-        return vuelo;
     }
 
-    public void menuCancelarVuelo(){
 
-    }
-    public void menuBuscarPorFecha(Aerolinea aerolinea){
+    public void menuBuscarVueloPorFecha(Aerolinea aerolinea){
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("DD/MM/YYYY");
         String fechaString;
         LocalDate fechaDate;
-        Scanner scan = new Scanner(System.in);
-        fechaString = scan.nextLine();
+        System.out.println("Ingrese una fecha");
+        fechaString = sn.nextLine();
         fechaDate = LocalDate.parse(fechaString,formato);
-
         System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate));
     }
 
-    public void menuSeleccionAvion(LocalDate fecha, Ciudad origen, Ciudad destino, int nroAcompañantes){
+    public void menuCancelarVuelo(){
+    }
 
-
+    public void menuSeleccionVuelo(){
     }
 
 
