@@ -1,5 +1,6 @@
 package Vista;
 import java.util.Scanner;
+import LogicaDeNegocio.Aerolinea;
 
 public class MenuPrincipal {
     protected Scanner sn;
@@ -12,7 +13,7 @@ public class MenuPrincipal {
         opcion = 0;
     }
 
-    public void menuPrincipal() {
+    public void menuPrincipal(Aerolinea aerolinea) {
         while (!salir) {
 
             System.out.println("1. Opcion 1");
@@ -25,7 +26,7 @@ public class MenuPrincipal {
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Has seleccionado la opcion 1");
+                    menuLogin();
                     break;
                 case 2:
                     System.out.println("Has seleccionado la opcion 2");
