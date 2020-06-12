@@ -34,7 +34,9 @@ public class MenuVuelos extends MenuLogin{
             fechaString = sn.next();
             LocalDate fechaLocalDate = LocalDate.parse(fechaString);
 
+            System.out.println("Elija una de las siguientes ciudades de origen:");
             origen= menuSeleccionCiudad();
+            System.out.println("Elija una de las siguientes ciudades de destino:");
             destino= menuSeleccionCiudad();
 
             System.out.println("Ingrese cantidad de acompanantes");
@@ -74,8 +76,9 @@ public class MenuVuelos extends MenuLogin{
     }
 
     public Ciudad menuSeleccionCiudad(){
+        Ciudad ciudad = null;
         while (!salir) {
-            Ciudad ciudad;
+            
             System.out.println("1. BUENOS AIRES");
             System.out.println("2. CORDOBA");
             System.out.println("3. SANTIAGO DE CHILE");
@@ -100,13 +103,14 @@ public class MenuVuelos extends MenuLogin{
                     System.out.println("Solo números entre 1 y 4");
             }
         }
+        return ciudad;
     }
 
     public Vuelo menuSeleccionarVuelo(Aerolinea aerolinea, LocalDate fecha, Ciudad origen, Ciudad destino, int cantidadAcompanantes){
         int idVuelo;
         Vuelo vuelo;
         aerolinea.mostrarVuelosDisponibles(fecha,origen,destino,cantidadAcompanantes+1);
-        System.out.println("Seleccione un vuelo");
+        System.out.println("Seleccione la id del vuelo que desea reservar:");
         idVuelo = sn.nextInt();
         vuelo=aerolinea.buscarVueloPorID(idVuelo);
         return vuelo;

@@ -46,6 +46,19 @@ public class Aerolinea {
     }
 
     public String mostrarVuelosDisponibles(LocalDate fecha, Ciudad origen, Ciudad destino, int cantidadPasajeros){
+            String vuelosDisponibles = null;
+            for(Vuelo vuelo:this.vuelos){
+                if(fecha.equals(vuelo.getFecha())){
+                    if(origen.equals(vuelo.getOrigen())){
+                        if(destino.equals(destino)){
+                            if(vuelo.getAvion().getCapacidadMaxPasajeros()-vuelo.getPasajerosActuales() >= cantidadPasajeros){
+                                vuelosDisponibles.concat(vuelo.toString());
+                            }
+                        }
+                    }
+                }
+            }
+            return vuelosDisponibles;
     }
 
     public String mostrarUsuarios(){
