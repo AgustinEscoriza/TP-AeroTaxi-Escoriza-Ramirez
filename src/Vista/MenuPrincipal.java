@@ -15,7 +15,7 @@ public class MenuPrincipal extends MenuLogin {
         menuVuelos = new MenuVuelos();
     }
 
-    public void menuPrincipal(Usuario usuario, Aerolinea aerolinea, ) {
+    public void menuPrincipal(Usuario usuario, Aerolinea aerolinea) {
         while (!salir) {
 
             limpiarPantalla.limpiarPantalla();
@@ -33,7 +33,7 @@ public class MenuPrincipal extends MenuLogin {
                     break;
                 case 2:
                     limpiarPantalla.limpiarPantalla();
-                    menuVuelos.menuCancelarVuelo(usuario, aerolinea);
+                    menuVuelos.menuCancelarVuelo();
                     break;
                 case 3:
                     limpiarPantalla.limpiarPantalla();

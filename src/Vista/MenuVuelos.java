@@ -24,7 +24,6 @@ public class MenuVuelos extends MenuLogin{
         String fechaString;
         Ciudad destino=null;
         Ciudad origen=null;
-        int idVuelo;
         float costoTotal;
         String confirmacion = null;
         int cantidadAcompanantes;
@@ -35,18 +34,16 @@ public class MenuVuelos extends MenuLogin{
             fechaString = sn.next();
             LocalDate fechaLocalDate = LocalDate.parse(fechaString);
 
-            origen = menuSeleccionCiudad();
-            destino = menuSeleccionCiudad();
+            origen= menuSeleccionCiudad();
+            destino= menuSeleccionCiudad();
 
             System.out.println("Ingrese cantidad de acompanantes");
             cantidadAcompanantes = sn.nextInt();
 
-            aerolinea.mostrarVuelosDisponibles(fechaLocalDate,origen,destino,cantidadAcompanantes+1);
-            System.out.println("Seleccione un vuelo");
-            idVuelo = sn.nextInt();
-            vuelo=aerolinea.buscarVueloPorID(idVuelo);
+            vuelo=menuSeleccionarVuelo(aerolinea,fechaLocalDate,origen,destino,cantidadAcompanantes);
 
-            System.out.println("El costo total del vuelo es" + vuelo.getCostoTotal());
+            costoTotal=vuelo.calcularCosto(cantidadAcompanantes);
+            System.out.println("El costo total del vuelo es" + costoTotal);
 
             while (confirmacion != "S" || confirmacion != "N") {
                 System.out.println("Confirmar? S/N");
@@ -54,6 +51,7 @@ public class MenuVuelos extends MenuLogin{
                 if (confirmacion == "S") {
                     Reserva reserva = new Reserva(usuario,cantidadAcompanantes);
                     vuelo.agregarReserva(reserva);
+                    usuario.setTotalDineroGastado(costoTotal);
                 } else if (confirmacion == "N") {
                     salir=true;
                 } else {
@@ -101,16 +99,22 @@ public class MenuVuelos extends MenuLogin{
                 default:
                     System.out.println("Solo números entre 1 y 4");
             }
+        }
     }
 
-    public void menuBuscarVueloDisponiblePorFecha(){
+    public Vuelo menuSeleccionarVuelo(Aerolinea aerolinea, LocalDate fecha, Ciudad origen, Ciudad destino, int cantidadAcompanantes){
+        int idVuelo;
+        Vuelo vuelo;
+        aerolinea.mostrarVuelosDisponibles(fecha,origen,destino,cantidadAcompanantes+1);
+        System.out.println("Seleccione un vuelo");
+        idVuelo = sn.nextInt();
+        vuelo=aerolinea.buscarVueloPorID(idVuelo);
+        return vuelo;
     }
 
     public void menuCancelarVuelo(){
     }
 
-    public void menuSeleccionVuelo(){
-    }
 
 
 }
