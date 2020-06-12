@@ -1,5 +1,7 @@
 package Vista;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import LogicaDeNegocio.Aerolinea;
@@ -11,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 
 public class MenuVuelos extends MenuLogin{
 
-    public MenuVuelos(Aerolinea aerolinea) {
-        super(aerolinea);
+    public MenuVuelos() {
+        super();
     }
 
     public Vuelo menuContratarVuelo() {
@@ -63,11 +65,22 @@ public class MenuVuelos extends MenuLogin{
         return vuelo;
     }
 
-    public Vuelo menuCancelarVuelo(){
+    public void menuCancelarVuelo(){
 
     }
+    public void menuBuscarPorFecha(Aerolinea aerolinea){
 
-    public Avion menuSeleccionAvion(LocalDate fecha, Ciudad origen, Ciudad destino, int nroAcompañantes){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("DD/MM/YYYY");
+        String fechaString;
+        LocalDate fechaDate;
+        Scanner scan = new Scanner(System.in);
+        fechaString = scan.nextLine();
+        fechaDate = LocalDate.parse(fechaString,formato);
+
+        System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate));
+    }
+
+    public void menuSeleccionAvion(LocalDate fecha, Ciudad origen, Ciudad destino, int nroAcompañantes){
 
 
     }

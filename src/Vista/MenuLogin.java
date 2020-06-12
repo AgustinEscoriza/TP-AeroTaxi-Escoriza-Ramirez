@@ -20,7 +20,7 @@ public class MenuLogin {
     }
 
     public Usuario menuLogin(Aerolinea aerolinea){
-        Usuario usuario;
+        Usuario usuario = null;
         while (!salir) {
             limpiarPantalla.limpiarPantalla();
             System.out.println("1. Ingresar usuario registrado");
@@ -76,7 +76,7 @@ public class MenuLogin {
                 } else if (confirmacion == "N") {
                     usuario = null;
                 } else {
-                    System.out.println("Ingrese S o N");
+                    System.out.println("Caracter incorrecto. Por favor ingrese S o N");
                 }
             }
             salir=salirAMenuAnterior();

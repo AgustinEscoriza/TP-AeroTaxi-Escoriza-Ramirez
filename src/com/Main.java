@@ -1,16 +1,34 @@
 package com;
 
 import LogicaDeNegocio.Aerolinea;
+import Modelo.Avion;
+import Modelo.Usuario;
+import Modelo.Vuelo;
+import Persistencia.JsonAvion;
+import Persistencia.JsonUsuario;
+import Persistencia.JsonVuelo;
 import Vista.MenuLogin;
 import Vista.MenuPrincipal;
+
+import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
-        Aerolinea aerolinea = new Aerolinea();
+        ArrayList<Avion> aviones;
+        ArrayList<Vuelo> vuelos;
+        ArrayList<Usuario> usuarios;
+        JsonAvion jsonAvion = new JsonAvion();
+        JsonVuelo jsonVuelo = new JsonVuelo();
+        JsonUsuario jsonUsuario = new JsonUsuario();
+        aviones = jsonAvion.aJava();
+        usuarios = jsonUsuario.aJava();
+        vuelos = jsonVuelo.aJava();
 
-        MenuLogin menuLogin = new MenuLogin(aerolinea);
-        MenuPrincipal menuPrincipal = new MenuPrincipal(aerolinea);
+        Aerolinea aerolinea = new Aerolinea(aviones,vuelos,usuarios);
+
+        MenuLogin menuLogin = new MenuLogin();
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
 
         menuPrincipal.menuPrincipal(aerolinea, menuLogin.menuLogin(aerolinea));
     }

@@ -2,13 +2,15 @@ package Vista;
 import Modelo.Usuario;
 import LogicaDeNegocio.Aerolinea;
 
+import java.util.Scanner;
+
 public class MenuPrincipal extends MenuLogin {
 
     protected MenuVuelos menuVuelos;
 
     public MenuPrincipal(){
-        menuVuelos = new MenuVuelos();
         super();
+        menuVuelos = new MenuVuelos();
     }
 
     public void menuPrincipal(Aerolinea aerolinea, Usuario usuario) {
@@ -33,7 +35,8 @@ public class MenuPrincipal extends MenuLogin {
                     break;
                 case 3:
                     limpiarPantalla.limpiarPantalla();
-                    System.out.println(aerolinea.mostrarVuelosPorFecha());
+                    menuVuelos.menuBuscarPorFecha(aerolinea);
+
                     break;
                 case 4:
                     limpiarPantalla.limpiarPantalla();
