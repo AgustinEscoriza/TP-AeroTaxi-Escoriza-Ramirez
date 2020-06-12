@@ -3,11 +3,10 @@ package LogicaDeNegocio;
 import Modelo.Avion;
 import Modelo.Vuelo;
 import Modelo.Usuario;
-
+import Enums.Ciudad;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-    /// CHEQUEAR SI NO HAY QUE AGREGAR ELIMINAR AVIONES,VUELOS,USUARIOS U OTROS METODOS;
 public class Aerolinea {
     public ArrayList<Avion> aviones;
     public ArrayList<Vuelo> vuelos;
@@ -26,6 +25,16 @@ public class Aerolinea {
         }
     }
 
+    public Vuelo buscarVueloPorID(int idVuelo){
+        Vuelo vueloBuscado=null;
+        for(Vuelo vuelo: vuelos){
+            if(vuelo.getIdVuelo()==idVuelo){
+                vueloBuscado=vuelo;
+            }
+        }
+        return vueloBuscado;
+    }
+
     public String mostrarVuelosPorFecha(LocalDate fecha){
         String retornoVuelos = " ";
         for(Vuelo vuelo : vuelos){
@@ -34,6 +43,9 @@ public class Aerolinea {
             }
         }
         return retornoVuelos;
+    }
+
+    public String mostrarVuelosDisponibles(LocalDate fecha, Ciudad origen, Ciudad destino, int cantidadPasajeros){
     }
 
     public String mostrarUsuarios(){
