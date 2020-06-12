@@ -8,11 +8,11 @@ import java.time.LocalDate;
 
 public class MenuLogin extends MenuPrincipal {
 
-    public MenuLogin() {
-        super();
+    public MenuLogin(Aerolinea aerolinea) {
+        super(aerolinea);
     }
 
-    public Usuario menuLogin(){
+    public void menuLogin(){
         while (!salir) {
 
             System.out.println("1. Ingresar usuario registrado");
@@ -40,7 +40,7 @@ public class MenuLogin extends MenuPrincipal {
         String dni;
         int edad;
         String confirmacion = null;
-        Usuario usuario;
+        Usuario usuario = null;
         while (!salir) {
             System.out.println("Ingrese nombre");
             nombre = sn.next();
@@ -69,13 +69,13 @@ public class MenuLogin extends MenuPrincipal {
     public Usuario menuBuscarUsuarioPorDni(){
         String dni;
         String confirmacion=null;
-        Usuario usuarioBuscado;
+        Usuario usuarioBuscado = null;
         while (!salir) {
             System.out.print("Ingrese DNI");
             dni = sn.next();
-            usuarioBuscado = aerolinea.buscarUsuarioPorDNI();
+            usuarioBuscado = aerolinea.buscarUsuarioPorDNI(dni);
             salir=salirAMenuAnterior();
         }
-        return usuario;
+        return usuarioBuscado;
     }
 }
