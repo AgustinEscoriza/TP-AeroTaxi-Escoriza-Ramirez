@@ -14,7 +14,6 @@ public class Vuelo {
     private Ciudad destino;
     private LocalDate fecha;
     private int pasajerosActuales;
-    private float costoTotal;
     private int distanciaKms;
     public ArrayList<Reserva> reservas;
 
@@ -24,7 +23,6 @@ public class Vuelo {
         this.destino = destino;
         this.fecha = fecha;
         this.distanciaKms = calcularKms();
-        this.costoTotal = calcularCosto();
         this.idVuelo = generadorId.getAndIncrement();
     }
 
@@ -42,10 +40,6 @@ public class Vuelo {
 
     public LocalDate getFecha() {
         return fecha;
-    }
-
-    public float getCostoTotal() {
-        return costoTotal;
     }
 
     public Integer getIdVuelo() {
@@ -69,7 +63,6 @@ public class Vuelo {
                 ", origen=" + origen +
                 ", destino=" + destino +
                 ", fecha=" + fecha +
-                ", costoTotal=" + costoTotal +
                 ", distanciaKms=" + distanciaKms +
                 '}';
     }
@@ -107,7 +100,7 @@ public class Vuelo {
 
     public float calcularCosto(int cantidadAcompanantes){
         float costoTotal = 0;
-        costoTotal = ( distanciaKms * avion.getCostoPorKm() ) + ( (cantidadAcompanantes+1) * 3500 ) + avion.getTarifaFija();
+        costoTotal = ( distanciaKms * avion.getCostoPorKm() ) + ((cantidadAcompanantes+1) * 3500 ) + avion.getTarifaFija();
         return costoTotal;
     }
 

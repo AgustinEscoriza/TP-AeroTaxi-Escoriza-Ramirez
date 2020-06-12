@@ -3,15 +3,15 @@ package Modelo;
 public class Reserva {
 
     private Usuario usuario;
-    private int nroAcompanantes;
+    private int cantidadAcompanantes;
 
     public Reserva(Usuario usuario, int nroAcompanantes) {
         this.usuario = usuario;
-        this.nroAcompanantes = nroAcompanantes;
+        this.cantidadAcompanantes = nroAcompanantes;
     }
 
     public int getNroAcompanantes() {
-        return nroAcompanantes;
+        return cantidadAcompanantes;
     }
 
     public Usuario getUsuario() {
