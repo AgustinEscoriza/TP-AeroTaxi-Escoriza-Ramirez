@@ -24,6 +24,7 @@ public class MenuVuelos extends MenuLogin{
         String fechaString;
         Ciudad destino=null;
         Ciudad origen=null;
+        int idVuelo;
         float costoTotal;
         String confirmacion = null;
         int cantidadAcompanantes;
@@ -34,12 +35,18 @@ public class MenuVuelos extends MenuLogin{
             fechaString = sn.next();
             LocalDate fechaLocalDate = LocalDate.parse(fechaString);
 
-            //SELECCION ORIGEN Y DESTINO//
+            origen = menuSeleccionCiudad();
+            destino = menuSeleccionCiudad();
 
             System.out.println("Ingrese cantidad de acompanantes");
             cantidadAcompanantes = sn.nextInt();
 
-            //SELECCION DE VUELO//
+            aerolinea.mostrarVuelosDisponibles(fechaLocalDate,origen,destino,cantidadAcompanantes+1);
+            System.out.println("Seleccione un vuelo");
+            idVuelo = sn.nextInt();
+            vuelo=aerolinea.buscarVueloPorID(idVuelo);
+
+            System.out.println("El costo total del vuelo es" + vuelo.getCostoTotal());
 
             while (confirmacion != "S" || confirmacion != "N") {
                 System.out.println("Confirmar? S/N");
@@ -57,7 +64,6 @@ public class MenuVuelos extends MenuLogin{
         }
     }
 
-
     public void menuBuscarVueloPorFecha(Aerolinea aerolinea){
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("DD/MM/YYYY");
@@ -67,6 +73,37 @@ public class MenuVuelos extends MenuLogin{
         fechaString = sn.nextLine();
         fechaDate = LocalDate.parse(fechaString,formato);
         System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate));
+    }
+
+    public Ciudad menuSeleccionCiudad(){
+        while (!salir) {
+            Ciudad ciudad;
+            System.out.println("1. BUENOS AIRES");
+            System.out.println("2. CORDOBA");
+            System.out.println("3. SANTIAGO DE CHILE");
+            System.out.println("4. MONTEVIDEO");
+            System.out.println("Elija una opcion");
+            opcion = sn.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    ciudad = Ciudad.BUENOS_AIRES;
+                    break;
+                case 2:
+                    ciudad = Ciudad.CORDOBA;
+                    break;
+                case 3:
+                    ciudad = Ciudad.SANTIAGO_DE_CHILE;
+                    break;
+                case 4:
+                    ciudad = Ciudad.MONTEVIDEO;
+                    break;
+                default:
+                    System.out.println("Solo números entre 1 y 4");
+            }
+    }
+
+    public void menuBuscarVueloDisponiblePorFecha(){
     }
 
     public void menuCancelarVuelo(){
