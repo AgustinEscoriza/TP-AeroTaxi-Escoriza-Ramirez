@@ -2,6 +2,7 @@ package Persistencia;
 
 import Modelo.Avion;
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -13,6 +14,9 @@ public class JsonAvion {
 
     private static ObjectMapper mapper = new ObjectMapper();
     private static String archivo = "avion.json";
+
+    public JsonAvion() {
+    }
 
     public static void aJson(ArrayList<Avion> aviones){
         try {
@@ -27,13 +31,11 @@ public class JsonAvion {
         }
     }
     public static ArrayList<Avion> aJava(){
-        Avion[] arrayAviones = new Avion[0];
         ArrayList<Avion> aviones = null;
         try{
 
             File json = new File(archivo);
-            arrayAviones = mapper.readValue(json,Avion[].class);
-            aviones = avionToArrayList(arrayAviones);
+            aviones = mapper.readValue(json, new TypeReference<ArrayList<Avion>>(){});
 
         } catch (JsonMappingException e){
             e.printStackTrace();
@@ -41,21 +43,6 @@ public class JsonAvion {
             e.printStackTrace();
         } catch (IOException e){
             e.printStackTrace();
-        }
-
-        return aviones;
-    }
-
-    private static ArrayList<Avion> avionToArrayList(Avion[] arrayAviones) {
-        ArrayList<Avion> aviones = null;
-        Avion avion = null ;
-        int contador = 0;
-        int cantidad = 0;
-        cantidad = arrayAviones.length;
-
-        while(contador < cantidad){
-            aviones.add(arrayAviones[contador]);
-            contador ++;
         }
 
         return aviones;

@@ -1,8 +1,10 @@
 package Persistencia;
 
 
+import Modelo.Avion;
 import Modelo.Usuario;
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,10 +17,13 @@ public class JsonUsuario {
     private static ObjectMapper mapper = new ObjectMapper();
     private static String archivo = "usuario.json";
 
+    public JsonUsuario() {
+    }
+
     public static void aJson(ArrayList<Usuario> usuarios){
         try {
             File json = new File(archivo);
-            mapper.writeValue(json,);
+            mapper.writeValue(json,usuarios);
         } catch (JsonMappingException e){
             e.printStackTrace();
         } catch (JsonGenerationException e){
@@ -28,13 +33,11 @@ public class JsonUsuario {
         }
     }
     public static ArrayList<Usuario> aJava(){
-        Usuario[] arrayUsuario = new Usuario[0];
         ArrayList<Usuario> usuarios = null;
         try{
 
             File json = new File(archivo);
-            arrayUsuario = mapper.readValue(json,Usuario[].class);
-            usuarios = usuarioToArrayList(arrayUsuario);
+            usuarios = mapper.readValue(json, new TypeReference<ArrayList<Usuario>>(){} );
 
         } catch (JsonMappingException e){
             e.printStackTrace();
