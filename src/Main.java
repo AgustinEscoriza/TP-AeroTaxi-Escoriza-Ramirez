@@ -28,6 +28,8 @@ public class Main {
         MenuLogin menuLogin = new MenuLogin();
         MenuPrincipal menuPrincipal = new MenuPrincipal();
 
-        menuPrincipal.menuPrincipal(aerolinea, menuLogin.menuLogin(aerolinea));
+        Usuario usuario;
+        usuario=menuLogin.menuLogin(aerolinea);
+        menuPrincipal.menuPrincipal(usuario, aerolinea);
     }
 }
