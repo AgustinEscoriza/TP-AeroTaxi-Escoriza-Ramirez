@@ -116,5 +116,14 @@ public class Vuelo {
         pasajerosActuales=+reserva.getNroAcompanantes()+1;
     }
 
+    public Boolean isDisponible(int pasajerosAReservar){
+        if(getPasajerosActuales()+pasajerosAReservar<avion.getCapacidadMaxPasajeros()&&avion.isDisponible()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }
 

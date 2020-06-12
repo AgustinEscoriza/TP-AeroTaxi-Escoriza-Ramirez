@@ -1,5 +1,3 @@
-package com;
-
 import LogicaDeNegocio.Aerolinea;
 import Modelo.Avion;
 import Modelo.Usuario;
