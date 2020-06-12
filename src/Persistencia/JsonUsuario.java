@@ -20,7 +20,7 @@ public class JsonUsuario {
     public JsonUsuario() {
     }
 
-    public static void aJson(ArrayList<Usuario> usuarios){
+    public static void cargarJsonUsuario(ArrayList<Usuario> usuarios){
         try {
             File json = new File(archivo);
             mapper.writeValue(json,usuarios);
@@ -32,7 +32,7 @@ public class JsonUsuario {
             e.printStackTrace();
         }
     }
-    public static ArrayList<Usuario> aJava(){
+    public static ArrayList<Usuario> getJsonUsuario(){
         ArrayList<Usuario> usuarios = null;
         try{
 

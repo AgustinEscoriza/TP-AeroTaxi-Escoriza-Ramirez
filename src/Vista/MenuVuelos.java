@@ -27,6 +27,7 @@ public class MenuVuelos extends MenuLogin{
         float costoTotal;
         String confirmacion = null;
         int cantidadAcompanantes;
+        boolean flag = false;
 
         while (!salir) {
 
@@ -36,8 +37,17 @@ public class MenuVuelos extends MenuLogin{
 
             System.out.println("Elija una de las siguientes ciudades de origen:");
             origen= menuSeleccionCiudad();
-            System.out.println("Elija una de las siguientes ciudades de destino:");
-            destino= menuSeleccionCiudad();
+            while(flag == false){
+                System.out.println("Elija una de las siguientes ciudades de destino:");
+                destino= menuSeleccionCiudad();
+                if(destino.equals(origen)){
+                    flag = false;
+                    System.out.println("El destino no puede ser "+ destino.toString() +"ya que es el origen. Ingrese otra ciudad");
+                }else{
+                    flag = true;
+                }
+            }
+
 
             System.out.println("Ingrese cantidad de acompanantes");
             cantidadAcompanantes = sn.nextInt();

@@ -18,7 +18,7 @@ public class JsonAvion {
     public JsonAvion() {
     }
 
-    public static void aJson(ArrayList<Avion> aviones){
+    public static void cargarJsonAvion(ArrayList<Avion> aviones){
         try {
             File json = new File(archivo);
             mapper.writeValue(json,aviones);
@@ -30,7 +30,7 @@ public class JsonAvion {
             e.printStackTrace();
         }
     }
-    public static ArrayList<Avion> aJava(){
+    public static ArrayList<Avion> getJsonAvion(){
         ArrayList<Avion> aviones = null;
         try{
 
