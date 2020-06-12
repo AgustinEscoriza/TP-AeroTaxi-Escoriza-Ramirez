@@ -13,13 +13,13 @@ public class Aerolinea {
     public ArrayList<Vuelo> vuelos;
     public ArrayList<Usuario> usuarios;
 
-    public Aerolinea(){
-        this.aviones = new ArrayList<Avion>();
-        this.usuarios = new ArrayList<Usuario>();
-        this.vuelos = new ArrayList<Vuelo>();
-    }
+        public Aerolinea(ArrayList<Avion> aviones, ArrayList<Vuelo> vuelos, ArrayList<Usuario> usuarios) {
+            this.aviones = aviones;
+            this.vuelos = vuelos;
+            this.usuarios = usuarios;
+        }
 
-    public void agregarAvion(Avion avion){
+        public void agregarAvion(Avion avion){
         if(avion!=null) {
             aviones.add(avion);
         }
