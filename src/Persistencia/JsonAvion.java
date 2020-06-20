@@ -4,10 +4,7 @@ import Modelo.Avion;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
-
 import java.io.*;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +33,7 @@ public class JsonAvion {
     public static ArrayList<Avion> getJsonAvion() throws IOException {
         ArrayList<Avion> aviones = null;
 
-        Type listOfAvion = new TypeToken<List<Avion>>(){}.getType();
+        Type listOfAvion = new TypeToken<ArrayList<Avion>>(){}.getType();
 
         BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
 
@@ -45,8 +42,7 @@ public class JsonAvion {
         Gson gson = builder.create();
 
         //List<Avion> list = Collections.synchronizedList(new ArrayList<Avion>());
-        ArrayList<Avion> list = new ArrayList();
-        gson.fromJson(bufferedReader,listOfAvion);
+        ArrayList<Avion> list = gson.fromJson(bufferedReader,listOfAvion);
 
         aviones = list;
 

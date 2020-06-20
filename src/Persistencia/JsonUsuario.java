@@ -3,50 +3,44 @@ package Persistencia;
 
 import Modelo.Avion;
 import Modelo.Usuario;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class JsonUsuario {
 
-    private static ObjectMapper mapper = new ObjectMapper();
-    private static String archivo = "usuario.json";
+    private static File archivo = new File("usuario.json");
 
     public JsonUsuario() {
     }
 
-    public static void cargarJsonUsuario(ArrayList<Usuario> usuarios){
-        try {
-            File json = new File(archivo);
-            mapper.writeValue(json,usuarios);
-        } catch (JsonMappingException e){
-            e.printStackTrace();
-        } catch (JsonGenerationException e){
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+    public static void cargarJsonUsuario(ArrayList<Usuario> usuarios) throws IOException {
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(archivo));
+        Gson gson = new Gson();
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+        listaUsuarios = usuarios;
+        gson.toJson(listaUsuarios,bufferedWriter);
+
+        bufferedWriter.close();
     }
-    public static ArrayList<Usuario> getJsonUsuario(){
+
+    public static ArrayList<Usuario> getJsonUsuario() throws IOException {
         ArrayList<Usuario> usuarios = null;
-        try{
+        Type tipoListOfUsuario = new TypeToken<ArrayList<Usuario>>(){}.getType();
 
-            File json = new File(archivo);
-            usuarios = mapper.readValue(json, new TypeReference<ArrayList<Usuario>>(){} );
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
 
-        } catch (JsonMappingException e){
-            e.printStackTrace();
-        } catch (JsonGenerationException e){
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        Gson gson = new Gson();
+        ArrayList<Usuario> listaUsuarios = gson.fromJson(bufferedReader,tipoListOfUsuario);
 
+        usuarios = listaUsuarios;
+
+        bufferedReader.close();
         return usuarios;
     }
 

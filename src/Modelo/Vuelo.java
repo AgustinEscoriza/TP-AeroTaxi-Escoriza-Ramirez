@@ -14,7 +14,7 @@ public class Vuelo {
     private Ciudad destino;
     private LocalDate fecha;
     private Usuario usuario;
-    private int cantPasajeros
+    private int cantPasajeros;
     private int distanciaKms;
 
     public Vuelo(Avion avion, Ciudad origen, Ciudad destino, LocalDate fecha, Usuario usuario, int cantAcompanantes) {

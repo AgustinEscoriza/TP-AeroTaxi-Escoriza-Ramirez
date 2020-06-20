@@ -1,51 +1,47 @@
 package Persistencia;
 
 import Modelo.Avion;
+import Modelo.Usuario;
 import Modelo.Vuelo;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class JsonVuelo {
 
-    private static ObjectMapper mapper = new ObjectMapper();
     private static String archivo = "vuelo.json";
 
     public JsonVuelo() {
     }
 
-    public static void cargarJsonVuelo(ArrayList<Vuelo> vuelos){
-        try {
-            File json = new File(archivo);
-            mapper.writeValue(json,vuelos);
-        } catch (JsonMappingException e){
-            e.printStackTrace();
-        } catch (JsonGenerationException e){
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+    public static void cargarJsonVuelo(ArrayList<Vuelo> vuelos) throws IOException {
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(archivo));
+
+        Gson gson = new Gson();
+
+        ArrayList<Vuelo> listaVuelos = new ArrayList<>();
+        listaVuelos = vuelos;
+        gson.toJson(listaVuelos,bufferedWriter);
+
+        bufferedWriter.close();
     }
-    public static ArrayList<Vuelo> getJsonVuelo(){
+    public static ArrayList<Vuelo> getJsonVuelo() throws IOException {
+
         ArrayList<Vuelo> vuelos = null;
-        try{
+        Type tipoListOfVuelo = new TypeToken<ArrayList<Vuelo>>(){}.getType();
 
-            File json = new File(archivo);
-            vuelos = mapper.readValue(json,new TypeReference<ArrayList<Vuelo>>(){});
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
 
-        } catch (JsonMappingException e){
-            e.printStackTrace();
-        } catch (JsonGenerationException e){
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        Gson gson = new Gson();
+        ArrayList<Vuelo> listaVuelos = gson.fromJson(bufferedReader,tipoListOfVuelo);
 
+        vuelos = listaVuelos;
+
+        bufferedReader.close();
         return vuelos;
     }
 
