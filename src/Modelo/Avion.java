@@ -1,6 +1,7 @@
 package Modelo;
 
 import Enums.Propulsion;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,6 +17,8 @@ public abstract class Avion {
     private Propulsion propulsion;
     private boolean disponible;
     protected float tarifaFija;
+    @SerializedName("type")
+    private String typeName;
 
 
     public Avion(float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
@@ -26,6 +29,7 @@ public abstract class Avion {
         this.propulsion = propulsion;
         this.disponible = true;
         this.idAvion = generadorId.getAndIncrement();
+        this.typeName = getClass().getName();
     }
 
     @Override
@@ -70,5 +74,9 @@ public abstract class Avion {
 
     public float getTarifaFija() {
         return tarifaFija;
+    }
+
+    public String getTypeName() {
+        return typeName;
     }
 }

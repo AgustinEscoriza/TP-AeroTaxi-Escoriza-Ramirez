@@ -1,50 +1,56 @@
 package Persistencia;
 
 import Modelo.Avion;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.IOException;
+
+import java.io.*;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class JsonAvion {
 
-    private static ObjectMapper mapper = new ObjectMapper();
-    private static String archivo = "avion.json";
+    private static File archivo = new File ("avion.json");
+
 
     public JsonAvion() {
     }
 
-    public static void cargarJsonAvion(ArrayList<Avion> aviones){
-        try {
-            File json = new File(archivo);
-            mapper.writeValue(json,aviones);
-        } catch (JsonMappingException e){
-            e.printStackTrace();
-        } catch (JsonGenerationException e){
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+    public static void cargarJsonAvion(ArrayList<Avion> aviones) throws IOException {
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(archivo));
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Avion.class,new JsonSerializerAvion());
+        Gson gson = builder.create();
+        List<Avion> list = Collections.synchronizedList(new ArrayList<Avion>());  //probar si anda sin esto despues de que corra bien, esta puesto por copiar de internet: https://stackoverflow.com/questions/5813434/trouble-with-gson-serializing-an-arraylist-of-pojos
+        list = aviones;
+        gson.toJson(list,bufferedWriter);
+        bufferedWriter.close();
+
     }
-    public static ArrayList<Avion> getJsonAvion(){
+    public static ArrayList<Avion> getJsonAvion() throws IOException {
         ArrayList<Avion> aviones = null;
-        try{
 
-            File json = new File(archivo);
-            aviones = mapper.readValue(json, new TypeReference<ArrayList<Avion>>(){});
+        Type listOfAvion = new TypeToken<List<Avion>>(){}.getType();
 
-        } catch (JsonMappingException e){
-            e.printStackTrace();
-        } catch (JsonGenerationException e){
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
 
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Avion.class,new JsonDeserializerAvion<Avion>());
+        Gson gson = builder.create();
+
+        //List<Avion> list = Collections.synchronizedList(new ArrayList<Avion>());
+        ArrayList<Avion> list = new ArrayList();
+        gson.fromJson(bufferedReader,listOfAvion);
+
+        aviones = list;
+
+        bufferedReader.close();
         return aviones;
     }
 
