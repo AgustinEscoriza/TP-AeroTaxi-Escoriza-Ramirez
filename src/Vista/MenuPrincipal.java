@@ -37,7 +37,7 @@ public class MenuPrincipal extends MenuLogin {
                     break;
                 case 3:
                     limpiarPantalla.limpiarPantalla();
-                    menuVuelos.menuBuscarVueloPorFecha(aerolinea);
+                    menuVuelos.menuBuscarVuelosPorFecha(aerolinea);
                     break;
                 case 4:
                     limpiarPantalla.limpiarPantalla();

@@ -5,7 +5,6 @@ public class LimpiarPantalla {
     public LimpiarPantalla(){
 
     }
-
     public void limpiarPantalla(){
         try
         {

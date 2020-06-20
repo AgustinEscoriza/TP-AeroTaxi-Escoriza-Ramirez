@@ -1,13 +1,9 @@
 package Vista;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
 import LogicaDeNegocio.Aerolinea;
 import Modelo.Vuelo;
-import Modelo.Avion;
 import Modelo.Usuario;
-import Modelo.Reserva;
+import Modelo.Avion;
 import Enums.Ciudad;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,16 +14,16 @@ public class MenuVuelos extends MenuLogin{
         super();
     }
 
-    public void menuContratarVuelo(Usuario usuario, Aerolinea aerolinea) {
+    public Vuelo menuContratarVuelo(Usuario usuario, Aerolinea aerolinea) {
 
-        Vuelo vuelo;
+        Avion avion;
+        Vuelo vuelo=null;
         String fechaString;
-        Ciudad destino=null;
-        Ciudad origen=null;
+        Ciudad destino;
+        Ciudad origen;
         float costoTotal;
         String confirmacion = null;
-        int cantidadAcompanantes;
-        boolean flag = false;
+        int cantAcompanantes;
 
         while (!salir) {
 
@@ -37,32 +33,21 @@ public class MenuVuelos extends MenuLogin{
 
             System.out.println("Elija una de las siguientes ciudades de origen:");
             origen= menuSeleccionCiudad();
-            while(flag == false){
-                System.out.println("Elija una de las siguientes ciudades de destino:");
-                destino= menuSeleccionCiudad();
-                if(destino.equals(origen)){
-                    flag = false;
-                    System.out.println("El destino no puede ser "+ destino.toString() +"ya que es el origen. Ingrese otra ciudad");
-                }else{
-                    flag = true;
-                }
-            }
-
+            System.out.println("Elija una de las siguientes ciudades de destino:");
+            destino= menuSeleccionCiudad();
 
             System.out.println("Ingrese cantidad de acompanantes");
-            cantidadAcompanantes = sn.nextInt();
-
-            vuelo=menuSeleccionarVuelo(aerolinea,fechaLocalDate,origen,destino,cantidadAcompanantes);
-
-            costoTotal=vuelo.calcularCosto(cantidadAcompanantes);
+            cantAcompanantes = sn.nextInt();
+            avion=menuSeleccionarAvion();
+            costoTotal=vuelo.calcularCosto(cantAcompanantes);
             System.out.println("El costo total del vuelo es" + costoTotal);
 
             while (confirmacion != "S" || confirmacion != "N") {
                 System.out.println("Confirmar? S/N");
                 confirmacion = sn.next();
+
                 if (confirmacion == "S") {
-                    Reserva reserva = new Reserva(usuario,cantidadAcompanantes);
-                    vuelo.agregarReserva(reserva);
+                    vuelo = new Vuelo(avion, origen, destino, fechaLocalDate, usuario, cantAcompanantes);
                     usuario.setTotalDineroGastado(costoTotal);
                 } else if (confirmacion == "N") {
                     salir=true;
@@ -72,9 +57,10 @@ public class MenuVuelos extends MenuLogin{
             }
             salir=salirAMenuAnterior();
         }
+        return vuelo;
     }
 
-    public void menuBuscarVueloPorFecha(Aerolinea aerolinea){
+    public void menuBuscarVuelosPorFecha(Aerolinea aerolinea){
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("DD/MM/YYYY");
         String fechaString;
@@ -116,14 +102,14 @@ public class MenuVuelos extends MenuLogin{
         return ciudad;
     }
 
-    public Vuelo menuSeleccionarVuelo(Aerolinea aerolinea, LocalDate fecha, Ciudad origen, Ciudad destino, int cantidadAcompanantes){
-        int idVuelo;
-        Vuelo vuelo;
-        aerolinea.mostrarVuelosDisponibles(fecha,origen,destino,cantidadAcompanantes+1);
-        System.out.println("Seleccione la id del vuelo que desea reservar:");
-        idVuelo = sn.nextInt();
-        vuelo=aerolinea.buscarVueloPorID(idVuelo);
-        return vuelo;
+    public Avion menuSeleccionarAvion(){
+        //int idVuelo;
+        //Vuelo vuelo;
+        //aerolinea.mostrarVuelosDisponibles(fecha,origen,destino,cantidadAcompanantes+1);
+        //System.out.println("Seleccione la id del vuelo que desea reservar:");
+        //idVuelo = sn.nextInt();
+        //vuelo=aerolinea.buscarVueloPorID(idVuelo);
+        //return vuelo;
     }
 
     public void menuCancelarVuelo(){
