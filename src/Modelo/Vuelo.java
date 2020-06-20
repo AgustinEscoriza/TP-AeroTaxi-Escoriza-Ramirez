@@ -13,16 +13,18 @@ public class Vuelo {
     private Ciudad origen;
     private Ciudad destino;
     private LocalDate fecha;
-    private int pasajerosActuales;
+    private Usuario usuario;
+    private int cantPasajeros
     private int distanciaKms;
-    public ArrayList<Reserva> reservas;
 
-    public Vuelo(Avion avion, Ciudad origen, Ciudad destino, LocalDate fecha) {
+    public Vuelo(Avion avion, Ciudad origen, Ciudad destino, LocalDate fecha, Usuario usuario, int cantAcompanantes) {
         this.avion = avion;
         this.origen = origen;
         this.destino = destino;
         this.fecha = fecha;
         this.distanciaKms = calcularKms();
+        this.usuario = usuario;
+        setCantPasajeros(cantAcompanantes);
         this.idVuelo = generadorId.getAndIncrement();
     }
 
@@ -46,14 +48,14 @@ public class Vuelo {
         return idVuelo;
     }
 
-    public int getPasajerosActuales(){
-        return pasajerosActuales;
-    }
-
     public int getDistanciaKms() {
         return distanciaKms;
     }
 
+    public void setCantPasajeros(int cantAcompanantes){
+        cantPasajeros=cantAcompanantes+1;
+        this.cantPasajeros=cantPasajeros;
+    }
 
     @Override
     public String toString() {
@@ -104,13 +106,8 @@ public class Vuelo {
         return costoTotal;
     }
 
-    public void agregarReserva(Reserva reserva){
-        reservas.add(reserva);
-        pasajerosActuales=+reserva.getNroAcompanantes()+1;
-    }
-
     public Boolean isDisponible(int pasajerosAReservar){
-        if(getPasajerosActuales()+pasajerosAReservar<avion.getCapacidadMaxPasajeros()&&avion.isDisponible()){
+        if(pasajerosAReservar<avion.getCapacidadMaxPasajeros()&&avion.isDisponible()){
             return true;
         }
         else{
