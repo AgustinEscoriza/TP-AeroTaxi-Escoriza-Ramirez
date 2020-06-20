@@ -4,6 +4,7 @@ import Modelo.Avion;
 import Modelo.Usuario;
 import Modelo.Vuelo;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
@@ -21,8 +22,10 @@ public class JsonVuelo {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(archivo));
 
-        Gson gson = new Gson();
 
+        GsonBuilder builder = new GsonBuilder();
+        builder.setDateFormat("yyyy-MM-dd");
+        Gson gson = builder.create();
         ArrayList<Vuelo> listaVuelos = new ArrayList<>();
         listaVuelos = vuelos;
         gson.toJson(listaVuelos,bufferedWriter);
@@ -36,7 +39,9 @@ public class JsonVuelo {
 
         BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
 
-        Gson gson = new Gson();
+        GsonBuilder builder = new GsonBuilder();
+        builder.setDateFormat("yyyy-MM-dd");
+        Gson gson = builder.create();
         ArrayList<Vuelo> listaVuelos = gson.fromJson(bufferedReader,tipoListOfVuelo);
 
         vuelos = listaVuelos;

@@ -1,0 +1,27 @@
+{
+  "usuario":[{
+    "idUsuario": 1000,
+    "nombre": "opepo",
+    "apellido": "mesa",
+    "dni": "39345456",
+    "edad": 50,
+    "totalDineroGastado": 0,
+  },
+    {
+      "idUsuario": 1002,
+      "nombre": "elfacha",
+      "apellido": "facio",
+      "dni": "40409409",
+      "edad": 55,
+      "totalDineroGastado": 5000,
+    },
+    {
+      "idUsuario": 1001,
+      "nombre": "gushi",
+      "apellido": "nator",
+      "dni": "38852852",
+      "edad": 40,
+      "totalDineroGastado": 2500,
+    }
+  ]
+}

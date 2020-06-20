@@ -17,7 +17,7 @@ public class MenuVuelos extends MenuLogin{
     public Vuelo menuContratarVuelo(Usuario usuario, Aerolinea aerolinea) {
 
         Avion avion;
-        Vuelo vuelo;
+        Vuelo vuelo = null;
         String fechaString;
         Ciudad destino;
         Ciudad origen;
@@ -107,12 +107,12 @@ public class MenuVuelos extends MenuLogin{
 
     public Avion menuSeleccionarAvion(){
         //int idVuelo;
-        //Vuelo vuelo;
+        Avion avion = null;
         //aerolinea.mostrarVuelosDisponibles(fecha,origen,destino,cantidadAcompanantes+1);
         //System.out.println("Seleccione la id del vuelo que desea reservar:");
         //idVuelo = sn.nextInt();
         //vuelo=aerolinea.buscarVueloPorID(idVuelo);
-        //return vuelo;
+        return avion;
     }
 
     public void menuCancelarVuelo(){
