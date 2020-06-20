@@ -106,14 +106,5 @@ public class Vuelo {
         return costoTotal;
     }
 
-    public Boolean isDisponible(int pasajerosAReservar){
-        if(pasajerosAReservar<avion.getCapacidadMaxPasajeros()&&avion.isDisponible()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
 }
 
