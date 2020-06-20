@@ -52,6 +52,10 @@ public class Vuelo {
         return distanciaKms;
     }
 
+    public int getCantPasajeros(){
+        return cantPasajeros;
+    }
+
     public void setCantPasajeros(int cantAcompanantes){
         cantPasajeros=cantAcompanantes+1;
         this.cantPasajeros=cantPasajeros;

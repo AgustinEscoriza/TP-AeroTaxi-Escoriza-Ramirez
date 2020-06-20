@@ -17,7 +17,7 @@ public class MenuVuelos extends MenuLogin{
     public Vuelo menuContratarVuelo(Usuario usuario, Aerolinea aerolinea) {
 
         Avion avion;
-        Vuelo vuelo=null;
+        Vuelo vuelo;
         String fechaString;
         Ciudad destino;
         Ciudad origen;
@@ -38,18 +38,21 @@ public class MenuVuelos extends MenuLogin{
 
             System.out.println("Ingrese cantidad de acompanantes");
             cantAcompanantes = sn.nextInt();
+
             avion=menuSeleccionarAvion();
+
+            vuelo = new Vuelo(avion, origen, destino, fechaLocalDate, usuario, cantAcompanantes);
+
             costoTotal=vuelo.calcularCosto(cantAcompanantes);
             System.out.println("El costo total del vuelo es" + costoTotal);
 
             while (confirmacion != "S" || confirmacion != "N") {
                 System.out.println("Confirmar? S/N");
                 confirmacion = sn.next();
-
                 if (confirmacion == "S") {
-                    vuelo = new Vuelo(avion, origen, destino, fechaLocalDate, usuario, cantAcompanantes);
                     usuario.setTotalDineroGastado(costoTotal);
                 } else if (confirmacion == "N") {
+                    vuelo=null;
                     salir=true;
                 } else {
                     System.out.println("Ingrese S o N");
