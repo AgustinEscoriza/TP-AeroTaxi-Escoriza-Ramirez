@@ -18,11 +18,16 @@ public class Aerolinea {
             this.usuarios = usuarios;
         }
 
+    public void agregarVuelo(Vuelo vuelo){
+         if(vuelo!=null){
+             vuelos.add(vuelo);
+             vuelo.getAvion().agregarFechaReservada(vuelo.getFecha());
+         }
+    }
 
-    public void agregarUsuario(Usuario usuario){
-        if(usuario!=null){
-            usuarios.add(usuario);
-        }
+    public void eliminarVuelo(Vuelo vuelo){
+         vuelos.remove(vuelo);
+         vuelo.getAvion().eliminarFechaReservada(vuelo.getFecha());
     }
 
     public Vuelo buscarVueloPorID(int idVuelo){
@@ -45,20 +50,24 @@ public class Aerolinea {
         return retornoVuelos;
     }
 
-    public String mostrarAvionesDisponibles(LocalDate fecha, Ciudad origen, Ciudad destino, int cantidadPasajeros){
-            String vuelosDisponibles = null;
-            for(Vuelo vuelo:this.vuelos){
-                if(fecha.equals(vuelo.getFecha())){
-                    if(origen.equals(vuelo.getOrigen())){
-                        if(destino.equals(destino)){
-                            if(vuelo.getCantPasajeros()==0){
-                                vuelosDisponibles.concat(vuelo.toString());
-                            }
-                        }
-                    }
+    public String mostrarAvionesDisponibles(LocalDate fecha){
+            String avionesDisponibles = null;
+            for(Avion avion: aviones){
+                if(avion.isDisponible(fecha)){
+                    avionesDisponibles.concat(avion.toString());
                 }
             }
-            return vuelosDisponibles;
+            return avionesDisponibles;
+    }
+
+    public Avion buscarAvionPorID(int idAvion){
+        Avion avionBuscado=null;
+        for(Avion avion: aviones){
+            if(avion.getIdAvion()==idAvion){
+                avionBuscado=avion;
+            }
+        }
+        return avionBuscado;
     }
 
     public String mostrarUsuarios(){
