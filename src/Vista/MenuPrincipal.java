@@ -1,5 +1,6 @@
 package Vista;
 import Modelo.Usuario;
+import Modelo.Vuelo;
 import LogicaDeNegocio.Aerolinea;
 
 import java.time.LocalDate;
@@ -33,7 +34,7 @@ public class MenuPrincipal extends MenuLogin {
                     break;
                 case 2:
                     limpiarPantalla.limpiarPantalla();
-                    menuVuelos.menuCancelarVuelo();
+                    menuVuelos.menuCancelarVuelo(aerolinea)
                     break;
                 case 3:
                     limpiarPantalla.limpiarPantalla();

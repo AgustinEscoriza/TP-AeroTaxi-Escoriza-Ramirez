@@ -22,7 +22,6 @@ public class MenuLogin {
     public Usuario menuLogin(Aerolinea aerolinea){
         Usuario usuario;
         limpiarPantalla.limpiarPantalla();
-        System.out.println("Ingresar usuario registrado");
         usuario=menuBuscarUsuarioPorDni(aerolinea);
         return usuario;
     }
@@ -31,7 +30,7 @@ public class MenuLogin {
         String dni;
         Usuario usuarioBuscado = null;
         while (!salir) {
-            System.out.print("Ingrese DNI");
+            System.out.print("Ingrese DNI de usuario registrado");
             dni = sn.next();
             usuarioBuscado = aerolinea.buscarUsuarioPorDNI(dni);
             salir=salirAMenuAnterior();
