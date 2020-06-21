@@ -1,6 +1,8 @@
 package Modelo;
 
 import Enums.Propulsion;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,8 +17,8 @@ public abstract class Avion {
     private int capacidadMaxPasajeros;
     private float velocidadMaxima;
     private Propulsion propulsion;
-    private boolean disponible;
     protected float tarifaFija;
+    private ArrayList<LocalDate> fechasReservadas;
     @SerializedName("type")
     private String typeName;
 
@@ -27,7 +29,6 @@ public abstract class Avion {
         this.capacidadMaxPasajeros = capacidadMaxPasajeros;
         this.velocidadMaxima = velocidadMaxima;
         this.propulsion = propulsion;
-        this.disponible = true;
         this.idAvion = generadorId.getAndIncrement();
         this.typeName = getClass().getName();
     }
@@ -39,7 +40,6 @@ public abstract class Avion {
                 ", capacidadMaxPasajeros=" + capacidadMaxPasajeros +
                 ", velocidadMaxima=" + velocidadMaxima +
                 ", propulsion=" + propulsion +
-                ", disponible=" + disponible +
                 ", tarifaFija=" + tarifaFija ;
     }
 
@@ -68,10 +68,6 @@ public abstract class Avion {
         return propulsion;
     }
 
-    public boolean isDisponible() {
-        return disponible;
-    }
-
     public float getTarifaFija() {
         return tarifaFija;
     }
@@ -79,4 +75,24 @@ public abstract class Avion {
     public String getTypeName() {
         return typeName;
     }
+
+    public void agregarFechaReservada(LocalDate fecha){
+        fechasReservadas.add(fecha);
+    }
+
+    public void eliminarFechaReservada(LocalDate fecha){
+        fechasReservadas.remove(fecha);
+    }
+
+    public boolean isDisponible(LocalDate fechaABuscar){
+        Boolean disponible=true;
+        for(LocalDate fecha: fechasReservadas){
+            if(fecha.equals(fechaABuscar)){
+                disponible=false;
+                break;
+            }
+        }
+        return disponible;
+    }
+
 }
