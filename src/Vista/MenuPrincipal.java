@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class MenuPrincipal extends MenuLogin {
+public class MenuPrincipal extends Menu {
 
     protected MenuVuelos menuVuelos;
 
@@ -46,6 +46,7 @@ public class MenuPrincipal extends MenuLogin {
                     break;
                 case 5:
                     salir=true;
+                    break;
                 default:
                     System.out.println("Solo números entre 1 y 5");
             }

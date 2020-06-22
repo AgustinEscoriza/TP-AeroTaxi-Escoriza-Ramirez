@@ -5,10 +5,17 @@ import Modelo.Vuelo;
 import Modelo.Usuario;
 import Modelo.Avion;
 import Enums.Ciudad;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-public class MenuVuelos extends MenuLogin{
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
+public class MenuVuelos extends Menu{
 
     public MenuVuelos() {
         super();
@@ -24,16 +31,36 @@ public class MenuVuelos extends MenuLogin{
         float costoTotal;
         String confirmacion=null;
         int cantAcompanantes;
+        LocalDate fechaLocalDate = null;
 
-        while (!salir) {
+        do{
             System.out.println("Ingrese fecha");
             fechaString = sn.next();
-            LocalDate fechaLocalDate = LocalDate.parse(fechaString);
+            DateFormat formatoDeFecha = new SimpleDateFormat(fechaString);
+            formatoDeFecha.setLenient(false);
+
+            if (validateJavaDate(fechaString)) { //Validar que sea del futuro
+
+                fechaLocalDate = LocalDate.parse(fechaString);
+                LocalDateTime ahora = LocalDateTime.now();
+
+                if(fechaLocalDate.isAfter(ChronoLocalDate.from(ahora))){
+                    System.out.println(" esa fecha no es futura");
+                    salir = true;
+                }
+            } else {
+                System.out.println(" esa fecha es invalida");
+                salir = false;
+            }
+
+        }while(!salir);
+
+
 
             System.out.println("Elija una de las siguientes ciudades de origen:");
-            origen= menuSeleccionCiudad();
+            origen= menuSeleccionCiudadOrigen();
             System.out.println("Elija una de las siguientes ciudades de destino:");
-            destino= menuSeleccionCiudad();
+            destino= menuSeleccionCiudadDestino(origen);
 
             System.out.println("Ingrese cantidad de acompanantes");
             cantAcompanantes = sn.nextInt();
@@ -60,7 +87,6 @@ public class MenuVuelos extends MenuLogin{
             }
             salir=salirAMenuAnterior();
         }
-    }
 
     public void menuBuscarVuelosPorFecha(Aerolinea aerolinea){
 
@@ -73,7 +99,8 @@ public class MenuVuelos extends MenuLogin{
         System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate));
     }
 
-    public Ciudad menuSeleccionCiudad(){
+
+    public Ciudad menuSeleccionCiudadOrigen(){
         Ciudad ciudad = null;
         System.out.println("1. BUENOS AIRES");
         System.out.println("2. CORDOBA");
@@ -98,6 +125,91 @@ public class MenuVuelos extends MenuLogin{
             default:
                 System.out.println("Solo números entre 1 y 4");
             }
+
+        return ciudad;
+    }
+    public Ciudad menuSeleccionCiudadDestino(Ciudad origen){
+        Ciudad ciudad = null;
+        if(origen.equals(Ciudad.BUENOS_AIRES)){
+            System.out.println("1. CORDOBA");
+            System.out.println("2. SANTIAGO DE CHILE");
+            System.out.println("3. MONTEVIDEO");
+            System.out.println("Elija una opcion");
+            opcion = sn.nextInt();
+            switch (opcion) {
+                case 1:
+                    ciudad = Ciudad.CORDOBA;
+                    break;
+                case 2:
+                    ciudad = Ciudad.SANTIAGO_DE_CHILE;
+                    break;
+                case 3:
+                    ciudad = Ciudad.MONTEVIDEO;
+                    break;
+                default:
+                    System.out.println("Solo números entre 1 y 3");
+            }
+        }
+        if(origen.equals(Ciudad.CORDOBA)){
+            System.out.println("1. BUENOS AIRES");
+            System.out.println("2. SANTIAGO DE CHILE");
+            System.out.println("3. MONTEVIDEO");
+            System.out.println("Elija una opcion");
+            opcion = sn.nextInt();
+            switch (opcion) {
+                case 1:
+                    ciudad = Ciudad.BUENOS_AIRES;
+                    break;
+                case 2:
+                    ciudad = Ciudad.SANTIAGO_DE_CHILE;
+                    break;
+                case 3:
+                    ciudad = Ciudad.MONTEVIDEO;
+                    break;
+                default:
+                    System.out.println("Solo números entre 1 y 3");
+            }
+        }
+        if(origen.equals(Ciudad.SANTIAGO_DE_CHILE)){
+            System.out.println("1. BUENOS AIRES");
+            System.out.println("2. CORDOBA");
+            System.out.println("3. MONTEVIDEO");
+            System.out.println("Elija una opcion");
+            opcion = sn.nextInt();
+            switch (opcion) {
+                case 1:
+                    ciudad = Ciudad.BUENOS_AIRES;
+                    break;
+                case 2:
+                    ciudad = Ciudad.CORDOBA;
+                    break;
+                case 3:
+                    ciudad = Ciudad.MONTEVIDEO;
+                    break;
+                default:
+                    System.out.println("Solo números entre 1 y 3");
+            }
+        }
+        if(origen.equals(Ciudad.MONTEVIDEO)){
+            System.out.println("1. BUENOS AIRES");
+            System.out.println("2. CORDOBA");
+            System.out.println("3. SANTIAGO DE CHILE");
+            System.out.println("Elija una opcion");
+            opcion = sn.nextInt();
+            switch (opcion) {
+                case 1:
+                    ciudad = Ciudad.BUENOS_AIRES;
+                    break;
+                case 2:
+                    ciudad = Ciudad.CORDOBA;
+                    break;
+                case 3:
+                    ciudad = Ciudad.SANTIAGO_DE_CHILE;
+                    break;
+                default:
+                    System.out.println("Solo números entre 1 y 3");
+            }
+        }
 
         return ciudad;
     }
@@ -135,6 +247,37 @@ public class MenuVuelos extends MenuLogin{
         }
     }
 
-
+    public static boolean validateJavaDate(String strDate)
+    {
+        /* Check if date is 'null' */
+        if (strDate.trim().equals(""))
+        {
+            return true;
+        }
+        /* Date is not 'null' */
+        else
+        {
+            /*
+             * Set preferred date format,
+             * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
+            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+            sdfrmt.setLenient(false);
+            /* Create Date object
+             * parse the string into date
+             */
+            try
+            {
+                Date javaDate = sdfrmt.parse(strDate);
+            }
+            /* Date format is invalid */
+            catch (ParseException e)
+            {
+                System.out.println(strDate+" esa fecha es invalida");
+                return false;
+            }
+            /* Return true if date format is valid */
+            return true;
+        }
+    }
 
 }
