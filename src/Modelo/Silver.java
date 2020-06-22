@@ -4,9 +4,11 @@ import Enums.Propulsion;
 
 public class Silver extends Avion implements Servicio{
 
+    static float tarifaFijaSilver = 4000;
+
     public Silver(float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
         super(capacidadCombustible, costoPorKm, capacidadMaxPasajeros, velocidadMaxima, propulsion);
-        super.tarifaFija = 4000;
+        super.tarifaFija = tarifaFijaSilver;
     }
 
     @Override

@@ -18,9 +18,6 @@ public abstract class Avion {
     private float velocidadMaxima;
     private Propulsion propulsion;
     protected float tarifaFija;
-    private ArrayList<LocalDate> fechasReservadas;
-    @SerializedName("type")
-    private String typeName;
 
 
     public Avion(float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
@@ -30,7 +27,6 @@ public abstract class Avion {
         this.velocidadMaxima = velocidadMaxima;
         this.propulsion = propulsion;
         this.idAvion = generadorId.getAndIncrement();
-        this.typeName = getClass().getName();
     }
 
     @Override
@@ -72,27 +68,6 @@ public abstract class Avion {
         return tarifaFija;
     }
 
-    public String getTypeName() {
-        return typeName;
-    }
 
-    public void agregarFechaReservada(LocalDate fecha){
-        fechasReservadas.add(fecha);
-    }
-
-    public void eliminarFechaReservada(LocalDate fecha){
-        fechasReservadas.remove(fecha);
-    }
-
-    public boolean isDisponible(LocalDate fechaABuscar){
-        Boolean disponible=true;
-        for(LocalDate fecha: fechasReservadas){
-            if(fecha.equals(fechaABuscar)){
-                disponible=false;
-                break;
-            }
-        }
-        return disponible;
-    }
 
 }

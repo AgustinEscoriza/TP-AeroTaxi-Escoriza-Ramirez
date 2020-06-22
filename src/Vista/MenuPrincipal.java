@@ -34,7 +34,7 @@ public class MenuPrincipal extends MenuLogin {
                     break;
                 case 2:
                     limpiarPantalla.limpiarPantalla();
-                    menuVuelos.menuCancelarVuelo(aerolinea)
+                    menuVuelos.menuCancelarVuelo(aerolinea);
                     break;
                 case 3:
                     limpiarPantalla.limpiarPantalla();

@@ -21,13 +21,12 @@ public class Aerolinea {
     public void agregarVuelo(Vuelo vuelo){
          if(vuelo!=null){
              vuelos.add(vuelo);
-             vuelo.getAvion().agregarFechaReservada(vuelo.getFecha());
+
          }
     }
 
     public void eliminarVuelo(Vuelo vuelo){
          vuelos.remove(vuelo);
-         vuelo.getAvion().eliminarFechaReservada(vuelo.getFecha());
     }
 
     public Vuelo buscarVueloPorID(int idVuelo){
@@ -53,9 +52,9 @@ public class Aerolinea {
     public String mostrarAvionesDisponibles(LocalDate fecha){
             String avionesDisponibles = null;
             for(Avion avion: aviones){
-                if(avion.isDisponible(fecha)){
+               /* if(avion.isDisponible(fecha)){
                     avionesDisponibles.concat(avion.toString());
-                }
+                }*/
             }
             return avionesDisponibles;
     }
@@ -87,5 +86,4 @@ public class Aerolinea {
         }
         return usuarioBuscado;
     }
-
 }

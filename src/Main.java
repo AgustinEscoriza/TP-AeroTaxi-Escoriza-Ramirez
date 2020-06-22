@@ -2,9 +2,7 @@ import LogicaDeNegocio.Aerolinea;
 import Modelo.Avion;
 import Modelo.Usuario;
 import Modelo.Vuelo;
-import Persistencia.JsonAvion;
-import Persistencia.JsonUsuario;
-import Persistencia.JsonVuelo;
+import Persistencia.*;
 import Vista.MenuLogin;
 import Vista.MenuPrincipal;
 
@@ -14,37 +12,47 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Avion> aviones = new ArrayList<>();
-        ArrayList<Vuelo> vuelos = new ArrayList<>();
-        ArrayList<Usuario> usuarios = new ArrayList<>();
-        JsonAvion jsonAvion = new JsonAvion();
-        JsonVuelo jsonVuelo = new JsonVuelo();
-        JsonUsuario jsonUsuario = new JsonUsuario();
-        try{
-            aviones = jsonAvion.getJsonAvion();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        try{
-            usuarios = jsonUsuario.getJsonUsuario();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
 
-        try{
-            vuelos = jsonVuelo.getJsonVuelo();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        Aerolinea aerolinea = cargarAerolinea();
 
-        Aerolinea aerolinea = new Aerolinea(aviones,vuelos,usuarios);
-
-        System.out.println(aerolinea.mostrarUsuarios());
         MenuLogin menuLogin = new MenuLogin();
         MenuPrincipal menuPrincipal = new MenuPrincipal();
 
         Usuario usuario;
         usuario=menuLogin.menuLogin(aerolinea);
         menuPrincipal.menuPrincipal(usuario, aerolinea);
+    }
+
+    public static Aerolinea cargarAerolinea(){
+        Aerolinea aerolinea = null;
+        JsonBronze jsonBronze = new JsonBronze();
+        JsonSilver jsonSilver = new JsonSilver();
+        JsonGold jsonGold = new JsonGold();
+        JsonVuelo jsonVuelo = new JsonVuelo();
+        JsonUsuario jsonUsuario = new JsonUsuario();
+        ArrayList<Avion> aviones = new ArrayList<>();
+        ArrayList<Vuelo> vuelos = new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+
+        try{
+            aviones.addAll(jsonGold.getJsonGold());
+            aviones.addAll(jsonSilver.getJsonSilver());
+            aviones.addAll(jsonBronze.getJsonBronze());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+         try{
+             usuarios = jsonUsuario.getJsonUsuario();
+         }catch (IOException e){
+             e.printStackTrace();
+         }
+
+         try{
+             vuelos = jsonVuelo.getJsonVuelo();
+         }catch (IOException e){
+             e.printStackTrace();
+         }
+        aerolinea = new Aerolinea(aviones,vuelos,usuarios);
+        return aerolinea;
     }
 }
