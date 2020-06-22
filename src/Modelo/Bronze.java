@@ -13,6 +13,6 @@ public class Bronze extends Avion {
 
     @Override
     public String toString() {
-        return "Bronze{ " + super.toString() + "}" + "\n";
+        return "Clase Bronze: " + super.toString() + "\n";
     }
 }

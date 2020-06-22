@@ -5,10 +5,11 @@ public class LimpiarPantalla {
     public LimpiarPantalla(){
 
     }
-    public void limpiarPantalla(){
+    public final static void limpiarPantalla()
+    {
         try
         {
-            String os = System.getProperty("os.name");
+            final String os = System.getProperty("os.name");
 
             if (os.contains("Windows"))
             {
@@ -19,9 +20,9 @@ public class LimpiarPantalla {
                 Runtime.getRuntime().exec("clear");
             }
         }
-        catch (Exception exception)
+        catch (final Exception e)
         {
-            // capturar error
+            //  Handle any exceptions.
         }
     }
 }

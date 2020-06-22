@@ -35,9 +35,11 @@ public class Aerolinea {
 
     public Vuelo buscarVueloPorID(int idVuelo) {
         Vuelo vueloBuscado = null;
-        for (Vuelo vuelo : vuelos) {
-            if (vuelo.getIdVuelo() == idVuelo) {
-                vueloBuscado = vuelo;
+        if(vuelos!=null){
+            for (Vuelo vuelo : vuelos) {
+                if (vuelo.getIdVuelo() == idVuelo) {
+                    vueloBuscado = vuelo;
+                }
             }
         }
         return vueloBuscado;
@@ -86,10 +88,10 @@ public class Aerolinea {
         return avionBuscado;
     }
 
-    public String mostrarUsuarios() {
-        String retornoUsuario = " ";
+    public StringBuilder mostrarUsuarios() {
+        StringBuilder retornoUsuario = new StringBuilder();
         for (Usuario usuario : usuarios) {
-            retornoUsuario.concat(usuario.toString());
+            retornoUsuario.append(usuario.toString());
         }
         return retornoUsuario;
     }

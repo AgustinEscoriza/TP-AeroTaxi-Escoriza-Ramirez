@@ -31,7 +31,8 @@ public class MenuPrincipal extends Menu {
 
             switch (opcion) {
                 case 1:
-                    limpiarPantalla.limpiarPantalla();
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     menuVuelos.menuContratarVuelo(usuario, aerolinea);
                     break;
                 case 2:

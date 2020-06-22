@@ -13,11 +13,11 @@ public class Silver extends Avion implements Servicio{
 
     @Override
     public String toString() {
-        return "Silver{ " + super.toString() + "}" + "\n";
+        return "Clase Silver: " + super.toString() + catering() +  "\n";
     }
 
     @Override
     public String catering() {
-        return "Este avion tiene servicio de catering";
+        return " Este avion tiene servicio de catering. ";
     }
 }

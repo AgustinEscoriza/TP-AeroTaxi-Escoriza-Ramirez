@@ -29,17 +29,6 @@ public abstract class Avion {
         this.idAvion = generadorId.getAndIncrement();
     }
 
-    @Override
-    public String toString() {
-        return "capacidadCombustible=" + capacidadCombustible +
-                ", costoPorKm=" + costoPorKm +
-                ", capacidadMaxPasajeros=" + capacidadMaxPasajeros +
-                ", velocidadMaxima=" + velocidadMaxima +
-                ", propulsion=" + propulsion +
-                ", tarifaFija=" + tarifaFija ;
-    }
-
-
     public Integer getIdAvion() {
         return idAvion;
     }
@@ -66,6 +55,17 @@ public abstract class Avion {
 
     public float getTarifaFija() {
         return tarifaFija;
+    }
+
+    @Override
+    public String toString() {
+        return "ID Avion: " + idAvion +
+                ", Capacidad de combustible: " + capacidadCombustible +
+                ", Costo por KM: " + costoPorKm +
+                ", Capacidad maxima: " + capacidadMaxPasajeros +
+                ", Velocidad maxima: " + velocidadMaxima +
+                ", Propulsion: " + propulsion +
+                ", Tarifa fija: " + tarifaFija + ".";
     }
 
 

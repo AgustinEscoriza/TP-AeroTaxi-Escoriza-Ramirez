@@ -19,14 +19,13 @@ public class Gold extends Avion implements Servicio{
 
     @Override
     public String toString() {
-        return "Gold{" +
-                super.toString() +
-                "wifi=" + wifi +
-                "} " + "\n";
+        return "Clase Gold: " +
+                super.toString() + catering() +
+                "Wifi: " + wifi + "\n";
     }
 
     @Override
     public String catering() {
-        return "Este avion tiene servicio de catering";
+        return "Este avion tiene servicio de catering. ";
     }
 }

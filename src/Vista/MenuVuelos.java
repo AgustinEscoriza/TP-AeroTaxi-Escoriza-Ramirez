@@ -30,8 +30,7 @@ public class MenuVuelos extends Menu {
         Ciudad destino;
         Ciudad origen;
         float costoTotal;
-        boolean repetir=false;
-        String confirmacion = null;
+        String confirmacion;
         int cantAcompanantes;
         LocalDate fechaLocalDate = null;
         do {
@@ -74,6 +73,7 @@ public class MenuVuelos extends Menu {
                 costoTotal = vuelo.calcularCosto(cantAcompanantes);
                 System.out.println("El costo total del vuelo es" + costoTotal);
                 boolean flag=false;
+
                 while (!flag) {
                     System.out.println("Confirmar? S/N");
                     confirmacion = sn.next();
@@ -109,7 +109,7 @@ public class MenuVuelos extends Menu {
 
             }
             else {
-                System.out.println(" esa fecha es invalida. Formato:YYYY-MM-DD");
+                System.out.println("Esa fecha es invalida. Formato:YYYY-MM-DD");
             }
         } while (!salir);
 
@@ -294,25 +294,33 @@ public class MenuVuelos extends Menu {
 
     public void menuCancelarVuelo(Aerolinea aerolinea) {
         int idVuelo;
-        Vuelo vuelo;
-        String confirmacion = null;
+        String confirmacion;
         System.out.println("Ingrese id del vuelo a cancelar");
         idVuelo = sn.nextInt();
-        vuelo = aerolinea.buscarVueloPorID(idVuelo);
-        System.out.println(vuelo.toString());
+        Vuelo vuelo = aerolinea.buscarVueloPorID(idVuelo);
 
-        while (confirmacion != "S" || confirmacion != "N") {
-            System.out.println("Confirmar cancelacion? S/N");
-            confirmacion = sn.next();
-            if (confirmacion == "S") {
-                aerolinea.eliminarVuelo(vuelo);
-                System.out.println("Vuelo cancelado con exito");
-            } else if (confirmacion == "N") {
-                break;
-            } else {
-                System.out.println("Ingrese S o N");
+        if(vuelo!=null){
+            System.out.println(vuelo.toString());
+            boolean flag=false;
+            while (!flag) {
+                System.out.println("Confirmar cancelacion? S/N");
+                confirmacion = sn.next();
+                if (confirmacion.equals("S")) {
+                    flag=true;
+                    aerolinea.eliminarVuelo(vuelo);
+                    System.out.println("Vuelo cancelado con exito");
+                } else if (confirmacion.equals("N")) {
+                    flag=true;
+                    System.out.print("El vuelo no ha sido cancelado");
+                } else {
+                    System.out.println("Ingrese S o N");
+                }
             }
         }
+        else{
+            System.out.println("Ese vuelo no ha sido encontrado");
+        }
+
     }
 
     public static boolean validateJavaDate(String strDate) {
