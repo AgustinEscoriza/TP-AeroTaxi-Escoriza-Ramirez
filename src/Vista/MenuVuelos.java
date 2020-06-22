@@ -65,6 +65,8 @@ public class MenuVuelos extends Menu {
             System.out.println("Ingrese cantidad de acompanantes: ");
             cantAcompanantes = sn.nextInt();
             sn.nextLine();
+            limpiarPantalla();
+
             avion = menuSeleccionarAvion(aerolinea, fechaLocalDate, cantAcompanantes + 1);
 
             if (avion != null) {
@@ -75,6 +77,7 @@ public class MenuVuelos extends Menu {
                 boolean flag = false;
 
                 while (!flag) {
+                    sn.nextLine();
                     System.out.println("Confirmar? S/N. ");
                     confirmacion = sn.nextLine();
                     if (confirmacion.equals("S")) {
@@ -229,7 +232,7 @@ public class MenuVuelos extends Menu {
     }
 
     public Avion menuSeleccionarAvion(Aerolinea aerolinea, LocalDate fecha, int cantPasajeros) {
-        int idAvion;
+        int idAvion=0;
         Avion avion = null;
         boolean salir = false;
         ArrayList<Avion> aviones = aerolinea.buscarAvionesDisponibles(fecha, cantPasajeros);
@@ -239,7 +242,13 @@ public class MenuVuelos extends Menu {
             }
             do {
                 System.out.println("Seleccione la id del avion que desea contratar: ");
-                idAvion = sn.nextInt();
+
+                while (!sn.hasNextInt()) {
+                    System.out.println("Ingrese uno de los id mostrados previamente: ");
+                    sn.next();
+                }
+                idAvion=sn.nextInt();
+
                 for (Avion aux : aviones) {
                     if (aux.getIdAvion() == idAvion) {
                         salir = true;

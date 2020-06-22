@@ -30,5 +30,38 @@
     },
     "cantPasajeros": 2,
     "distanciaKms": 695
+  },
+  {
+    "idVuelo": 1001,
+    "avion": {
+      "type": "Modelo.Gold",
+      "data": {
+        "wifi": false,
+        "idAvion": 4,
+        "capacidadCombustible": 5000.0,
+        "costoPorKm": 100.0,
+        "capacidadMaxPasajeros": 5,
+        "velocidadMaxima": 900.0,
+        "propulsion": "REACCION",
+        "tarifaFija": 6000.0
+      }
+    },
+    "origen": "BUENOS_AIRES",
+    "destino": "CORDOBA",
+    "fecha": {
+      "year": 2020,
+      "month": 6,
+      "day": 23
+    },
+    "usuario": {
+      "idUsuario": 1002,
+      "nombre": "elfacha",
+      "apellido": "facio",
+      "dni": "40409409",
+      "edad": 55,
+      "totalDineroGastado": 171000.0
+    },
+    "cantPasajeros": 4,
+    "distanciaKms": 695
   }
 ]

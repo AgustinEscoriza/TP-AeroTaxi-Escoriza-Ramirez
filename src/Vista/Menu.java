@@ -14,4 +14,9 @@ public abstract class Menu {
         opcion = 0;
     }
 
+    public static void limpiarPantalla() {
+        for (int i = 0; i < 25; i++) {
+            System.out.println();
+        }
+    }
 }
