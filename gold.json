@@ -7,7 +7,8 @@
       "capacidadMaxPasajeros": 5,
       "velocidadMaxima": 900.0,
       "propulsion": "REACCION",
-      "disponible": "true"
+      "disponible": "true",
+      "tarifaFija": 6000
     },
     {
       "idAvion": 5,
@@ -16,7 +17,8 @@
       "capacidadMaxPasajeros": 6,
       "velocidadMaxima": 900,
       "propulsion": "HELICE",
-      "disponible": "true"
+      "disponible": "true",
+      "tarifaFija": 6000
     },
     {
       "idAvion": 6,
@@ -25,6 +27,7 @@
       "capacidadMaxPasajeros": 7,
       "velocidadMaxima": 900,
       "propulsion": "PISTONES",
-      "disponible": "true"
+      "disponible": "true",
+      "tarifaFija": 6000
     }
   ]

@@ -72,6 +72,9 @@ public class Aerolinea {
                         }
                     }
                 }
+                else{
+                    avionesABorrar.add(avion);
+                }
             }
         }
         else{

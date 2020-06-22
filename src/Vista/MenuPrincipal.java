@@ -1,19 +1,17 @@
 package Vista;
-import Modelo.Usuario;
-import Modelo.Vuelo;
-import LogicaDeNegocio.Aerolinea;
-import Persistencia.JsonVuelo;
 
+import Modelo.Usuario;
+import LogicaDeNegocio.Aerolinea;
+import Persistencia.JsonUsuario;
+import Persistencia.JsonVuelo;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+
 
 public class MenuPrincipal extends Menu {
 
     protected MenuVuelos menuVuelos;
 
-    public MenuPrincipal(){
+    public MenuPrincipal() {
         super();
         menuVuelos = new MenuVuelos();
     }
@@ -21,7 +19,6 @@ public class MenuPrincipal extends Menu {
     public void menuPrincipal(Usuario usuario, Aerolinea aerolinea) {
         while (!salir) {
 
-            limpiarPantalla.limpiarPantalla();
             System.out.println("1. Contratar un vuelo");
             System.out.println("2. Cancelar un vuelo");
             System.out.println("3. Ver vuelos programados por fecha");
@@ -31,25 +28,25 @@ public class MenuPrincipal extends Menu {
 
             switch (opcion) {
                 case 1:
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
+                    limpiarPantalla();
                     menuVuelos.menuContratarVuelo(usuario, aerolinea);
                     break;
                 case 2:
-                    limpiarPantalla.limpiarPantalla();
+                    limpiarPantalla();
                     menuVuelos.menuCancelarVuelo(aerolinea);
                     break;
                 case 3:
-                    limpiarPantalla.limpiarPantalla();
+                    limpiarPantalla();
                     menuVuelos.menuBuscarVuelosPorFecha(aerolinea);
                     break;
                 case 4:
-                    limpiarPantalla.limpiarPantalla();
+                    limpiarPantalla();
                     System.out.println(aerolinea.mostrarUsuarios());
                     break;
                 case 5:
                     actualizarJsonVuelos(aerolinea);
-                    salir=true;
+                    actualizarJsonUsuarios(aerolinea);
+                    salir = true;
                     break;
                 default:
                     System.out.println("Solo números entre 1 y 5");
@@ -59,7 +56,7 @@ public class MenuPrincipal extends Menu {
 
     private void actualizarJsonVuelos(Aerolinea aerolinea) {
         JsonVuelo jsonVuelo = new JsonVuelo();
-        if(aerolinea.getVuelos()!=null) {
+        if (aerolinea.getVuelos() != null) {
             try {
                 jsonVuelo.cargarJsonVuelo(aerolinea.getVuelos());
             } catch (IOException e) {
@@ -68,5 +65,20 @@ public class MenuPrincipal extends Menu {
         }
     }
 
+    private void actualizarJsonUsuarios(Aerolinea aerolinea) {
+        JsonUsuario jsonUsuarios = new JsonUsuario();
+        if (aerolinea.getUsuarios() != null) {
+            try {
+                jsonUsuarios.cargarJsonUsuario(aerolinea.getUsuarios());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
+    public static void limpiarPantalla() {
+        for (int i = 0; i < 25; i++) {
+            System.out.println();
+        }
+    }
 }

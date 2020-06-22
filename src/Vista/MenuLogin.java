@@ -3,8 +3,6 @@ package Vista;
 import Modelo.Usuario;
 import LogicaDeNegocio.Aerolinea;
 
-import java.util.Scanner;
-
 public class MenuLogin extends Menu {
 
 
@@ -14,7 +12,6 @@ public class MenuLogin extends Menu {
 
     public Usuario menuLogin(Aerolinea aerolinea) {
         Usuario usuario;
-        limpiarPantalla.limpiarPantalla();
         usuario = menuBuscarUsuarioPorDni(aerolinea);
         return usuario;
     }
@@ -23,12 +20,12 @@ public class MenuLogin extends Menu {
         String dni;
         Usuario usuarioBuscado = null;
         while (!salir) {
-            System.out.print("Ingrese DNI de usuario registrado:");
-            dni = sn.next();
+            System.out.println("Ingrese DNI de usuario registrado: ");
+            dni = sn.nextLine();
             usuarioBuscado = aerolinea.buscarUsuarioPorDNI(dni);
             if (usuarioBuscado == null) {
 
-                System.out.println("Ese usuario no existe. Ingrese uno nuevamente");
+                System.out.println("Ese usuario no existe. Ingrese uno nuevamente. ");
 
             } else {
 

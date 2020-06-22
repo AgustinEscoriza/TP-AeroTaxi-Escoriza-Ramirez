@@ -58,24 +58,12 @@ public class Vuelo {
 
     public void setCantPasajeros(int cantAcompanantes){
         cantPasajeros=cantAcompanantes+1;
-        this.cantPasajeros=cantPasajeros;
     }
 
     public void setIdVuelo(Integer idVuelo) {
         this.idVuelo = idVuelo;
     }
 
-    @Override
-    public String toString() {
-        return "Vuelo{" +
-                "idVuelo=" + idVuelo +
-                ", avion=" + avion +
-                ", origen=" + origen +
-                ", destino=" + destino +
-                ", fecha=" + fecha +
-                ", distanciaKms=" + distanciaKms +
-                '}';
-    }
 
     public int calcularKms(){
         int distancia = 0;
@@ -112,6 +100,17 @@ public class Vuelo {
         float costoTotal = 0;
         costoTotal = ( distanciaKms * avion.getCostoPorKm() ) + ((cantidadAcompanantes+1) * 3500 ) + avion.getTarifaFija();
         return costoTotal;
+    }
+
+    @Override
+    public String toString() {
+        return  "\n" + "ID de vuelo: " + idVuelo +
+                ", ID de Avion: " + avion.getIdAvion() +
+                ", DNI Usuario: " + usuario.getDni() +
+                ", Origen: " + origen +
+                ", Destino: " + destino +
+                ", Fecha: " + fecha +
+                ", Distancia KMS: " + distanciaKms + "\n";
     }
 
 }

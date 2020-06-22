@@ -6,8 +6,8 @@ public class Bronze extends Avion {
 
     static float tarifaFijaBronze = 3000;
 
-    public Bronze(float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
-        super(capacidadCombustible, costoPorKm, capacidadMaxPasajeros, velocidadMaxima, propulsion);
+    public Bronze(int idAvion, float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
+        super(idAvion, capacidadCombustible, costoPorKm, capacidadMaxPasajeros, velocidadMaxima, propulsion);
         super.tarifaFija = tarifaFijaBronze;
     }
 

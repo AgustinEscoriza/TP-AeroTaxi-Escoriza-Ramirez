@@ -12,10 +12,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class MenuVuelos extends Menu {
 
@@ -36,8 +34,8 @@ public class MenuVuelos extends Menu {
         LocalDate fechaLocalDate = null;
         do {
             do {
-                System.out.println("Ingrese fecha");
-                fechaString = sn.next();
+                System.out.println("Ingrese fecha: ");
+                fechaString = sn.nextLine();
                 DateFormat formatoDeFecha = new SimpleDateFormat(fechaString);
                 formatoDeFecha.setLenient(false);
 
@@ -47,88 +45,53 @@ public class MenuVuelos extends Menu {
                     LocalDateTime ahora = LocalDateTime.now();
 
                     if (fechaLocalDate.isAfter(ChronoLocalDate.from(ahora))) {
-                        System.out.println(" esa fecha es valida");
+                        System.out.println("Fecha valida. ");
                         salir = true;
                     } else {
-                        System.out.println(" esa fecha no es futura");
+                        System.out.println("Esa fecha no es futura. ");
                     }
                 } else {
-                    System.out.println(" esa fecha es invalida. Formato:YYYY-MM-DD");
+                    System.out.println("Fecha invalida. Formato:YYYY-MM-DD");
                     salir = false;
                 }
 
             } while (!salir);
             salir = false;
-            System.out.println("Elija una de las siguientes ciudades de origen:");
+            System.out.println("Elija una de las siguientes ciudades de origen: ");
             origen = menuSeleccionCiudadOrigen();
-            System.out.println("Elija una de las siguientes ciudades de destino:");
+            System.out.println("Elija una de las siguientes ciudades de destino: ");
             destino = menuSeleccionCiudadDestino(origen);
 
-            System.out.println("Ingrese cantidad de acompanantes");
+            System.out.println("Ingrese cantidad de acompanantes: ");
             cantAcompanantes = sn.nextInt();
-
+            sn.nextLine();
             avion = menuSeleccionarAvion(aerolinea, fechaLocalDate, cantAcompanantes + 1);
 
             if (avion != null) {
                 salir = true;
                 vuelo = new Vuelo(avion, origen, destino, fechaLocalDate, usuario, cantAcompanantes);
                 costoTotal = vuelo.calcularCosto(cantAcompanantes);
-                System.out.println("El costo total del vuelo es" + costoTotal);
-                boolean flag=false;
+                System.out.println("El costo total del vuelo es " + costoTotal);
+                boolean flag = false;
 
                 while (!flag) {
-                    System.out.println("Confirmar? S/N");
-                    confirmacion = sn.next();
+                    System.out.println("Confirmar? S/N. ");
+                    confirmacion = sn.nextLine();
                     if (confirmacion.equals("S")) {
-                        flag=true;
+                        flag = true;
                         aerolinea.agregarVuelo(vuelo);
                         usuario.setTotalDineroGastado(costoTotal);
-                        System.out.println("Vuelo contratado. El id de su vuelo es" + vuelo.getIdVuelo());
+                        System.out.println("Vuelo contratado. El id de su vuelo es " + vuelo.getIdVuelo());
                     } else if (confirmacion.equals("N")) {
-                        flag=true;
-                        System.out.println("Vuelo no ha sido contratado");
+                        flag = true;
+                        System.out.println("Vuelo no ha sido contratado. ");
                     } else {
-                        System.out.println("Ingrese S o N");
+                        System.out.println("Ingrese S o N. ");
                     }
                 }
             }
         } while (!salir);
     }
-
-    public void menuBuscarVuelosPorFecha(Aerolinea aerolinea) {
-
-        String fechaString;
-        LocalDate fechaDate = null;
-        sn.nextLine();
-        salir = false;
-        do { //validacion de fecha
-            System.out.println("Ingrese una fecha:");
-            fechaString = sn.nextLine();
-            if (validateJavaDate(fechaString)) { //Validar que sea en el futuro
-
-                fechaDate = LocalDate.parse(fechaString);
-                salir = true;
-
-            }
-            else {
-                System.out.println("Esa fecha es invalida. Formato:YYYY-MM-DD");
-            }
-        } while (!salir);
-
-        if(aerolinea.mostrarVuelosPorFecha(fechaDate)!=""){ //si devuelte string cargado
-            System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate)); // imprimo
-        }
-        else{
-            if(aerolinea.getVuelos()==null){
-                System.out.println("No hay vuelos cargados aun");
-            }else{
-                System.out.println("No hay vuelos cargados en esa fecha");
-            }
-
-        }
-
-    }
-
 
     public Ciudad menuSeleccionCiudadOrigen() {
         Ciudad ciudad = null;
@@ -138,7 +101,7 @@ public class MenuVuelos extends Menu {
             System.out.println("2. CORDOBA");
             System.out.println("3. SANTIAGO DE CHILE");
             System.out.println("4. MONTEVIDEO");
-            System.out.println("Elija una opcion");
+            System.out.println("Elija una opcion: ");
             opcion = sn.nextInt();
 
             switch (opcion) {
@@ -161,7 +124,7 @@ public class MenuVuelos extends Menu {
                 default:
                     System.out.println("Solo números entre 1 y 4");
             }
-        }while (!salir);
+        } while (!salir);
         return ciudad;
     }
 
@@ -173,7 +136,7 @@ public class MenuVuelos extends Menu {
                 System.out.println("1. CORDOBA");
                 System.out.println("2. SANTIAGO DE CHILE");
                 System.out.println("3. MONTEVIDEO");
-                System.out.println("Elija una opcion");
+                System.out.println("Elija una opcion: ");
                 opcion = sn.nextInt();
                 switch (opcion) {
                     case 1:
@@ -196,7 +159,7 @@ public class MenuVuelos extends Menu {
                 System.out.println("1. BUENOS AIRES");
                 System.out.println("2. SANTIAGO DE CHILE");
                 System.out.println("3. MONTEVIDEO");
-                System.out.println("Elija una opcion");
+                System.out.println("Elija una opcion: ");
                 opcion = sn.nextInt();
                 switch (opcion) {
                     case 1:
@@ -219,7 +182,7 @@ public class MenuVuelos extends Menu {
                 System.out.println("1. BUENOS AIRES");
                 System.out.println("2. CORDOBA");
                 System.out.println("3. MONTEVIDEO");
-                System.out.println("Elija una opcion");
+                System.out.println("Elija una opcion: ");
                 opcion = sn.nextInt();
                 switch (opcion) {
                     case 1:
@@ -242,7 +205,7 @@ public class MenuVuelos extends Menu {
                 System.out.println("1. BUENOS AIRES");
                 System.out.println("2. CORDOBA");
                 System.out.println("3. SANTIAGO DE CHILE");
-                System.out.println("Elija una opcion");
+                System.out.println("Elija una opcion: ");
                 opcion = sn.nextInt();
                 switch (opcion) {
                     case 1:
@@ -261,7 +224,7 @@ public class MenuVuelos extends Menu {
                         System.out.println("Solo números entre 1 y 3");
                 }
             }
-        }while (!salir);
+        } while (!salir);
         return ciudad;
     }
 
@@ -275,7 +238,7 @@ public class MenuVuelos extends Menu {
                 System.out.println(aux.toString());
             }
             do {
-                System.out.println("Seleccione la id del avion que desea contratar:");
+                System.out.println("Seleccione la id del avion que desea contratar: ");
                 idAvion = sn.nextInt();
                 for (Avion aux : aviones) {
                     if (aux.getIdAvion() == idAvion) {
@@ -283,13 +246,13 @@ public class MenuVuelos extends Menu {
                     }
                 }
                 if (!salir) {
-                    System.out.println("Ingrese uno de los id mostrados previamente");
+                    System.out.println("Ingrese uno de los id mostrados previamente: ");
                 }
             } while (!salir);
 
             avion = aerolinea.buscarAvionPorID(idAvion);
         } else {
-            System.out.println("No se encontraron aviones disponibles en esa fecha o con esa cantidad de pasajeros");
+            System.out.println("No se encontraron aviones disponibles en esa fecha o con esa cantidad de pasajeros. ");
         }
         return avion;
     }
@@ -297,30 +260,65 @@ public class MenuVuelos extends Menu {
     public void menuCancelarVuelo(Aerolinea aerolinea) {
         int idVuelo;
         String confirmacion;
-        System.out.println("Ingrese id del vuelo a cancelar");
+        LocalDateTime ahora = LocalDateTime.now();
+        System.out.println("Ingrese id del vuelo a cancelar: ");
         idVuelo = sn.nextInt();
         Vuelo vuelo = aerolinea.buscarVueloPorID(idVuelo);
 
-        if(vuelo!=null){
-            System.out.println(vuelo.toString());
-            boolean flag=false;
-            while (!flag) {
-                System.out.println("Confirmar cancelacion? S/N");
-                confirmacion = sn.next();
-                if (confirmacion.equals("S")) {
-                    flag=true;
-                    aerolinea.eliminarVuelo(vuelo);
-                    System.out.println("Vuelo cancelado con exito");
-                } else if (confirmacion.equals("N")) {
-                    flag=true;
-                    System.out.print("El vuelo no ha sido cancelado");
-                } else {
-                    System.out.println("Ingrese S o N");
+        if (vuelo != null) {
+            if (vuelo.getFecha().minusDays(1).isBefore(ChronoLocalDate.from(ahora))) {
+                System.out.println("No se puede cancelar un vuelo con menos de 24hs de anticipacion. ");
+            } else {
+                System.out.println(vuelo.toString());
+                boolean flag = false;
+                while (!flag) {
+                    System.out.println("Confirmar cancelacion? S/N. ");
+                    confirmacion = sn.nextLine();
+                    if (confirmacion.equals("S")) {
+                        flag = true;
+                        aerolinea.eliminarVuelo(vuelo);
+                        System.out.println("Vuelo cancelado con exito. ");
+                    } else if (confirmacion.equals("N")) {
+                        flag = true;
+                        System.out.println("El vuelo no ha sido cancelado. ");
+                    } else {
+                        System.out.println("Ingrese S o N. ");
+                    }
                 }
             }
+        } else {
+            System.out.println("Ese vuelo no ha sido encontrado. ");
         }
-        else{
-            System.out.println("Ese vuelo no ha sido encontrado");
+    }
+
+
+    public void menuBuscarVuelosPorFecha(Aerolinea aerolinea) {
+
+        String fechaString;
+        LocalDate fechaDate = null;
+        salir = false;
+        do { //validacion de fecha
+            System.out.println("Ingrese una fecha: ");
+            fechaString = sn.nextLine();
+            if (validateJavaDate(fechaString)) { //Validar que sea en el futuro
+
+                fechaDate = LocalDate.parse(fechaString);
+                salir = true;
+
+            } else {
+                System.out.println("Esa fecha es invalida. Formato: YYYY-MM-DD. ");
+            }
+        } while (!salir);
+
+        if (aerolinea.mostrarVuelosPorFecha(fechaDate) != "") { //si devuelte string cargado
+            System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate)); // imprimo
+        } else {
+            if (aerolinea.getVuelos() == null) {
+                System.out.println("No hay vuelos cargados aun. ");
+            } else {
+                System.out.println("No hay vuelos cargados en esa fecha. ");
+            }
+
         }
 
     }

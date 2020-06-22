@@ -40,7 +40,7 @@ public class Usuario {
     }
 
     public void setTotalDineroGastado(float dineroGastado){
-        totalDineroGastado =+ dineroGastado;
+        totalDineroGastado += dineroGastado;
     }
 
     @Override

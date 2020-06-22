@@ -4,70 +4,6 @@
     "avion": {
       "type": "Modelo.Silver",
       "data": {
-        "idAvion": 2,
-        "capacidadCombustible": 7000.0,
-        "costoPorKm": 150.0,
-        "capacidadMaxPasajeros": 6,
-        "velocidadMaxima": 900.0,
-        "propulsion": "HELICE",
-        "tarifaFija": 0.0
-      }
-    },
-    "origen": "BUENOS_AIRES",
-    "destino": "MONTEVIDEO",
-    "fecha": {
-      "year": 2020,
-      "month": 10,
-      "day": 12
-    },
-    "usuario": {
-      "idUsuario": 1002,
-      "nombre": "elfacha",
-      "apellido": "facio",
-      "dni": "40409409",
-      "edad": 55,
-      "totalDineroGastado": 163500.0
-    },
-    "cantPasajeros": 6,
-    "distanciaKms": 950
-  },
-  {
-    "idVuelo": 1001,
-    "avion": {
-      "type": "Modelo.Silver",
-      "data": {
-        "idAvion": 3,
-        "capacidadCombustible": 9000.0,
-        "costoPorKm": 200.0,
-        "capacidadMaxPasajeros": 7,
-        "velocidadMaxima": 900.0,
-        "propulsion": "PISTONES",
-        "tarifaFija": 0.0
-      }
-    },
-    "origen": "BUENOS_AIRES",
-    "destino": "SANTIAGO_DE_CHILE",
-    "fecha": {
-      "year": 2020,
-      "month": 7,
-      "day": 23
-    },
-    "usuario": {
-      "idUsuario": 1002,
-      "nombre": "elfacha",
-      "apellido": "facio",
-      "dni": "40409409",
-      "edad": 55,
-      "totalDineroGastado": 224000.0
-    },
-    "cantPasajeros": 6,
-    "distanciaKms": 1400
-  },
-  {
-    "idVuelo": 1002,
-    "avion": {
-      "type": "Modelo.Silver",
-      "data": {
         "idAvion": 1,
         "capacidadCombustible": 5000.0,
         "costoPorKm": 100.0,
@@ -78,38 +14,6 @@
       }
     },
     "origen": "BUENOS_AIRES",
-    "destino": "MONTEVIDEO",
-    "fecha": {
-      "year": 2020,
-      "month": 7,
-      "day": 23
-    },
-    "usuario": {
-      "idUsuario": 1002,
-      "nombre": "elfacha",
-      "apellido": "facio",
-      "dni": "40409409",
-      "edad": 55,
-      "totalDineroGastado": 224000.0
-    },
-    "cantPasajeros": 5,
-    "distanciaKms": 950
-  },
-  {
-    "idVuelo": 1003,
-    "avion": {
-      "type": "Modelo.Bronze",
-      "data": {
-        "idAvion": 9,
-        "capacidadCombustible": 9000.0,
-        "costoPorKm": 200.0,
-        "capacidadMaxPasajeros": 7,
-        "velocidadMaxima": 700.0,
-        "propulsion": "PISTONES",
-        "tarifaFija": 0.0
-      }
-    },
-    "origen": "SANTIAGO_DE_CHILE",
     "destino": "CORDOBA",
     "fecha": {
       "year": 2020,
@@ -122,9 +26,9 @@
       "apellido": "facio",
       "dni": "40409409",
       "edad": 55,
-      "totalDineroGastado": 224000.0
+      "totalDineroGastado": 81500.0
     },
-    "cantPasajeros": 4,
-    "distanciaKms": 1050
+    "cantPasajeros": 2,
+    "distanciaKms": 695
   }
 ]

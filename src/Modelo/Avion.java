@@ -1,17 +1,10 @@
 package Modelo;
 
 import Enums.Propulsion;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Avion {
 
-    private static final AtomicInteger generadorId = new AtomicInteger(1);
-
-    private Integer idAvion;
+    private int idAvion;
     private float capacidadCombustible;
     private float costoPorKm;
     private int capacidadMaxPasajeros;
@@ -19,17 +12,16 @@ public abstract class Avion {
     private Propulsion propulsion;
     protected float tarifaFija;
 
-
-    public Avion(float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
+    public Avion(int idAvion, float capacidadCombustible, float costoPorKm, int capacidadMaxPasajeros, float velocidadMaxima, Propulsion propulsion) {
+        this.idAvion = idAvion;
         this.capacidadCombustible = capacidadCombustible;
         this.costoPorKm = costoPorKm;
         this.capacidadMaxPasajeros = capacidadMaxPasajeros;
         this.velocidadMaxima = velocidadMaxima;
         this.propulsion = propulsion;
-        this.idAvion = generadorId.getAndIncrement();
     }
 
-    public Integer getIdAvion() {
+    public int getIdAvion() {
         return idAvion;
     }
 
@@ -60,12 +52,12 @@ public abstract class Avion {
     @Override
     public String toString() {
         return "ID Avion: " + idAvion +
-                ", Capacidad de combustible: " + capacidadCombustible +
+                ", Tarifa fija: " + tarifaFija +
                 ", Costo por KM: " + costoPorKm +
                 ", Capacidad maxima: " + capacidadMaxPasajeros +
-                ", Velocidad maxima: " + velocidadMaxima +
                 ", Propulsion: " + propulsion +
-                ", Tarifa fija: " + tarifaFija + ".";
+                ", Capacidad de combustible: " + capacidadCombustible +
+                ", Velocidad maxima: " + velocidadMaxima;
     }
 
 
