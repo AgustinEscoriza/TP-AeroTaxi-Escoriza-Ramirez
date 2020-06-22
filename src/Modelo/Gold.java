@@ -22,7 +22,7 @@ public class Gold extends Avion implements Servicio{
         return "Gold{" +
                 super.toString() +
                 "wifi=" + wifi +
-                "} ";
+                "} " + "\n";
     }
 
     @Override

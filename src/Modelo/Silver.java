@@ -13,7 +13,7 @@ public class Silver extends Avion implements Servicio{
 
     @Override
     public String toString() {
-        return "Silver{ " + super.toString() + "}";
+        return "Silver{ " + super.toString() + "}" + "\n";
     }
 
     @Override
