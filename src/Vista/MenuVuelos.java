@@ -41,7 +41,7 @@ public class MenuVuelos extends Menu {
                 DateFormat formatoDeFecha = new SimpleDateFormat(fechaString);
                 formatoDeFecha.setLenient(false);
 
-                if (validateJavaDate(fechaString)) { //Validar que sea del futuro
+                if (validateJavaDate(fechaString)) { //Validar que sea en el futuro
 
                     fechaLocalDate = LocalDate.parse(fechaString);
                     LocalDateTime ahora = LocalDateTime.now();
@@ -95,128 +95,171 @@ public class MenuVuelos extends Menu {
 
     public void menuBuscarVuelosPorFecha(Aerolinea aerolinea) {
 
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("DD/MM/YYYY");
         String fechaString;
-        LocalDate fechaDate;
-        System.out.println("Ingrese una fecha");
-        fechaString = sn.nextLine();
-        fechaDate = LocalDate.parse(fechaString, formato);
-        System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate));
+        LocalDate fechaDate = null;
+        sn.reset();
+        salir = false;
+        do { //validacion de fecha
+            System.out.println("Ingrese una fecha:");
+            fechaString = sn.nextLine();
+            if (validateJavaDate(fechaString)) { //Validar que sea en el futuro
+
+                fechaDate = LocalDate.parse(fechaString);
+                salir = true;
+
+            }
+            else {
+                System.out.println(" esa fecha es invalida. Formato:YYYY-MM-DD");
+            }
+        } while (!salir);
+
+        if(aerolinea.mostrarVuelosPorFecha(fechaDate)!=""){ //si devuelte string cargado
+            System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate)); // imprimo
+        }
+        else{
+            if(aerolinea.getVuelos()==null){
+                System.out.println("No hay vuelos cargados aun");
+            }else{
+                System.out.println("No hay vuelos cargados en esa fecha");
+            }
+
+        }
+
     }
 
 
     public Ciudad menuSeleccionCiudadOrigen() {
         Ciudad ciudad = null;
-        System.out.println("1. BUENOS AIRES");
-        System.out.println("2. CORDOBA");
-        System.out.println("3. SANTIAGO DE CHILE");
-        System.out.println("4. MONTEVIDEO");
-        System.out.println("Elija una opcion");
-        opcion = sn.nextInt();
+        boolean salir = false;
+        do {
+            System.out.println("1. BUENOS AIRES");
+            System.out.println("2. CORDOBA");
+            System.out.println("3. SANTIAGO DE CHILE");
+            System.out.println("4. MONTEVIDEO");
+            System.out.println("Elija una opcion");
+            opcion = sn.nextInt();
 
-        switch (opcion) {
-            case 1:
-                ciudad = Ciudad.BUENOS_AIRES;
-                break;
-            case 2:
-                ciudad = Ciudad.CORDOBA;
-                break;
-            case 3:
-                ciudad = Ciudad.SANTIAGO_DE_CHILE;
-                break;
-            case 4:
-                ciudad = Ciudad.MONTEVIDEO;
-                break;
-            default:
-                System.out.println("Solo números entre 1 y 4");
-        }
-
+            switch (opcion) {
+                case 1:
+                    ciudad = Ciudad.BUENOS_AIRES;
+                    salir = true;
+                    break;
+                case 2:
+                    ciudad = Ciudad.CORDOBA;
+                    salir = true;
+                    break;
+                case 3:
+                    ciudad = Ciudad.SANTIAGO_DE_CHILE;
+                    salir = true;
+                    break;
+                case 4:
+                    ciudad = Ciudad.MONTEVIDEO;
+                    salir = true;
+                    break;
+                default:
+                    System.out.println("Solo números entre 1 y 4");
+            }
+        }while (!salir);
         return ciudad;
     }
 
     public Ciudad menuSeleccionCiudadDestino(Ciudad origen) {
         Ciudad ciudad = null;
-        if (origen.equals(Ciudad.BUENOS_AIRES)) {
-            System.out.println("1. CORDOBA");
-            System.out.println("2. SANTIAGO DE CHILE");
-            System.out.println("3. MONTEVIDEO");
-            System.out.println("Elija una opcion");
-            opcion = sn.nextInt();
-            switch (opcion) {
-                case 1:
-                    ciudad = Ciudad.CORDOBA;
-                    break;
-                case 2:
-                    ciudad = Ciudad.SANTIAGO_DE_CHILE;
-                    break;
-                case 3:
-                    ciudad = Ciudad.MONTEVIDEO;
-                    break;
-                default:
-                    System.out.println("Solo números entre 1 y 3");
+        boolean salir = false;
+        do {
+            if (origen.equals(Ciudad.BUENOS_AIRES)) {
+                System.out.println("1. CORDOBA");
+                System.out.println("2. SANTIAGO DE CHILE");
+                System.out.println("3. MONTEVIDEO");
+                System.out.println("Elija una opcion");
+                opcion = sn.nextInt();
+                switch (opcion) {
+                    case 1:
+                        ciudad = Ciudad.CORDOBA;
+                        salir = true;
+                        break;
+                    case 2:
+                        ciudad = Ciudad.SANTIAGO_DE_CHILE;
+                        salir = true;
+                        break;
+                    case 3:
+                        ciudad = Ciudad.MONTEVIDEO;
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Solo números entre 1 y 3");
+                }
             }
-        }
-        if (origen.equals(Ciudad.CORDOBA)) {
-            System.out.println("1. BUENOS AIRES");
-            System.out.println("2. SANTIAGO DE CHILE");
-            System.out.println("3. MONTEVIDEO");
-            System.out.println("Elija una opcion");
-            opcion = sn.nextInt();
-            switch (opcion) {
-                case 1:
-                    ciudad = Ciudad.BUENOS_AIRES;
-                    break;
-                case 2:
-                    ciudad = Ciudad.SANTIAGO_DE_CHILE;
-                    break;
-                case 3:
-                    ciudad = Ciudad.MONTEVIDEO;
-                    break;
-                default:
-                    System.out.println("Solo números entre 1 y 3");
+            if (origen.equals(Ciudad.CORDOBA)) {
+                System.out.println("1. BUENOS AIRES");
+                System.out.println("2. SANTIAGO DE CHILE");
+                System.out.println("3. MONTEVIDEO");
+                System.out.println("Elija una opcion");
+                opcion = sn.nextInt();
+                switch (opcion) {
+                    case 1:
+                        ciudad = Ciudad.BUENOS_AIRES;
+                        salir = true;
+                        break;
+                    case 2:
+                        ciudad = Ciudad.SANTIAGO_DE_CHILE;
+                        salir = true;
+                        break;
+                    case 3:
+                        ciudad = Ciudad.MONTEVIDEO;
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Solo números entre 1 y 3");
+                }
             }
-        }
-        if (origen.equals(Ciudad.SANTIAGO_DE_CHILE)) {
-            System.out.println("1. BUENOS AIRES");
-            System.out.println("2. CORDOBA");
-            System.out.println("3. MONTEVIDEO");
-            System.out.println("Elija una opcion");
-            opcion = sn.nextInt();
-            switch (opcion) {
-                case 1:
-                    ciudad = Ciudad.BUENOS_AIRES;
-                    break;
-                case 2:
-                    ciudad = Ciudad.CORDOBA;
-                    break;
-                case 3:
-                    ciudad = Ciudad.MONTEVIDEO;
-                    break;
-                default:
-                    System.out.println("Solo números entre 1 y 3");
+            if (origen.equals(Ciudad.SANTIAGO_DE_CHILE)) {
+                System.out.println("1. BUENOS AIRES");
+                System.out.println("2. CORDOBA");
+                System.out.println("3. MONTEVIDEO");
+                System.out.println("Elija una opcion");
+                opcion = sn.nextInt();
+                switch (opcion) {
+                    case 1:
+                        ciudad = Ciudad.BUENOS_AIRES;
+                        salir = true;
+                        break;
+                    case 2:
+                        ciudad = Ciudad.CORDOBA;
+                        salir = true;
+                        break;
+                    case 3:
+                        ciudad = Ciudad.MONTEVIDEO;
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Solo números entre 1 y 3");
+                }
             }
-        }
-        if (origen.equals(Ciudad.MONTEVIDEO)) {
-            System.out.println("1. BUENOS AIRES");
-            System.out.println("2. CORDOBA");
-            System.out.println("3. SANTIAGO DE CHILE");
-            System.out.println("Elija una opcion");
-            opcion = sn.nextInt();
-            switch (opcion) {
-                case 1:
-                    ciudad = Ciudad.BUENOS_AIRES;
-                    break;
-                case 2:
-                    ciudad = Ciudad.CORDOBA;
-                    break;
-                case 3:
-                    ciudad = Ciudad.SANTIAGO_DE_CHILE;
-                    break;
-                default:
-                    System.out.println("Solo números entre 1 y 3");
+            if (origen.equals(Ciudad.MONTEVIDEO)) {
+                System.out.println("1. BUENOS AIRES");
+                System.out.println("2. CORDOBA");
+                System.out.println("3. SANTIAGO DE CHILE");
+                System.out.println("Elija una opcion");
+                opcion = sn.nextInt();
+                switch (opcion) {
+                    case 1:
+                        ciudad = Ciudad.BUENOS_AIRES;
+                        salir = true;
+                        break;
+                    case 2:
+                        ciudad = Ciudad.CORDOBA;
+                        salir = true;
+                        break;
+                    case 3:
+                        ciudad = Ciudad.SANTIAGO_DE_CHILE;
+                        salir = true;
+                        break;
+                    default:
+                        System.out.println("Solo números entre 1 y 3");
+                }
             }
-        }
-
+        }while (!salir);
         return ciudad;
     }
 
@@ -297,6 +340,5 @@ public class MenuVuelos extends Menu {
             return true;
         }
     }
-
 
 }

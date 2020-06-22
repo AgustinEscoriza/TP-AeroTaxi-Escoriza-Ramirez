@@ -2,7 +2,9 @@ package Vista;
 import Modelo.Usuario;
 import Modelo.Vuelo;
 import LogicaDeNegocio.Aerolinea;
+import Persistencia.JsonVuelo;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -45,10 +47,22 @@ public class MenuPrincipal extends Menu {
                     System.out.println(aerolinea.mostrarUsuarios());
                     break;
                 case 5:
+                    actualizarJsonVuelos(aerolinea);
                     salir=true;
                     break;
                 default:
                     System.out.println("Solo números entre 1 y 5");
+            }
+        }
+    }
+
+    private void actualizarJsonVuelos(Aerolinea aerolinea) {
+        JsonVuelo jsonVuelo = new JsonVuelo();
+        if(aerolinea.getVuelos()!=null) {
+            try {
+                jsonVuelo.cargarJsonVuelo(aerolinea.getVuelos());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

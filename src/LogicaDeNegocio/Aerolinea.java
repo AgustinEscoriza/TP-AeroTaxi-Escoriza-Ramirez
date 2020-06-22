@@ -21,6 +21,9 @@ public class Aerolinea {
     }
 
     public void agregarVuelo(Vuelo vuelo) {
+        if(vuelos == null){ //si el json llega cargado vacio lo inicializa sino no anda
+            vuelos = new ArrayList<>();
+        }
         if (vuelo != null) {
             vuelos.add(vuelo);
         }
@@ -41,10 +44,12 @@ public class Aerolinea {
     }
 
     public String mostrarVuelosPorFecha(LocalDate fecha) {
-        String retornoVuelos = " ";
-        for (Vuelo vuelo : vuelos) {
-            if (fecha.equals(vuelo.getFecha())) {
-                retornoVuelos.concat(vuelo.toString());
+        String retornoVuelos = "";
+        if(vuelos != null) {
+            for (Vuelo vuelo : vuelos) {
+                if (fecha.equals(vuelo.getFecha())) {
+                    retornoVuelos.concat(vuelo.toString());
+                }
             }
         }
         return retornoVuelos;
@@ -97,5 +102,17 @@ public class Aerolinea {
             }
         }
         return usuarioBuscado;
+    }
+
+    public ArrayList<Avion> getAviones() {
+        return aviones;
+    }
+
+    public ArrayList<Vuelo> getVuelos() {
+        return vuelos;
+    }
+
+    public ArrayList<Usuario> getUsuarios() {
+        return usuarios;
     }
 }
