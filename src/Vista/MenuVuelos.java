@@ -15,6 +15,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class MenuVuelos extends Menu {
 
@@ -67,6 +68,7 @@ public class MenuVuelos extends Menu {
             cantAcompanantes = sn.nextInt();
 
             avion = menuSeleccionarAvion(aerolinea, fechaLocalDate, cantAcompanantes + 1);
+
             if (avion != null) {
                 salir = true;
                 vuelo = new Vuelo(avion, origen, destino, fechaLocalDate, usuario, cantAcompanantes);
@@ -97,7 +99,7 @@ public class MenuVuelos extends Menu {
 
         String fechaString;
         LocalDate fechaDate = null;
-        sn.reset();
+        sn.nextLine();
         salir = false;
         do { //validacion de fecha
             System.out.println("Ingrese una fecha:");
@@ -268,7 +270,7 @@ public class MenuVuelos extends Menu {
         Avion avion = null;
         boolean salir = false;
         ArrayList<Avion> aviones = aerolinea.buscarAvionesDisponibles(fecha, cantPasajeros);
-        if (aviones != null) {
+        if (!aviones.isEmpty()) {
             for (Avion aux : aviones) {
                 System.out.println(aux.toString());
             }

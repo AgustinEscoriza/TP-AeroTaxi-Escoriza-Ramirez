@@ -8,6 +8,7 @@ import Enums.Ciudad;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Aerolinea {
     public ArrayList<Avion> aviones;
@@ -49,8 +50,8 @@ public class Aerolinea {
         String retornoVuelos = "";
         if(vuelos != null) {
             for (Vuelo vuelo : vuelos) {
-                if (fecha.equals(vuelo.getFecha())) {
-                    retornoVuelos.concat(vuelo.toString());
+                if (fecha.isEqual(vuelo.getFecha())) {
+                    retornoVuelos+=(vuelo.toString());
                 }
             }
         }
@@ -58,14 +59,15 @@ public class Aerolinea {
     }
 
     public ArrayList<Avion> buscarAvionesDisponibles(LocalDate fecha, int cantPasajeros) {
-        ArrayList<Avion> avionesRetorno=new ArrayList<>();
+        ArrayList<Avion> avionesRetorno=aviones;
+        ArrayList<Avion> avionesABorrar = new ArrayList<>();
         if(vuelos!=null) {
-            for (Avion avion : aviones) {
+            for(Avion avion : aviones) {
                 if (cantPasajeros <= avion.getCapacidadMaxPasajeros()) {
                     for (Vuelo vuelo : vuelos) {
-                        if (vuelo.getAvion().equals(avion)) {
-                            if (!vuelo.getFecha().equals(fecha)) {
-                                avionesRetorno.add(avion);
+                        if (vuelo.getFecha().equals(fecha)) {
+                            if (vuelo.getAvion().equals(avion)){
+                                avionesABorrar.add(avion);
                             }
                         }
                     }
@@ -73,7 +75,14 @@ public class Aerolinea {
             }
         }
         else{
-            avionesRetorno.addAll(aviones);
+            for(Avion avion : aviones){
+                if(cantPasajeros > avion.getCapacidadMaxPasajeros()){
+                    avionesABorrar.add(avion);
+                }
+            }
+        }
+        for(Avion avion:avionesABorrar){
+            avionesRetorno.remove(avion);
         }
         return avionesRetorno;
     }

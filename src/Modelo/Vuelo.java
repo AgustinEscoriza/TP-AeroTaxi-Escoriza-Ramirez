@@ -3,7 +3,7 @@ package Modelo;
 import java.time.LocalDate;
 import Enums.Ciudad;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.ArrayList;
+
 
 public class Vuelo {
 
@@ -25,7 +25,7 @@ public class Vuelo {
         this.distanciaKms = calcularKms();
         this.usuario = usuario;
         setCantPasajeros(cantAcompanantes);
-        this.idVuelo = generadorId.getAndIncrement();
+        this.idVuelo = generadorId.get();
     }
 
     public Avion getAvion() {
@@ -59,6 +59,10 @@ public class Vuelo {
     public void setCantPasajeros(int cantAcompanantes){
         cantPasajeros=cantAcompanantes+1;
         this.cantPasajeros=cantPasajeros;
+    }
+
+    public void setIdVuelo(Integer idVuelo) {
+        this.idVuelo = idVuelo;
     }
 
     @Override

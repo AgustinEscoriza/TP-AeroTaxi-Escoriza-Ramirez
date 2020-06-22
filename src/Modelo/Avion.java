@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Avion {
 
-    private static final AtomicInteger generadorId = new AtomicInteger(1000);
+    private static final AtomicInteger generadorId = new AtomicInteger(1);
 
     private Integer idAvion;
     private float capacidadCombustible;

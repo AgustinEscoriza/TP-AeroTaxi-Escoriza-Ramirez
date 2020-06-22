@@ -22,10 +22,17 @@ public class JsonVuelo {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(archivo));
 
+        int contador = 1000;
+        for(Vuelo vuelo:vuelos){
+            vuelo.setIdVuelo(contador++);
+        }
 
         GsonBuilder builder = new GsonBuilder();
         builder.setDateFormat("yyyy-MM-dd");
+        builder.registerTypeAdapter(Avion.class,new InterfaceAdapter<Avion>());
+        builder.setPrettyPrinting();
         Gson gson = builder.create();
+
         ArrayList<Vuelo> listaVuelos = new ArrayList<>();
         listaVuelos = vuelos;
         gson.toJson(listaVuelos,bufferedWriter);
@@ -40,6 +47,7 @@ public class JsonVuelo {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
 
         GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Avion.class,new InterfaceAdapter<Avion>());
         builder.setDateFormat("yyyy-MM-dd");
         Gson gson = builder.create();
         ArrayList<Vuelo> listaVuelos = gson.fromJson(bufferedReader,tipoListOfVuelo);
