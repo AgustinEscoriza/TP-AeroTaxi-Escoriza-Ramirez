@@ -1,13 +1,9 @@
 package LogicaDeNegocio;
 
 import Modelo.*;
-import Enums.Ciudad;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Aerolinea {
     public ArrayList<Avion> aviones;

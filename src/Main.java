@@ -15,10 +15,9 @@ public class Main {
 
         Aerolinea aerolinea = cargarAerolinea();
 
-        if(aerolinea.getAviones().isEmpty()) {
+        if (aerolinea.getAviones().isEmpty()) {
             System.out.println("No se encuentran aviones en los registros." + "\n" + "Por favor carguelos antes de iniciar el programa.");
-        }
-        else{
+        } else {
             MenuLogin menuLogin = new MenuLogin();
             MenuPrincipal menuPrincipal = new MenuPrincipal();
 
@@ -28,7 +27,7 @@ public class Main {
         }
     }
 
-    public static Aerolinea cargarAerolinea(){
+    public static Aerolinea cargarAerolinea() {
         Aerolinea aerolinea = null;
         JsonBronze jsonBronze = new JsonBronze();
         JsonSilver jsonSilver = new JsonSilver();
@@ -39,26 +38,26 @@ public class Main {
         ArrayList<Vuelo> vuelos = new ArrayList<>();
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
-        try{
+        try {
             aviones.addAll(jsonGold.getJsonGold());
             aviones.addAll(jsonSilver.getJsonSilver());
             aviones.addAll(jsonBronze.getJsonBronze());
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
         }
-         try{
-             usuarios = jsonUsuario.getJsonUsuario();
-         }catch (IOException e){
-             e.printStackTrace();
-         }
+        try {
+            usuarios = jsonUsuario.getJsonUsuario();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-         try{
-             vuelos = jsonVuelo.getJsonVuelo();
-         }catch (IOException e){
-             e.printStackTrace();
-         }
-        aerolinea = new Aerolinea(aviones,vuelos,usuarios);
+        try {
+            vuelos = jsonVuelo.getJsonVuelo();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        aerolinea = new Aerolinea(aviones, vuelos, usuarios);
         return aerolinea;
     }
 }

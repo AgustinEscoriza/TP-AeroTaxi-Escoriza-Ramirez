@@ -19,7 +19,6 @@ public class MenuLogin extends Menu {
         while (!salir) {
             System.out.println("1. Ingresar usuario registrado");
             System.out.println("2. Registrar nuevo usuario");
-            System.out.println("3. Salir del programa");
             opcion = sn.nextInt();
 
             switch (opcion) {
@@ -30,12 +29,13 @@ public class MenuLogin extends Menu {
                 case 2:
                     limpiarPantalla();
                     usuario = menuRegistrarUsuario(aerolinea);
-                    break;
-                case 3:
-                    salir = true;
+                    salir = false;
+                    if (usuario != null) {
+                        salir = true;
+                    }
                     break;
                 default:
-                System.out.println("Solo números 1 o 2");
+                    System.out.println("Solo números 1 o 2");
             }
         }
         return usuario;
@@ -52,51 +52,61 @@ public class MenuLogin extends Menu {
 
         while (!salir) {
             do {
-                System.out.println("Ingrese nombre:");
+                System.out.println("Ingrese nombre: ");
                 nombre = sn.next();
-                if(!nombre.matches("[A-Z][a-z]*")){
-                    System.out.println("Ingrese nombre valido");
+                if (!nombre.matches("[A-Z][a-z]*")) {
+                    System.out.println("Ingrese nombre valido. ");
                 }
-            }while(!nombre.matches("[A-Z][a-z]*"));
+            } while (!nombre.matches("[A-Z][a-z]*"));
 
             do {
-                System.out.println("Ingrese apellido:");
+                System.out.println("Ingrese apellido: ");
                 apellido = sn.next();
-                if(!apellido.matches("[A-Z][a-z]*")){
-                    System.out.println("Ingrese un apellido valido");
+                if (!apellido.matches("[A-Z][a-z]*")) {
+                    System.out.println("Ingrese un apellido valido. ");
                 }
-            }while(!apellido.matches("[A-Z][a-z]*"));
+            } while (!apellido.matches("[A-Z][a-z]*"));
 
-            do{
+            boolean flag = false;
+            do {
                 System.out.println("Ingrese DNI:");
                 dni = sn.next();
-                if(!dni.matches("[0-9]*")){
-                    System.out.println("Ingrese un DNI con exclusivamente numeros");
+                if (!dni.matches("[0-9]*")) {
+                    System.out.println("Ingrese un DNI valido. ");
                 }
-            }while (!dni.matches("[0-9]*"));
+                else{
+                    if (aerolinea.buscarUsuarioPorDNI(dni) != null) {
+                        System.out.println("Este DNI ya se encuentra en uso. ");
+                    } else {
+                        flag = true;
+                    }
+                }
+            } while (!flag);
 
-            System.out.print("Ingrese edad:");
+
+            System.out.println("Ingrese edad: ");
             while (!sn.hasNextInt()) {
-                System.out.print("Ingrese edad valida");
+                System.out.println("Ingrese edad valida. ");
                 sn.next();
             }
             edad = sn.nextInt();
-            boolean flag = false;
+
+            flag = false;
             while (!flag) {
-                System.out.println("Confirmar? S/N:");
-                confirmacion = sn.nextLine();
+                System.out.println("Confirmar? S/N: ");
+                confirmacion = sn.next();
                 if (confirmacion.equals("S")) {
                     usuario = new Usuario(nombre, apellido, dni, edad);
                     aerolinea.agregarUsuario(usuario);
                     actualizarJsonUsuarios(aerolinea.getUsuarios());
-                    System.out.println("Usuario registrado exitosamente");
+                    System.out.println("Usuario registrado exitosamente. ");
                     flag = true;
                 } else if (confirmacion.equals("N")) {
-                    System.out.println("Usuario no ingresado a los registros");
+                    System.out.println("Usuario no ingresado a los registros. ");
                     usuario = null;
                     flag = true;
                 } else {
-                    System.out.println("Caracter incorrecto. Por favor ingrese S o N");
+                    System.out.println("Caracter incorrecto. Por favor ingrese S o N. ");
                 }
             }
             salir = true;
@@ -123,6 +133,7 @@ public class MenuLogin extends Menu {
         }
         return usuarioBuscado;
     }
+
     private void actualizarJsonUsuarios(ArrayList<Usuario> usuarios) {
         JsonUsuario jsonUsuarios = new JsonUsuario();
         if (usuarios != null) {

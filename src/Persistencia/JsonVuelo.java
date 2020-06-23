@@ -1,7 +1,6 @@
 package Persistencia;
 
 import Modelo.Avion;
-import Modelo.Usuario;
 import Modelo.Vuelo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,7 +28,7 @@ public class JsonVuelo {
 
         GsonBuilder builder = new GsonBuilder();
         builder.setDateFormat("yyyy-MM-dd");
-        builder.registerTypeAdapter(Avion.class,new InterfaceAdapter<Avion>());
+        builder.registerTypeAdapter(Avion.class,new ApdatadorAviones<Avion>());
         builder.setPrettyPrinting();
         Gson gson = builder.create();
 
@@ -47,7 +46,7 @@ public class JsonVuelo {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
 
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Avion.class,new InterfaceAdapter<Avion>());
+        builder.registerTypeAdapter(Avion.class,new ApdatadorAviones<Avion>());
         builder.setDateFormat("yyyy-MM-dd");
         Gson gson = builder.create();
         ArrayList<Vuelo> listaVuelos = gson.fromJson(bufferedReader,tipoListOfVuelo);

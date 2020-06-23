@@ -5,7 +5,7 @@
     "apellido": "Ramirez",
     "dni": "39345456",
     "edad": 50,
-    "totalDineroGastado": 163000.0
+    "totalDineroGastado": 630000.0
   },
   {
     "idUsuario": 1002,
@@ -13,7 +13,7 @@
     "apellido": "Gimenez",
     "dni": "40409409",
     "edad": 55,
-    "totalDineroGastado": 395500.0
+    "totalDineroGastado": 0.0
   },
   {
     "idUsuario": 1001,
@@ -28,6 +28,27 @@
     "apellido": "Chiletto",
     "dni": "39062732",
     "edad": 50,
+    "totalDineroGastado": 0.0
+  },
+  {
+    "nombre": "Joaquin",
+    "apellido": "Lopez",
+    "dni": "25395395",
+    "edad": 25,
+    "totalDineroGastado": 0.0
+  },
+  {
+    "nombre": "Mario",
+    "apellido": "Rodriguez",
+    "dni": "93829342",
+    "edad": 35,
+    "totalDineroGastado": 0.0
+  },
+  {
+    "nombre": "Pablo",
+    "apellido": "Lopez",
+    "dni": "39345455",
+    "edad": 32,
     "totalDineroGastado": 0.0
   }
 ]

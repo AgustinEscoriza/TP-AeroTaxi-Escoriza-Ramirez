@@ -27,7 +27,7 @@ public class MenuVuelos extends Menu {
     public void menuContratarVuelo(Usuario usuario, Aerolinea aerolinea) {
 
         Avion avion;
-        Vuelo vuelo = null;
+        Vuelo vuelo;
         String fechaString;
         Ciudad destino;
         Ciudad origen;
@@ -42,7 +42,7 @@ public class MenuVuelos extends Menu {
                 DateFormat formatoDeFecha = new SimpleDateFormat(fechaString);
                 formatoDeFecha.setLenient(false);
 
-                if (validateJavaDate(fechaString)) { //Validar que sea en el futuro
+                if (validarJavaLocalDate(fechaString)) { //Validar que sea en el futuro
 
                     fechaLocalDate = LocalDate.parse(fechaString);
                     LocalDateTime ahora = LocalDateTime.now();
@@ -278,6 +278,10 @@ public class MenuVuelos extends Menu {
         LocalDateTime ahora = LocalDateTime.now();
         System.out.println(aerolinea.mostrarVuelos());
         System.out.println("Ingrese id del vuelo a cancelar: ");
+        while (!sn.hasNextInt()) {
+            System.out.println("Ingrese un numero valido: ");
+            sn.next();
+        }
         idVuelo = sn.nextInt();
         Vuelo vuelo = aerolinea.buscarVueloPorID(idVuelo);
 
@@ -285,11 +289,12 @@ public class MenuVuelos extends Menu {
             if (vuelo.getFecha().minusDays(1).isBefore(ChronoLocalDate.from(ahora))) {
                 System.out.println("No se puede cancelar un vuelo con menos de 24hs de anticipacion. ");
             } else {
+                System.out.println("El vuelo a cancelar es el siguiente: ");
                 System.out.println(vuelo.toString());
                 boolean flag = false;
                 while (!flag) {
                     System.out.println("Confirmar cancelacion? S/N. ");
-                    confirmacion = sn.nextLine();
+                    confirmacion = sn.next();
                     if (confirmacion.equals("S")) {
                         flag = true;
                         vuelo.getUsuario().setTotalDineroGastado( - vuelo.calcularCosto());
@@ -312,14 +317,13 @@ public class MenuVuelos extends Menu {
 
 
     public void menuBuscarVuelosPorFecha(Aerolinea aerolinea) {
-
         String fechaString;
         LocalDate fechaDate = null;
         salir = false;
         do { //validacion de fecha
             System.out.println("Ingrese una fecha: ");
             fechaString = sn.nextLine();
-            if (validateJavaDate(fechaString)) { //Validar que sea en el futuro
+            if (validarJavaLocalDate(fechaString)) { //Validar que sea en el futuro
 
                 fechaDate = LocalDate.parse(fechaString);
                 salir = true;
@@ -342,7 +346,29 @@ public class MenuVuelos extends Menu {
 
     }
 
-    public static boolean validateJavaDate(String strDate) {
+    private void actualizarJsonVuelos(ArrayList<Vuelo>vuelos) {
+        JsonVuelo jsonVuelo = new JsonVuelo();
+        if (vuelos != null) {
+            try {
+                jsonVuelo.cargarJsonVuelo(vuelos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void actualizarJsonUsuarios(ArrayList<Usuario>usuarios) {
+        JsonUsuario jsonUsuarios = new JsonUsuario();
+        if (usuarios != null) {
+            try {
+                jsonUsuarios.cargarJsonUsuario(usuarios);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean validarJavaLocalDate(String strDate) {
         /* Check if date is 'null' */
         if (strDate.trim().equals("")) {
             return true;
@@ -365,27 +391,6 @@ public class MenuVuelos extends Menu {
             }
             /* Return true if date format is valid */
             return true;
-        }
-    }
-    private void actualizarJsonVuelos(ArrayList<Vuelo>vuelos) {
-        JsonVuelo jsonVuelo = new JsonVuelo();
-        if (vuelos != null) {
-            try {
-                jsonVuelo.cargarJsonVuelo(vuelos);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void actualizarJsonUsuarios(ArrayList<Usuario>usuarios) {
-        JsonUsuario jsonUsuarios = new JsonUsuario();
-        if (usuarios != null) {
-            try {
-                jsonUsuarios.cargarJsonUsuario(usuarios);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
