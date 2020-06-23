@@ -74,22 +74,31 @@ public class MenuLogin extends Menu {
                 if (!dni.matches("[0-9]*")) {
                     System.out.println("Ingrese un DNI valido. ");
                 }
-                else{
-                    if (aerolinea.buscarUsuarioPorDNI(dni) != null) {
+                else {
+                    if(dni.length()!=8){
+                        System.out.println("Ese DNI no contiene 8 caracteres");
+                    }
+                    else if (aerolinea.buscarUsuarioPorDNI(dni) != null) {
                         System.out.println("Este DNI ya se encuentra en uso. ");
-                    } else {
+                    }
+                    else {
                         flag = true;
                     }
                 }
             } while (!flag);
 
-
             System.out.println("Ingrese edad: ");
+
             while (!sn.hasNextInt()) {
-                System.out.println("Ingrese edad valida. ");
+                System.out.println("Ingrese un numero valido. ");
                 sn.next();
             }
-            edad = sn.nextInt();
+            do {
+                edad = sn.nextInt();
+                if (edad < 18 || edad > 100) {
+                    System.out.println("Edades entre 18 y 100 anios. ");
+                }
+            } while (edad < 18 || edad > 100);
 
             flag = false;
             while (!flag) {

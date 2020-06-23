@@ -1,7 +1,7 @@
 [
   {
     "idUsuario": 1000,
-    "nombre": "Facundito",
+    "nombre": "Facundo",
     "apellido": "Ramirez",
     "dni": "39345456",
     "edad": 50,
@@ -49,6 +49,20 @@
     "apellido": "Lopez",
     "dni": "39345455",
     "edad": 32,
+    "totalDineroGastado": 0.0
+  },
+  {
+    "nombre": "Maria",
+    "apellido": "Juarez",
+    "dni": "23323232",
+    "edad": 23,
+    "totalDineroGastado": 0.0
+  },
+  {
+    "nombre": "Pablito",
+    "apellido": "Ruiz",
+    "dni": "392031290",
+    "edad": 18,
     "totalDineroGastado": 0.0
   }
 ]
