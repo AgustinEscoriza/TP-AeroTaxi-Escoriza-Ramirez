@@ -11,8 +11,8 @@
     "idUsuario": 1002,
     "nombre": "Sebastian",
     "apellido": "DeLaFuente",
-    "dni": "40409409",
-    "edad": 55,
+    "dni": "39409409",
+    "edad": 25,
     "totalDineroGastado": 0.0
   },
   {
@@ -63,6 +63,13 @@
     "apellido": "Ruiz",
     "dni": "392031290",
     "edad": 18,
+    "totalDineroGastado": 0.0
+  },
+  {
+    "nombre": "Gerardo",
+    "apellido": "Martinez",
+    "dni": "40758923",
+    "edad": 32,
     "totalDineroGastado": 0.0
   }
 ]
