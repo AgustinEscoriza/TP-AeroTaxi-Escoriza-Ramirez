@@ -274,47 +274,54 @@ public class MenuVuelos extends Menu {
         int idVuelo;
         String confirmacion;
         LocalDateTime ahora = LocalDateTime.now();
-        System.out.println(aerolinea.mostrarVuelos());
-        System.out.println("Ingrese id del vuelo a cancelar: ");
-        while (!sn.hasNextInt()) {
-            System.out.println("Ingrese un numero valido: ");
-            sn.next();
-        }
-        idVuelo = sn.nextInt();
-        Vuelo vuelo = aerolinea.buscarVueloPorID(idVuelo);
+        if(aerolinea.getVuelos()!=null) {
+            System.out.println(aerolinea.mostrarVuelos());
+            System.out.println("Ingrese id del vuelo a cancelar: ");
+            while (!sn.hasNextInt()) {
+                System.out.println("Ingrese un numero valido: ");
+                sn.next();
+            }
+            idVuelo = sn.nextInt();
 
-        if (vuelo != null) {
-            if (vuelo.getFecha().isEqual(ChronoLocalDate.from(ahora))) {
-                System.out.println("No se puede cancelar un vuelo con menos de 24hs de anticipacion. ");
-                presioneTeclaParaContinuar();
-            } else {
-                System.out.println("El vuelo a cancelar es el siguiente: ");
-                System.out.println(vuelo.toString());
-                boolean flag = false;
-                while (!flag) {
-                    System.out.println("Confirmar cancelacion? S/N. ");
-                    confirmacion = sn.next();
-                    if (confirmacion.equals("S")) {
-                        flag = true;
-                        if (vuelo.getFecha().isAfter(ChronoLocalDate.from(ahora))) {
-                            aerolinea.buscarUsuarioPorDNI(vuelo.getUsuario().getDni()).restarDineroGastado(vuelo.calcularCosto());
+
+            Vuelo vuelo = aerolinea.buscarVueloPorID(idVuelo);
+
+            if (vuelo != null) {
+                if (vuelo.getFecha().isEqual(ChronoLocalDate.from(ahora))) {
+                    System.out.println("No se puede cancelar un vuelo con menos de 24hs de anticipacion. ");
+                    presioneTeclaParaContinuar();
+                } else {
+                    System.out.println("El vuelo a cancelar es el siguiente: ");
+                    System.out.println(vuelo.toString());
+                    boolean flag = false;
+                    while (!flag) {
+                        System.out.println("Confirmar cancelacion? S/N. ");
+                        confirmacion = sn.next();
+                        if (confirmacion.equals("S")) {
+                            flag = true;
+                            if (vuelo.getFecha().isAfter(ChronoLocalDate.from(ahora))) {
+                                aerolinea.buscarUsuarioPorDNI(vuelo.getUsuario().getDni()).restarDineroGastado(vuelo.calcularCosto());
+                            }
+                            aerolinea.eliminarVuelo(vuelo);
+                            actualizarJsonVuelos(aerolinea.getVuelos());
+                            actualizarJsonUsuarios(aerolinea.getUsuarios());
+                            System.out.println("Vuelo cancelado con exito. ");
+                            presioneTeclaParaContinuar();
+                        } else if (confirmacion.equals("N")) {
+                            flag = true;
+                            System.out.println("El vuelo no ha sido cancelado. ");
+                            presioneTeclaParaContinuar();
+                        } else {
+                            System.out.println("Ingrese S o N. ");
                         }
-                        aerolinea.eliminarVuelo(vuelo);
-                        actualizarJsonVuelos(aerolinea.getVuelos());
-                        actualizarJsonUsuarios(aerolinea.getUsuarios());
-                        System.out.println("Vuelo cancelado con exito. ");
-                        presioneTeclaParaContinuar();
-                    } else if (confirmacion.equals("N")) {
-                        flag = true;
-                        System.out.println("El vuelo no ha sido cancelado. ");
-                        presioneTeclaParaContinuar();
-                    } else {
-                        System.out.println("Ingrese S o N. ");
                     }
                 }
+            } else {
+                System.out.println("No hay un vuelo con esa Id registrado.");
+                presioneTeclaParaContinuar();
             }
-        } else {
-            System.out.println("No hay un vuelo con esa Id registrado.");
+        }else{
+            System.out.println("No hay un vuelos cargados en el sistema.");
             presioneTeclaParaContinuar();
         }
     }
