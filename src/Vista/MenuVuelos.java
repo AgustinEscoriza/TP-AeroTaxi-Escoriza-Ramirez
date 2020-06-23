@@ -39,25 +39,18 @@ public class MenuVuelos extends Menu {
             do {
                 System.out.println("Ingrese fecha: ");
                 fechaString = sn.nextLine();
+                if (validarJavaLocalDate(fechaString)) {
 
-                if(fechaString.matches("[0-9\\.-]*")){
+                    fechaLocalDate = LocalDate.parse(fechaString);
+                    LocalDateTime ahora = LocalDateTime.now();
 
-                    if (validarJavaLocalDate(fechaString)) {
-
-                        fechaLocalDate = LocalDate.parse(fechaString);
-                        LocalDateTime ahora = LocalDateTime.now();
-
-                        if (!fechaLocalDate.isBefore(ChronoLocalDate.from(ahora))) {
-                            System.out.println("Fecha valida. ");
-                            salir = true;
-                        } else {
-                            System.out.println("Esa fecha no es futura. ");
-                        }
+                    if (!fechaLocalDate.isBefore(ChronoLocalDate.from(ahora))) {
+                        System.out.println("Fecha valida. ");
+                        salir = true;
                     } else {
-                        System.out.println("Fecha invalida. Formato:YYYY-MM-DD");
-                        salir = false;
+                        System.out.println("Esa fecha no es futura. ");
                     }
-                }else{
+                } else {
                     System.out.println("Fecha invalida. Formato:YYYY-MM-DD");
                     salir = false;
                 }
@@ -242,7 +235,7 @@ public class MenuVuelos extends Menu {
     }
 
     public Avion menuSeleccionarAvion(Aerolinea aerolinea, LocalDate fecha, int cantPasajeros) {
-        int idAvion=0;
+        int idAvion = 0;
         Avion avion = null;
         boolean salir = false;
         ArrayList<Avion> aviones = aerolinea.buscarAvionesDisponibles(fecha, cantPasajeros);
@@ -257,7 +250,7 @@ public class MenuVuelos extends Menu {
                     System.out.println("Ingrese uno de los id mostrados previamente: ");
                     sn.next();
                 }
-                idAvion=sn.nextInt();
+                idAvion = sn.nextInt();
 
                 for (Avion aux : aviones) {
                     if (aux.getIdAvion() == idAvion) {
@@ -301,7 +294,7 @@ public class MenuVuelos extends Menu {
                     confirmacion = sn.next();
                     if (confirmacion.equals("S")) {
                         flag = true;
-                        if(vuelo.getFecha().isAfter(ChronoLocalDate.from(ahora))) {
+                        if (vuelo.getFecha().isAfter(ChronoLocalDate.from(ahora))) {
                             vuelo.getUsuario().setTotalDineroGastado(-vuelo.calcularCosto());
                         }
                         aerolinea.eliminarVuelo(vuelo);
@@ -329,7 +322,6 @@ public class MenuVuelos extends Menu {
         do { //validacion de fecha
             System.out.println("Ingrese una fecha: ");
             fechaString = sn.next();
-            if(fechaString.matches("[0-9\\.-]*")) {
                 if (validarJavaLocalDate(fechaString)) { //Validar que sea en el futuro
 
                     fechaDate = LocalDate.parse(fechaString);
@@ -338,9 +330,6 @@ public class MenuVuelos extends Menu {
                 } else {
                     System.out.println("Esa fecha es invalida. Formato: YYYY-MM-DD. ");
                 }
-            }else{
-                System.out.println("Esa fecha es invalida. Formato: YYYY-MM-DD. ");
-            }
         } while (!salir);
 
         if (aerolinea.mostrarVuelosPorFecha(fechaDate) != "") { //si devuelte string cargado
@@ -356,7 +345,7 @@ public class MenuVuelos extends Menu {
 
     }
 
-    private void actualizarJsonVuelos(ArrayList<Vuelo>vuelos) {
+    private void actualizarJsonVuelos(ArrayList<Vuelo> vuelos) {
         JsonVuelo jsonVuelo = new JsonVuelo();
         if (vuelos != null) {
             try {
@@ -367,7 +356,7 @@ public class MenuVuelos extends Menu {
         }
     }
 
-    private void actualizarJsonUsuarios(ArrayList<Usuario>usuarios) {
+    private void actualizarJsonUsuarios(ArrayList<Usuario> usuarios) {
         JsonUsuario jsonUsuarios = new JsonUsuario();
         if (usuarios != null) {
             try {
@@ -380,28 +369,34 @@ public class MenuVuelos extends Menu {
 
     public boolean validarJavaLocalDate(String strDate) {
         /* Check if date is 'null' */
+        boolean flag = false;
         if (strDate.trim().equals("")) {
-            return true;
+            flag = false;
         }
         /* Date is not 'null' */
         else {
-            /*
-             * Set preferred date format,
-             * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
-            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
-            sdfrmt.setLenient(false);
-            /* Create Date object
-             * parse the string into date
-             */
-            try {
-                Date javaDate = sdfrmt.parse(strDate);
+
+            if (strDate.matches("[0-9\\.-]*")) {
+                /*
+                 * Set preferred date format,
+                 * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
+                SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+                sdfrmt.setLenient(false);
+                /* Create Date object
+                 * parse the string into date
+                 */
+                try {
+                    Date javaDate = sdfrmt.parse(strDate);
+                    flag = true;
+                }
+                /* Date format is invalid */ catch (ParseException e) {
+                    flag = false;
+                }
             }
-            /* Date format is invalid */ catch (ParseException e) {
-                return false;
-            }
-            /* Return true if date format is valid */
-            return true;
+
         }
+        return flag;
+        /* Return true if date format is valid */
     }
 
 }
