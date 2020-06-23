@@ -62,5 +62,70 @@
     },
     "cantPasajeros": 11,
     "distanciaKms": 695
+  },
+  {
+    "idVuelo": 1002,
+    "avion": {
+      "type": "Modelo.Silver",
+      "data": {
+        "idAvion": 2,
+        "capacidadCombustible": 7000.0,
+        "costoPorKm": 150.0,
+        "capacidadMaxPasajeros": 6,
+        "velocidadMaxima": 900.0,
+        "propulsion": "HELICE",
+        "tarifaFija": 4000.0
+      }
+    },
+    "origen": "SANTIAGO_DE_CHILE",
+    "destino": "BUENOS_AIRES",
+    "fecha": {
+      "year": 2020,
+      "month": 6,
+      "day": 23
+    },
+    "usuario": {
+      "idUsuario": 1000,
+      "nombre": "Facundo",
+      "apellido": "Ramirez",
+      "dni": "39345456",
+      "edad": 50,
+      "totalDineroGastado": 1321250.0
+    },
+    "cantPasajeros": 6,
+    "distanciaKms": 1400
+  },
+  {
+    "idVuelo": 1003,
+    "avion": {
+      "type": "Modelo.Gold",
+      "data": {
+        "wifi": true,
+        "idAvion": 6,
+        "capacidadCombustible": 9000.0,
+        "costoPorKm": 200.0,
+        "capacidadMaxPasajeros": 7,
+        "velocidadMaxima": 900.0,
+        "propulsion": "PISTONES",
+        "tarifaFija": 6000.0
+      }
+    },
+    "origen": "SANTIAGO_DE_CHILE",
+    "destino": "BUENOS_AIRES",
+    "fecha": {
+      "year": 2020,
+      "month": 7,
+      "day": 23
+    },
+    "usuario": {
+      "idUsuario": 1000,
+      "nombre": "Facundo",
+      "apellido": "Ramirez",
+      "dni": "39345456",
+      "edad": 50,
+      "totalDineroGastado": 1321250.0
+    },
+    "cantPasajeros": 7,
+    "distanciaKms": 1400
   }
 ]

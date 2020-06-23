@@ -115,39 +115,27 @@ public class Aerolinea {
     }
 
     private String buscarMejorAvionDeUsuario(Usuario usuario) {
-        String mejorAvion = new String();
-        boolean flagGold= false;
-        boolean flagSilver= false;
+        String mejorCategoria = "";
+        boolean silver = false;
         if(vuelos != null) {
             for (Vuelo vuelo : vuelos) {
                 if(vuelo.getUsuario().getDni().equals(usuario.getDni())){
                     if(vuelo.getAvion() instanceof Gold){
-                        mejorAvion = " Mejor avion: Gold";
-                        flagGold= true;
+                        mejorCategoria = " Mejor avion: Gold";
+                        break;
                     }
-                }
-            }
-            if(!flagGold){
-                for (Vuelo vuelo : vuelos) {
-                    if(vuelo.getUsuario().getDni().equals(usuario.getDni())){
-                        if(vuelo.getAvion() instanceof Silver){
-                            mejorAvion = " Mejor avion: Silver";
-                            flagSilver= true;
-                        }
+                    else if(vuelo.getAvion() instanceof  Silver){
+                        mejorCategoria = " Mejor avion: Silver";
+                        silver = true;
                     }
-                }
-                if(!flagSilver){
-                    for (Vuelo vuelo : vuelos) {
-                        if(vuelo.getUsuario().getDni().equals(usuario.getDni())){
-                            if(vuelo.getAvion() instanceof  Bronze){
-                                mejorAvion = " Mejor avion: Bronze";
-                            }
-                        }
+                    else if(vuelo.getAvion() instanceof Bronze && !silver){
+                        mejorCategoria = " Mejor avion: Bronze";
                     }
+
                 }
             }
         }
-        return mejorAvion;
+        return mejorCategoria;
     }
 
     public Usuario buscarUsuarioPorDNI(String DNI) {

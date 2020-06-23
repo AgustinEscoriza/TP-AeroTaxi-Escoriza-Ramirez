@@ -17,6 +17,7 @@ public class MenuLogin extends Menu {
     public Usuario menuLogin(Aerolinea aerolinea) {
         Usuario usuario = null;
         while (!salir) {
+            limpiarPantalla();
             System.out.println("1. Ingresar usuario registrado");
             System.out.println("2. Registrar nuevo usuario");
             opcion = sn.nextInt();
@@ -25,6 +26,10 @@ public class MenuLogin extends Menu {
                 case 1:
                     limpiarPantalla();
                     usuario = menuBuscarUsuarioPorDni(aerolinea);
+                    salir = false;
+                    if (usuario != null) {
+                        salir = true;
+                    }
                     break;
                 case 2:
                     limpiarPantalla();
@@ -61,7 +66,7 @@ public class MenuLogin extends Menu {
 
             do {
                 System.out.println("Ingrese apellido: ");
-                apellido = sn.next();
+                apellido = sn.nextLine();
                 if (!apellido.matches("[A-Z][a-z]*")) {
                     System.out.println("Ingrese un apellido valido. ");
                 }
@@ -129,12 +134,28 @@ public class MenuLogin extends Menu {
         String dni;
         Usuario usuarioBuscado = null;
         while (!salir) {
-            System.out.println("Ingrese DNI de usuario registrado: ");
-            dni = sn.next();
+            boolean flag = false;
+            do {
+                System.out.println("Ingrese DNI:");
+                dni = sn.next();
+                if (!dni.matches("[0-9]*")) {
+                    System.out.println("Ingrese un DNI valido. ");
+                }
+                else {
+                    if(dni.length()!=8){
+                        System.out.println("Ese DNI no contiene 8 caracteres");
+                    }
+                    else {
+                        flag = true;
+                    }
+                }
+            } while (!flag);
             usuarioBuscado = aerolinea.buscarUsuarioPorDNI(dni);
             if (usuarioBuscado == null) {
 
-                System.out.println("Ese usuario no existe. Ingrese uno nuevamente. ");
+                System.out.println("Ese usuario no existe.");
+                salir=true;
+                presioneTeclaParaContinuar();
 
             } else {
 

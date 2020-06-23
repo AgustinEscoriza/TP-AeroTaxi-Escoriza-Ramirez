@@ -5,12 +5,12 @@
     "apellido": "Ramirez",
     "dni": "39345456",
     "edad": 50,
-    "totalDineroGastado": 775750.0
+    "totalDineroGastado": 1321250.0
   },
   {
     "idUsuario": 1002,
-    "nombre": "Juan",
-    "apellido": "Gimenez",
+    "nombre": "Sebastian",
+    "apellido": "DeLaFuente",
     "dni": "40409409",
     "edad": 55,
     "totalDineroGastado": 0.0
