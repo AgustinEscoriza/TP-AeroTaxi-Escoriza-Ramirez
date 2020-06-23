@@ -29,9 +29,7 @@ public class Main {
 
     public static Aerolinea cargarAerolinea() {
         Aerolinea aerolinea = null;
-        JsonBronze jsonBronze = new JsonBronze();
-        JsonSilver jsonSilver = new JsonSilver();
-        JsonGold jsonGold = new JsonGold();
+        JsonAvion jsonAvion = new JsonAvion();
         JsonVuelo jsonVuelo = new JsonVuelo();
         JsonUsuario jsonUsuario = new JsonUsuario();
         ArrayList<Avion> aviones = new ArrayList<>();
@@ -39,9 +37,7 @@ public class Main {
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try {
-            aviones.addAll(jsonGold.getJsonGold());
-            aviones.addAll(jsonSilver.getJsonSilver());
-            aviones.addAll(jsonBronze.getJsonBronze());
+            aviones.addAll(jsonAvion.getJsonAvion());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {

@@ -322,7 +322,7 @@ public class MenuVuelos extends Menu {
         salir = false;
         do { //validacion de fecha
             System.out.println("Ingrese una fecha: ");
-            fechaString = sn.nextLine();
+            fechaString = sn.next();
             if (validarJavaLocalDate(fechaString)) { //Validar que sea en el futuro
 
                 fechaDate = LocalDate.parse(fechaString);
