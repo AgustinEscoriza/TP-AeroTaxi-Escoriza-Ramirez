@@ -2,70 +2,6 @@
   {
     "idVuelo": 1000,
     "avion": {
-      "type": "Modelo.Bronze",
-      "data": {
-        "idAvion": 8,
-        "capacidadCombustible": 7000.0,
-        "costoPorKm": 150.0,
-        "capacidadMaxPasajeros": 12,
-        "velocidadMaxima": 600.0,
-        "propulsion": "HELICE",
-        "tarifaFija": 3000.0
-      }
-    },
-    "origen": "BUENOS_AIRES",
-    "destino": "MONTEVIDEO",
-    "fecha": {
-      "year": 2020,
-      "month": 6,
-      "day": 22
-    },
-    "usuario": {
-      "idUsuario": 1000,
-      "nombre": "Facundito",
-      "apellido": "Ramirez",
-      "dni": "39345456",
-      "edad": 50,
-      "totalDineroGastado": 163000.0
-    },
-    "cantPasajeros": 5,
-    "distanciaKms": 950
-  },
-  {
-    "idVuelo": 1001,
-    "avion": {
-      "type": "Modelo.Bronze",
-      "data": {
-        "idAvion": 8,
-        "capacidadCombustible": 7000.0,
-        "costoPorKm": 150.0,
-        "capacidadMaxPasajeros": 12,
-        "velocidadMaxima": 600.0,
-        "propulsion": "HELICE",
-        "tarifaFija": 3000.0
-      }
-    },
-    "origen": "BUENOS_AIRES",
-    "destino": "CORDOBA",
-    "fecha": {
-      "year": 2020,
-      "month": 7,
-      "day": 7
-    },
-    "usuario": {
-      "idUsuario": 1000,
-      "nombre": "Facundo",
-      "apellido": "Ramirez",
-      "dni": "39345456",
-      "edad": 50,
-      "totalDineroGastado": 775750.0
-    },
-    "cantPasajeros": 11,
-    "distanciaKms": 695
-  },
-  {
-    "idVuelo": 1002,
-    "avion": {
       "type": "Modelo.Silver",
       "data": {
         "idAvion": 2,
@@ -85,18 +21,17 @@
       "day": 23
     },
     "usuario": {
-      "idUsuario": 1000,
       "nombre": "Facundo",
       "apellido": "Ramirez",
       "dni": "39345456",
       "edad": 50,
-      "totalDineroGastado": 1321250.0
+      "totalDineroGastado": 235000.0
     },
     "cantPasajeros": 6,
     "distanciaKms": 1400
   },
   {
-    "idVuelo": 1003,
+    "idVuelo": 1001,
     "avion": {
       "type": "Modelo.Gold",
       "data": {
@@ -110,22 +45,53 @@
         "tarifaFija": 6000.0
       }
     },
-    "origen": "SANTIAGO_DE_CHILE",
-    "destino": "BUENOS_AIRES",
+    "origen": "CORDOBA",
+    "destino": "MONTEVIDEO",
     "fecha": {
       "year": 2020,
-      "month": 7,
-      "day": 23
+      "month": 11,
+      "day": 10
     },
     "usuario": {
-      "idUsuario": 1000,
-      "nombre": "Facundo",
-      "apellido": "Ramirez",
-      "dni": "39345456",
-      "edad": 50,
-      "totalDineroGastado": 1321250.0
+      "nombre": "Sebastian",
+      "apellido": "DeLaFuente",
+      "dni": "39409409",
+      "edad": 25,
+      "totalDineroGastado": 265000.0
     },
-    "cantPasajeros": 7,
-    "distanciaKms": 1400
+    "cantPasajeros": 6,
+    "distanciaKms": 1190
+  },
+  {
+    "idVuelo": 1002,
+    "avion": {
+      "type": "Modelo.Gold",
+      "data": {
+        "wifi": false,
+        "idAvion": 5,
+        "capacidadCombustible": 7000.0,
+        "costoPorKm": 150.0,
+        "capacidadMaxPasajeros": 6,
+        "velocidadMaxima": 900.0,
+        "propulsion": "HELICE",
+        "tarifaFija": 6000.0
+      }
+    },
+    "origen": "SANTIAGO_DE_CHILE",
+    "destino": "CORDOBA",
+    "fecha": {
+      "year": 2020,
+      "month": 10,
+      "day": 10
+    },
+    "usuario": {
+      "nombre": "Agustin",
+      "apellido": "Escoriza",
+      "dni": "38852852",
+      "edad": 40,
+      "totalDineroGastado": 174000.0
+    },
+    "cantPasajeros": 3,
+    "distanciaKms": 1050
   }
 ]

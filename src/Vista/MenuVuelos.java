@@ -82,7 +82,7 @@ public class MenuVuelos extends Menu {
                     if (confirmacion.equals("S")) {
                         flag = true;
                         aerolinea.agregarVuelo(vuelo);
-                        usuario.setTotalDineroGastado(costoTotal);
+                        usuario.sumarDineroGastado(costoTotal);
                         actualizarJsonVuelos(aerolinea.getVuelos());
                         actualizarJsonUsuarios(aerolinea.getUsuarios());
                         System.out.println("Vuelo contratado. El id de su vuelo es " + vuelo.getIdVuelo());
@@ -297,7 +297,7 @@ public class MenuVuelos extends Menu {
                     if (confirmacion.equals("S")) {
                         flag = true;
                         if (vuelo.getFecha().isAfter(ChronoLocalDate.from(ahora))) {
-                            vuelo.getUsuario().setTotalDineroGastado(-vuelo.calcularCosto());
+                            aerolinea.buscarUsuarioPorDNI(vuelo.getUsuario().getDni()).restarDineroGastado(vuelo.calcularCosto());
                         }
                         aerolinea.eliminarVuelo(vuelo);
                         actualizarJsonVuelos(aerolinea.getVuelos());

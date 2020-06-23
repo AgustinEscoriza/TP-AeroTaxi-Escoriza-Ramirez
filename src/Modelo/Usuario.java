@@ -1,10 +1,7 @@
 package Modelo;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Usuario {
 
-    private Integer idUsuario;
     private String nombre;
     private String apellido;
     private String dni;
@@ -39,8 +36,12 @@ public class Usuario {
         return totalDineroGastado;
     }
 
-    public void setTotalDineroGastado(float dineroGastado){
+    public void sumarDineroGastado(float dineroGastado){
         totalDineroGastado += dineroGastado;
+    }
+
+    public void restarDineroGastado(float dineroGastado){
+        totalDineroGastado -= dineroGastado;
     }
 
     @Override
@@ -49,6 +50,6 @@ public class Usuario {
                 ", Apellido: " + apellido +
                 ", DNI: " + dni +
                 ", Edad: " + edad +
-                ", Dinero gastado: " + totalDineroGastado + "." ;
+                ", Dinero gastado: " + totalDineroGastado + "," ;
     }
 }

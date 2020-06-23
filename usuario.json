@@ -1,27 +1,24 @@
 [
   {
-    "idUsuario": 1000,
     "nombre": "Facundo",
     "apellido": "Ramirez",
     "dni": "39345456",
     "edad": 50,
-    "totalDineroGastado": 1321250.0
+    "totalDineroGastado": 235000.0
   },
   {
-    "idUsuario": 1002,
     "nombre": "Sebastian",
     "apellido": "DeLaFuente",
     "dni": "39409409",
     "edad": 25,
-    "totalDineroGastado": 0.0
+    "totalDineroGastado": 265000.0
   },
   {
-    "idUsuario": 1001,
     "nombre": "Agustin",
     "apellido": "Escoriza",
     "dni": "38852852",
     "edad": 40,
-    "totalDineroGastado": 0.0
+    "totalDineroGastado": 174000.0
   },
   {
     "nombre": "Bernardo",
