@@ -1,7 +1,11 @@
 package Modelo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import Enums.Ciudad;
+
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -25,7 +29,7 @@ public class Vuelo {
         this.distanciaKms = calcularKms();
         this.usuario = usuario;
         setCantPasajeros(cantAcompanantes);
-        this.idVuelo = generadorId.get();
+        this.idVuelo = generadorId.getAndIncrement();
     }
 
     public Avion getAvion() {
@@ -58,6 +62,10 @@ public class Vuelo {
 
     public void setCantPasajeros(int cantAcompanantes){
         cantPasajeros=cantAcompanantes+1;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public void setIdVuelo(Integer idVuelo) {
@@ -96,9 +104,10 @@ public class Vuelo {
         return distancia;
     }
 
-    public float calcularCosto(int cantidadAcompanantes){
+
+    public float calcularCosto(){
         float costoTotal = 0;
-        costoTotal = ( distanciaKms * avion.getCostoPorKm() ) + ((cantidadAcompanantes+1) * 3500 ) + avion.getTarifaFija();
+        costoTotal = ( distanciaKms * avion.getCostoPorKm() ) + ((cantPasajeros) * 3500 ) + avion.getTarifaFija();
         return costoTotal;
     }
 
@@ -112,6 +121,30 @@ public class Vuelo {
                 ", Fecha: " + fecha +
                 ", Distancia KMS: " + distanciaKms + "\n";
     }
-
+    public boolean validateJavaDate(String strDate) {
+        /* Check if date is 'null' */
+        if (strDate.trim().equals("")) {
+            return true;
+        }
+        /* Date is not 'null' */
+        else {
+            /*
+             * Set preferred date format,
+             * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
+            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+            sdfrmt.setLenient(false);
+            /* Create Date object
+             * parse the string into date
+             */
+            try {
+                Date javaDate = sdfrmt.parse(strDate);
+            }
+            /* Date format is invalid */ catch (ParseException e) {
+                return false;
+            }
+            /* Return true if date format is valid */
+            return true;
+        }
+    }
 }
 

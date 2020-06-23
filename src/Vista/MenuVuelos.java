@@ -5,7 +5,10 @@ import Modelo.Vuelo;
 import Modelo.Usuario;
 import Modelo.Avion;
 import Enums.Ciudad;
+import Persistencia.JsonUsuario;
+import Persistencia.JsonVuelo;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,7 +47,7 @@ public class MenuVuelos extends Menu {
                     fechaLocalDate = LocalDate.parse(fechaString);
                     LocalDateTime ahora = LocalDateTime.now();
 
-                    if (fechaLocalDate.isAfter(ChronoLocalDate.from(ahora))) {
+                    if (!fechaLocalDate.isBefore(ChronoLocalDate.from(ahora))) {
                         System.out.println("Fecha valida. ");
                         salir = true;
                     } else {
@@ -72,7 +75,7 @@ public class MenuVuelos extends Menu {
             if (avion != null) {
                 salir = true;
                 vuelo = new Vuelo(avion, origen, destino, fechaLocalDate, usuario, cantAcompanantes);
-                costoTotal = vuelo.calcularCosto(cantAcompanantes);
+                costoTotal = vuelo.calcularCosto();
                 System.out.println("El costo total del vuelo es " + costoTotal);
                 boolean flag = false;
 
@@ -84,7 +87,10 @@ public class MenuVuelos extends Menu {
                         flag = true;
                         aerolinea.agregarVuelo(vuelo);
                         usuario.setTotalDineroGastado(costoTotal);
+                        actualizarJsonVuelos(aerolinea.getVuelos());
+                        actualizarJsonUsuarios(aerolinea.getUsuarios());
                         System.out.println("Vuelo contratado. El id de su vuelo es " + vuelo.getIdVuelo());
+
                     } else if (confirmacion.equals("N")) {
                         flag = true;
                         System.out.println("Vuelo no ha sido contratado. ");
@@ -270,6 +276,7 @@ public class MenuVuelos extends Menu {
         int idVuelo;
         String confirmacion;
         LocalDateTime ahora = LocalDateTime.now();
+        System.out.println(aerolinea.mostrarVuelos());
         System.out.println("Ingrese id del vuelo a cancelar: ");
         idVuelo = sn.nextInt();
         Vuelo vuelo = aerolinea.buscarVueloPorID(idVuelo);
@@ -285,7 +292,10 @@ public class MenuVuelos extends Menu {
                     confirmacion = sn.nextLine();
                     if (confirmacion.equals("S")) {
                         flag = true;
+                        vuelo.getUsuario().setTotalDineroGastado( - vuelo.calcularCosto());
                         aerolinea.eliminarVuelo(vuelo);
+                        actualizarJsonVuelos(aerolinea.getVuelos());
+                        actualizarJsonUsuarios(aerolinea.getUsuarios());
                         System.out.println("Vuelo cancelado con exito. ");
                     } else if (confirmacion.equals("N")) {
                         flag = true;
@@ -296,7 +306,7 @@ public class MenuVuelos extends Menu {
                 }
             }
         } else {
-            System.out.println("Ese vuelo no ha sido encontrado. ");
+            System.out.println("No hay un vuelo con esa Id registrado.");
         }
     }
 
@@ -355,6 +365,27 @@ public class MenuVuelos extends Menu {
             }
             /* Return true if date format is valid */
             return true;
+        }
+    }
+    private void actualizarJsonVuelos(ArrayList<Vuelo>vuelos) {
+        JsonVuelo jsonVuelo = new JsonVuelo();
+        if (vuelos != null) {
+            try {
+                jsonVuelo.cargarJsonVuelo(vuelos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void actualizarJsonUsuarios(ArrayList<Usuario>usuarios) {
+        JsonUsuario jsonUsuarios = new JsonUsuario();
+        if (usuarios != null) {
+            try {
+                jsonUsuarios.cargarJsonUsuario(usuarios);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

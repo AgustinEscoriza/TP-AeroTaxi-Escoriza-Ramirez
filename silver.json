@@ -1,33 +1,33 @@
 
-  [
-    {
-      "idAvion": 1,
-      "capacidadCombustible": 5000.0,
-      "costoPorKm": 100.0,
-      "capacidadMaxPasajeros": 5,
-      "velocidadMaxima": 900.0,
-      "propulsion": "REACCION",
-      "disponible": "true",
-      "tarifaFija": 4000
-    },
-    {
-      "idAvion": 2,
-      "capacidadCombustible": 7000,
-      "costoPorKm": 150,
-      "capacidadMaxPasajeros": 6,
-      "velocidadMaxima": 900,
-      "propulsion": "HELICE",
-      "disponible": "true",
-      "tarifaFija": 4000
-    },
-    {
-      "idAvion": 3,
-      "capacidadCombustible": 9000,
-      "costoPorKm": 200,
-      "capacidadMaxPasajeros": 7,
-      "velocidadMaxima": 900,
-      "propulsion": "PISTONES",
-      "disponible": "true",
-      "tarifaFija": 4000
-    }
-  ]
+[
+  {
+    "idAvion": 1,
+    "capacidadCombustible": 5000.0,
+    "costoPorKm": 100.0,
+    "capacidadMaxPasajeros": 5,
+    "velocidadMaxima": 900.0,
+    "propulsion": "REACCION",
+    "disponible": "true",
+    "tarifaFija": 4000
+  },
+  {
+    "idAvion": 2,
+    "capacidadCombustible": 7000,
+    "costoPorKm": 150,
+    "capacidadMaxPasajeros": 6,
+    "velocidadMaxima": 900,
+    "propulsion": "HELICE",
+    "disponible": "true",
+    "tarifaFija": 4000
+  },
+  {
+    "idAvion": 3,
+    "capacidadCombustible": 9000,
+    "costoPorKm": 200,
+    "capacidadMaxPasajeros": 7,
+    "velocidadMaxima": 900,
+    "propulsion": "PISTONES",
+    "disponible": "true",
+    "tarifaFija": 4000
+  }
+]

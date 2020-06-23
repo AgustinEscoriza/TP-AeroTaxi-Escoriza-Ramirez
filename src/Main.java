@@ -15,12 +15,17 @@ public class Main {
 
         Aerolinea aerolinea = cargarAerolinea();
 
-        MenuLogin menuLogin = new MenuLogin();
-        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        if(aerolinea.getAviones().isEmpty()) {
+            System.out.println("No se encuentran aviones en los registros." + "\n" + "Por favor carguelos antes de iniciar el programa.");
+        }
+        else{
+            MenuLogin menuLogin = new MenuLogin();
+            MenuPrincipal menuPrincipal = new MenuPrincipal();
 
-        Usuario usuario;
-        usuario=menuLogin.menuLogin(aerolinea);
-        menuPrincipal.menuPrincipal(usuario, aerolinea);
+            Usuario usuario;
+            usuario = menuLogin.menuLogin(aerolinea);
+            menuPrincipal.menuPrincipal(usuario, aerolinea);
+        }
     }
 
     public static Aerolinea cargarAerolinea(){
@@ -40,6 +45,7 @@ public class Main {
             aviones.addAll(jsonBronze.getJsonBronze());
         }catch (IOException e){
             e.printStackTrace();
+        }catch (NullPointerException e){
         }
          try{
              usuarios = jsonUsuario.getJsonUsuario();

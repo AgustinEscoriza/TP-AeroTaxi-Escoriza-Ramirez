@@ -1,11 +1,10 @@
 package LogicaDeNegocio;
 
-import Modelo.Avion;
-import Modelo.Vuelo;
-import Modelo.Usuario;
+import Modelo.*;
 import Enums.Ciudad;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -59,10 +58,12 @@ public class Aerolinea {
     }
 
     public ArrayList<Avion> buscarAvionesDisponibles(LocalDate fecha, int cantPasajeros) {
-        ArrayList<Avion> avionesRetorno=aviones;
+        ArrayList<Avion> avionesRetorno = new ArrayList<>();
+        avionesRetorno.addAll(aviones);
         ArrayList<Avion> avionesABorrar = new ArrayList<>();
+
         if(vuelos!=null) {
-            for(Avion avion : aviones) {
+            for(Avion avion : avionesRetorno) {
                 if (cantPasajeros <= avion.getCapacidadMaxPasajeros()) {
                     for (Vuelo vuelo : vuelos) {
                         if (vuelo.getFecha().equals(fecha)) {
@@ -78,7 +79,7 @@ public class Aerolinea {
             }
         }
         else{
-            for(Avion avion : aviones){
+            for(Avion avion : avionesRetorno){
                 if(cantPasajeros > avion.getCapacidadMaxPasajeros()){
                     avionesABorrar.add(avion);
                 }
@@ -99,20 +100,68 @@ public class Aerolinea {
         }
         return avionBuscado;
     }
+    public StringBuilder mostrarVuelos(){
+        StringBuilder retornoVuelos = new StringBuilder();
+        for(Vuelo vuelo : vuelos){
+            retornoVuelos.append(vuelo.toString());
+        }
+        return retornoVuelos;
+    }
 
     public StringBuilder mostrarUsuarios() {
         StringBuilder retornoUsuario = new StringBuilder();
         for (Usuario usuario : usuarios) {
             retornoUsuario.append(usuario.toString());
+            retornoUsuario.append(buscarMejorAvionDeUsuario(usuario));
+            retornoUsuario.append("\n");
         }
         return retornoUsuario;
     }
 
+    private String buscarMejorAvionDeUsuario(Usuario usuario) {
+        String mejorAvion = new String();
+        String prueba = "";
+        boolean flagGold= false;
+        boolean flagSilver= false;
+        if(vuelos != null) {
+            for (Vuelo vuelo : vuelos) {
+                if(vuelo.getUsuario().getDni().equals(usuario.getDni())){
+                    if(vuelo.getAvion() instanceof Gold){
+                        mejorAvion = " Mejor avion: Gold";
+                        flagGold= true;
+                    }
+                }
+            }
+            if(!flagGold){
+                for (Vuelo vuelo : vuelos) {
+                    if(vuelo.getUsuario().getDni().equals(usuario.getDni())){
+                        if(vuelo.getAvion() instanceof Silver){
+                            mejorAvion = " Mejor avion: Silver";
+                            flagSilver= true;
+                        }
+                    }
+                }
+                if(!flagSilver){
+                    for (Vuelo vuelo : vuelos) {
+                        if(vuelo.getUsuario().getDni().equals(usuario.getDni())){
+                            if(vuelo.getAvion() instanceof  Bronze){
+                                mejorAvion = " Mejor avion: Bronze";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return mejorAvion;
+    }
+
     public Usuario buscarUsuarioPorDNI(String DNI) {
         Usuario usuarioBuscado = null;
-        for (Usuario usuario : usuarios) {
-            if (usuario.getDni().equals(DNI)) {
-                usuarioBuscado = usuario;
+        if(usuarios != null) {
+            for (Usuario usuario : usuarios) {
+                if (usuario.getDni().equals(DNI)) {
+                    usuarioBuscado = usuario;
+                }
             }
         }
         return usuarioBuscado;
@@ -128,5 +177,14 @@ public class Aerolinea {
 
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
+    }
+
+    public void agregarUsuario(Usuario usuario) {
+        if(usuarios == null){ //si el json llega cargado vacio lo inicializa sino no anda
+            usuarios = new ArrayList<>();
+        }
+        if (usuario != null) {
+            usuarios.add(usuario);
+        }
     }
 }

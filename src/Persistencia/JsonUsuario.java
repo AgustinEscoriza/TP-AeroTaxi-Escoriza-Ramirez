@@ -21,7 +21,9 @@ public class JsonUsuario {
     public static void cargarJsonUsuario(ArrayList<Usuario> usuarios) throws IOException {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(archivo));
-        Gson gson = new Gson();
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
         ArrayList<Usuario> listaUsuarios = new ArrayList<>();
         listaUsuarios = usuarios;
         gson.toJson(listaUsuarios,bufferedWriter);

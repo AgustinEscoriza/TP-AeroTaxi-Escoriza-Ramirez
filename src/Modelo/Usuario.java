@@ -49,6 +49,6 @@ public class Usuario {
                 ", Apellido: " + apellido +
                 ", DNI: " + dni +
                 ", Edad: " + edad +
-                ", Dinero gastado: " + totalDineroGastado + "\n";
+                ", Dinero gastado: " + totalDineroGastado ;
     }
 }

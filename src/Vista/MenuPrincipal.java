@@ -22,7 +22,7 @@ public class MenuPrincipal extends Menu {
             System.out.println("1. Contratar un vuelo");
             System.out.println("2. Cancelar un vuelo");
             System.out.println("3. Ver vuelos programados por fecha");
-            System.out.println("4. Listar todos los clientes");
+            System.out.println("4. Listar todos los usuarios");
             System.out.println("5. Salir");
             opcion = sn.nextInt();
 
@@ -44,8 +44,6 @@ public class MenuPrincipal extends Menu {
                     System.out.println(aerolinea.mostrarUsuarios());
                     break;
                 case 5:
-                    actualizarJsonVuelos(aerolinea);
-                    actualizarJsonUsuarios(aerolinea);
                     salir = true;
                     break;
                 default:
@@ -54,27 +52,7 @@ public class MenuPrincipal extends Menu {
         }
     }
 
-    private void actualizarJsonVuelos(Aerolinea aerolinea) {
-        JsonVuelo jsonVuelo = new JsonVuelo();
-        if (aerolinea.getVuelos() != null) {
-            try {
-                jsonVuelo.cargarJsonVuelo(aerolinea.getVuelos());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
-    private void actualizarJsonUsuarios(Aerolinea aerolinea) {
-        JsonUsuario jsonUsuarios = new JsonUsuario();
-        if (aerolinea.getUsuarios() != null) {
-            try {
-                jsonUsuarios.cargarJsonUsuario(aerolinea.getUsuarios());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 
 }

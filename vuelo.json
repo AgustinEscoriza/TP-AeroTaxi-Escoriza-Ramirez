@@ -34,24 +34,23 @@
   {
     "idVuelo": 1001,
     "avion": {
-      "type": "Modelo.Gold",
+      "type": "Modelo.Silver",
       "data": {
-        "wifi": false,
-        "idAvion": 4,
-        "capacidadCombustible": 5000.0,
-        "costoPorKm": 100.0,
-        "capacidadMaxPasajeros": 5,
+        "idAvion": 2,
+        "capacidadCombustible": 7000.0,
+        "costoPorKm": 150.0,
+        "capacidadMaxPasajeros": 6,
         "velocidadMaxima": 900.0,
-        "propulsion": "REACCION",
-        "tarifaFija": 6000.0
+        "propulsion": "HELICE",
+        "tarifaFija": 4000.0
       }
     },
-    "origen": "BUENOS_AIRES",
-    "destino": "CORDOBA",
+    "origen": "SANTIAGO_DE_CHILE",
+    "destino": "BUENOS_AIRES",
     "fecha": {
       "year": 2020,
-      "month": 6,
-      "day": 23
+      "month": 10,
+      "day": 12
     },
     "usuario": {
       "idUsuario": 1002,
@@ -59,9 +58,41 @@
       "apellido": "facio",
       "dni": "40409409",
       "edad": 55,
-      "totalDineroGastado": 171000.0
+      "totalDineroGastado": 395500.0
     },
-    "cantPasajeros": 4,
-    "distanciaKms": 695
+    "cantPasajeros": 3,
+    "distanciaKms": 1400
+  },
+  {
+    "idVuelo": 1002,
+    "avion": {
+      "type": "Modelo.Bronze",
+      "data": {
+        "idAvion": 8,
+        "capacidadCombustible": 7000.0,
+        "costoPorKm": 150.0,
+        "capacidadMaxPasajeros": 12,
+        "velocidadMaxima": 600.0,
+        "propulsion": "HELICE",
+        "tarifaFija": 3000.0
+      }
+    },
+    "origen": "BUENOS_AIRES",
+    "destino": "MONTEVIDEO",
+    "fecha": {
+      "year": 2020,
+      "month": 6,
+      "day": 22
+    },
+    "usuario": {
+      "idUsuario": 1000,
+      "nombre": "Facundito",
+      "apellido": "Ramirez",
+      "dni": "39345456",
+      "edad": 50,
+      "totalDineroGastado": 163000.0
+    },
+    "cantPasajeros": 5,
+    "distanciaKms": 950
   }
 ]
