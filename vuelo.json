@@ -34,51 +34,19 @@
   {
     "idVuelo": 1001,
     "avion": {
-      "type": "Modelo.Silver",
-      "data": {
-        "idAvion": 2,
-        "capacidadCombustible": 7000.0,
-        "costoPorKm": 150.0,
-        "capacidadMaxPasajeros": 6,
-        "velocidadMaxima": 900.0,
-        "propulsion": "HELICE",
-        "tarifaFija": 4000.0
-      }
-    },
-    "origen": "SANTIAGO_DE_CHILE",
-    "destino": "CORDOBA",
-    "fecha": {
-      "year": 2020,
-      "month": 8,
-      "day": 8
-    },
-    "usuario": {
-      "idUsuario": 1000,
-      "nombre": "Facundito",
-      "apellido": "Ramirez",
-      "dni": "39345456",
-      "edad": 50,
-      "totalDineroGastado": 630000.0
-    },
-    "cantPasajeros": 5,
-    "distanciaKms": 1050
-  },
-  {
-    "idVuelo": 1002,
-    "avion": {
       "type": "Modelo.Bronze",
       "data": {
-        "idAvion": 7,
-        "capacidadCombustible": 6000.0,
-        "costoPorKm": 200.0,
-        "capacidadMaxPasajeros": 10,
-        "velocidadMaxima": 900.0,
-        "propulsion": "REACCION",
+        "idAvion": 8,
+        "capacidadCombustible": 7000.0,
+        "costoPorKm": 150.0,
+        "capacidadMaxPasajeros": 12,
+        "velocidadMaxima": 600.0,
+        "propulsion": "HELICE",
         "tarifaFija": 3000.0
       }
     },
-    "origen": "MONTEVIDEO",
-    "destino": "SANTIAGO_DE_CHILE",
+    "origen": "BUENOS_AIRES",
+    "destino": "CORDOBA",
     "fecha": {
       "year": 2020,
       "month": 7,
@@ -86,13 +54,13 @@
     },
     "usuario": {
       "idUsuario": 1000,
-      "nombre": "Facundito",
+      "nombre": "Facundo",
       "apellido": "Ramirez",
       "dni": "39345456",
       "edad": 50,
-      "totalDineroGastado": 630000.0
+      "totalDineroGastado": 775750.0
     },
-    "cantPasajeros": 8,
-    "distanciaKms": 2100
+    "cantPasajeros": 11,
+    "distanciaKms": 695
   }
 ]

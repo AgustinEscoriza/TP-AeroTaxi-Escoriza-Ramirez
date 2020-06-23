@@ -110,10 +110,12 @@ public class MenuLogin extends Menu {
                     actualizarJsonUsuarios(aerolinea.getUsuarios());
                     System.out.println("Usuario registrado exitosamente. ");
                     flag = true;
+                    presioneTeclaParaContinuar();
                 } else if (confirmacion.equals("N")) {
                     System.out.println("Usuario no ingresado a los registros. ");
                     usuario = null;
                     flag = true;
+                    presioneTeclaParaContinuar();
                 } else {
                     System.out.println("Caracter incorrecto. Por favor ingrese S o N. ");
                 }

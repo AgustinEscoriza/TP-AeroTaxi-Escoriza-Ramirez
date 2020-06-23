@@ -32,9 +32,7 @@ public class JsonVuelo {
         builder.setPrettyPrinting();
         Gson gson = builder.create();
 
-        ArrayList<Vuelo> listaVuelos = new ArrayList<>();
-        listaVuelos = vuelos;
-        gson.toJson(listaVuelos,bufferedWriter);
+        gson.toJson(vuelos,bufferedWriter);
 
         bufferedWriter.close();
     }
@@ -49,10 +47,7 @@ public class JsonVuelo {
         builder.registerTypeAdapter(Avion.class,new ApdatadorAviones<Avion>());
         builder.setDateFormat("yyyy-MM-dd");
         Gson gson = builder.create();
-        ArrayList<Vuelo> listaVuelos = gson.fromJson(bufferedReader,tipoListOfVuelo);
-
-        vuelos = listaVuelos;
-
+        vuelos = gson.fromJson(bufferedReader,tipoListOfVuelo);
         bufferedReader.close();
         return vuelos;
     }

@@ -18,7 +18,7 @@ public class MenuPrincipal extends Menu {
 
     public void menuPrincipal(Usuario usuario, Aerolinea aerolinea) {
         while (!salir) {
-
+            limpiarPantalla();
             System.out.println("1. Contratar un vuelo");
             System.out.println("2. Cancelar un vuelo");
             System.out.println("3. Ver vuelos programados por fecha");
@@ -42,6 +42,7 @@ public class MenuPrincipal extends Menu {
                 case 4:
                     limpiarPantalla();
                     System.out.println(aerolinea.mostrarUsuarios());
+                    presioneTeclaParaContinuar();
                     break;
                 case 5:
                     salir = true;

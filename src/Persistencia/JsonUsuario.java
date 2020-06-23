@@ -24,9 +24,7 @@ public class JsonUsuario {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
         Gson gson = builder.create();
-        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-        listaUsuarios = usuarios;
-        gson.toJson(listaUsuarios,bufferedWriter);
+        gson.toJson(usuarios,bufferedWriter);
 
         bufferedWriter.close();
     }
@@ -38,9 +36,7 @@ public class JsonUsuario {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(archivo));
 
         Gson gson = new Gson();
-        ArrayList<Usuario> listaUsuarios = gson.fromJson(bufferedReader,tipoListOfUsuario);
-
-        usuarios = listaUsuarios;
+        usuarios = gson.fromJson(bufferedReader,tipoListOfUsuario);
 
         bufferedReader.close();
         return usuarios;

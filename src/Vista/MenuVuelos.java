@@ -87,10 +87,12 @@ public class MenuVuelos extends Menu {
                         actualizarJsonVuelos(aerolinea.getVuelos());
                         actualizarJsonUsuarios(aerolinea.getUsuarios());
                         System.out.println("Vuelo contratado. El id de su vuelo es " + vuelo.getIdVuelo());
+                        presioneTeclaParaContinuar();
 
                     } else if (confirmacion.equals("N")) {
                         flag = true;
                         System.out.println("Vuelo no ha sido contratado. ");
+                        presioneTeclaParaContinuar();
                     } else {
                         System.out.println("Ingrese S o N. ");
                     }
@@ -285,6 +287,7 @@ public class MenuVuelos extends Menu {
         if (vuelo != null) {
             if (vuelo.getFecha().isEqual(ChronoLocalDate.from(ahora))) {
                 System.out.println("No se puede cancelar un vuelo con menos de 24hs de anticipacion. ");
+                presioneTeclaParaContinuar();
             } else {
                 System.out.println("El vuelo a cancelar es el siguiente: ");
                 System.out.println(vuelo.toString());
@@ -301,9 +304,11 @@ public class MenuVuelos extends Menu {
                         actualizarJsonVuelos(aerolinea.getVuelos());
                         actualizarJsonUsuarios(aerolinea.getUsuarios());
                         System.out.println("Vuelo cancelado con exito. ");
+                        presioneTeclaParaContinuar();
                     } else if (confirmacion.equals("N")) {
                         flag = true;
                         System.out.println("El vuelo no ha sido cancelado. ");
+                        presioneTeclaParaContinuar();
                     } else {
                         System.out.println("Ingrese S o N. ");
                     }
@@ -311,6 +316,7 @@ public class MenuVuelos extends Menu {
             }
         } else {
             System.out.println("No hay un vuelo con esa Id registrado.");
+            presioneTeclaParaContinuar();
         }
     }
 
@@ -334,11 +340,14 @@ public class MenuVuelos extends Menu {
 
         if (aerolinea.mostrarVuelosPorFecha(fechaDate) != "") { //si devuelte string cargado
             System.out.println(aerolinea.mostrarVuelosPorFecha(fechaDate)); // imprimo
+            presioneTeclaParaContinuar();
         } else {
             if (aerolinea.getVuelos() == null) {
                 System.out.println("No hay vuelos cargados aun. ");
+                presioneTeclaParaContinuar();
             } else {
                 System.out.println("No hay vuelos cargados en esa fecha. ");
+                presioneTeclaParaContinuar();
             }
 
         }

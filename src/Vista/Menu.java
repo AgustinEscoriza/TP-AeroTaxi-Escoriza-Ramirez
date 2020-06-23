@@ -19,4 +19,10 @@ public abstract class Menu {
             System.out.println();
         }
     }
+
+    public static void presioneTeclaParaContinuar(){
+        Scanner snAux = new Scanner(System.in);
+        System.out.println("Ingrese cualquier caracter para continuar. ");
+        snAux.next();
+    }
 }

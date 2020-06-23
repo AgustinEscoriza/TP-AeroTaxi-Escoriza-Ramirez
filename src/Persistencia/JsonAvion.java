@@ -29,9 +29,7 @@ public class JsonAvion {
         builder.registerTypeAdapter(Avion.class,new ApdatadorAviones<Avion>());
         builder.setDateFormat("yyyy-MM-dd");
         Gson gson = builder.create();
-        ArrayList<Avion> listaAviones = gson.fromJson(bufferedReader,tipoListOfAvion);
-
-        aviones = listaAviones;
+        aviones = gson.fromJson(bufferedReader,tipoListOfAvion);
 
         bufferedReader.close();
         return aviones;
