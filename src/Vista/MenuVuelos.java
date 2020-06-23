@@ -39,21 +39,25 @@ public class MenuVuelos extends Menu {
             do {
                 System.out.println("Ingrese fecha: ");
                 fechaString = sn.nextLine();
-                DateFormat formatoDeFecha = new SimpleDateFormat(fechaString);
-                formatoDeFecha.setLenient(false);
 
-                if (validarJavaLocalDate(fechaString)) { //Validar que sea en el futuro
+                if(fechaString.matches("[0-9\\.-]*")){
 
-                    fechaLocalDate = LocalDate.parse(fechaString);
-                    LocalDateTime ahora = LocalDateTime.now();
+                    if (validarJavaLocalDate(fechaString)) {
 
-                    if (!fechaLocalDate.isBefore(ChronoLocalDate.from(ahora))) {
-                        System.out.println("Fecha valida. ");
-                        salir = true;
+                        fechaLocalDate = LocalDate.parse(fechaString);
+                        LocalDateTime ahora = LocalDateTime.now();
+
+                        if (!fechaLocalDate.isBefore(ChronoLocalDate.from(ahora))) {
+                            System.out.println("Fecha valida. ");
+                            salir = true;
+                        } else {
+                            System.out.println("Esa fecha no es futura. ");
+                        }
                     } else {
-                        System.out.println("Esa fecha no es futura. ");
+                        System.out.println("Fecha invalida. Formato:YYYY-MM-DD");
+                        salir = false;
                     }
-                } else {
+                }else{
                     System.out.println("Fecha invalida. Formato:YYYY-MM-DD");
                     salir = false;
                 }
@@ -286,7 +290,7 @@ public class MenuVuelos extends Menu {
         Vuelo vuelo = aerolinea.buscarVueloPorID(idVuelo);
 
         if (vuelo != null) {
-            if (vuelo.getFecha().minusDays(1).isBefore(ChronoLocalDate.from(ahora))) {
+            if (vuelo.getFecha().isEqual(ChronoLocalDate.from(ahora))) {
                 System.out.println("No se puede cancelar un vuelo con menos de 24hs de anticipacion. ");
             } else {
                 System.out.println("El vuelo a cancelar es el siguiente: ");
@@ -297,7 +301,9 @@ public class MenuVuelos extends Menu {
                     confirmacion = sn.next();
                     if (confirmacion.equals("S")) {
                         flag = true;
-                        vuelo.getUsuario().setTotalDineroGastado( - vuelo.calcularCosto());
+                        if(vuelo.getFecha().isAfter(ChronoLocalDate.from(ahora))) {
+                            vuelo.getUsuario().setTotalDineroGastado(-vuelo.calcularCosto());
+                        }
                         aerolinea.eliminarVuelo(vuelo);
                         actualizarJsonVuelos(aerolinea.getVuelos());
                         actualizarJsonUsuarios(aerolinea.getUsuarios());
@@ -323,12 +329,16 @@ public class MenuVuelos extends Menu {
         do { //validacion de fecha
             System.out.println("Ingrese una fecha: ");
             fechaString = sn.next();
-            if (validarJavaLocalDate(fechaString)) { //Validar que sea en el futuro
+            if(fechaString.matches("[0-9\\.-]*")) {
+                if (validarJavaLocalDate(fechaString)) { //Validar que sea en el futuro
 
-                fechaDate = LocalDate.parse(fechaString);
-                salir = true;
+                    fechaDate = LocalDate.parse(fechaString);
+                    salir = true;
 
-            } else {
+                } else {
+                    System.out.println("Esa fecha es invalida. Formato: YYYY-MM-DD. ");
+                }
+            }else{
                 System.out.println("Esa fecha es invalida. Formato: YYYY-MM-DD. ");
             }
         } while (!salir);
