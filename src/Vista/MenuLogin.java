@@ -66,7 +66,7 @@ public class MenuLogin extends Menu {
 
             do {
                 System.out.println("Ingrese apellido: ");
-                apellido = sn.nextLine();
+                apellido = sn.next();
                 if (!apellido.matches("[A-Z][a-z]*")) {
                     System.out.println("Ingrese un apellido valido. ");
                 }
