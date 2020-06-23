@@ -10,7 +10,7 @@
         "capacidadMaxPasajeros": 5,
         "velocidadMaxima": 900.0,
         "propulsion": "REACCION",
-        "tarifaFija": 0.0
+        "tarifaFija": 4000.0
       }
     },
     "origen": "BUENOS_AIRES",
