@@ -116,7 +116,6 @@ public class Aerolinea {
 
     private String buscarMejorAvionDeUsuario(Usuario usuario) {
         String mejorAvion = new String();
-        String prueba = "";
         boolean flagGold= false;
         boolean flagSilver= false;
         if(vuelos != null) {
